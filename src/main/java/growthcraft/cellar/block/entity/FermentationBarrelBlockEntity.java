@@ -48,6 +48,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
 
     private int tickClock = 0;
     private int tickMax = -1;
+    private boolean yeastWarning = false, yeastError = false;
 
     protected final ContainerData data;
 
@@ -121,73 +122,109 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         }
     }
 
+    private static final int BRANCH_PROCESSING = 1, BRANCH_RESET_HAPPENED = 2, BRANCH_IDLE = 0;
+    private int tickerState = BRANCH_IDLE;
+
     @Override
     public void tick(Level level, BlockPos blockPos, BlockState blockState, FermentationBarrelBlockEntity blockEntity) {
+        if (level.isClientSide || this.getFluidTank(0).isEmpty()) {
+            return;
+        }
 
-        if(!level.isClientSide && !this.getFluidTank(0).isEmpty()) {
-            List<FermentationBarrelRecipe> recipes = this.getMatchingRecipes();
-            FermentationBarrelRecipe recipe = recipes.isEmpty() ? null : recipes.get(0);
-
-            if(recipe != null && this.tickClock <= this.tickMax) {
-                this.tickClock++;
-            } else if (recipe != null && this.tickMax > 0 && this.tickClock > this.tickMax) {
-                // Determine multiplier for fluid output.
-                int multiplier = recipe.getOutputMultiplier(
-                        this.getFluidStackInTank(0)
-                );
-
-                this.itemStackHandler.getStackInSlot(0).shrink(multiplier);
-                FluidStack resultingFluidStack = recipe.getResultingFluid().copy();
-                int resultingAmount = resultingFluidStack.getAmount() * multiplier;
-                resultingFluidStack.setAmount(resultingAmount);
-
-                // Clear the current fluid and replace with the resulting FluidStack with amount multiplier.
-                this.setFluidStackInTank(0, resultingFluidStack);
-                this.resetTickClock();
-
-                this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
-            } else if(recipe != null && this.tickMax == -1) {
-                this.tickMax = recipe.getProcessingTime() * recipe.getOutputMultiplier(this.getFluidStackInTank(0));
-            } else {
-                this.resetTickClock();
-            }
-
+        if (this.changed()) {
+            // change in fluid tank or yeast slot... reset everything.
+            this.resetTickClock();
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+            this.tickerState = BRANCH_RESET_HAPPENED;
+        }
+        else if (this.tickerState == BRANCH_PROCESSING && this.tickClock <= this.tickMax) {
+            // processing, somewhere in the middle
+            this.tickClock++; // move the counter
+            if (tickClock % 10 == 7) {  // sent client update twice per second. it's a tiny progress bar for a rather long process.
+                this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+            }
+        }
+        else if (this.tickerState == BRANCH_PROCESSING && this.tickClock > this.tickMax) {
+            // hitting the specified processing time (specified in the recipe)
+            FermentationBarrelRecipe recipe = this.getFirstMatchingRecipe();
+            int multiplier = recipe.getOutputMultiplier(this.getFluidStackInTank(0) );
+            this.itemStackHandler.getStackInSlot(0).shrink(multiplier);
+
+            FluidStack resultingFluidStack = recipe.getResultingFluid().copy();
+            int resultingAmount = resultingFluidStack.getAmount() * multiplier;
+            resultingFluidStack.setAmount(resultingAmount);
+            this.setFluidStackInTank(0, resultingFluidStack);
+
+            this.resetTickClock();
+            this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+            this.tickerState = BRANCH_IDLE;
+        }
+        else if (this.tickerState == BRANCH_RESET_HAPPENED   // barrel contents changed? second part of the condition (once per second) is in case of recipe data reload.
+               || (this.tickerState == BRANCH_IDLE && level.getGameTime() % 20 == 9)) {   // we may improve this second part in another pr as multiple machines should share it.
+            FermentationBarrelRecipe recipe = this.getFirstMatchingRecipe();
+            if (this.tickerState == BRANCH_RESET_HAPPENED || recipe != null) {
+                this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL); // this is to update tooltips on the gui
+            }
+            this.tickerState = BRANCH_IDLE; // in case we find nothing after content change
+            if (recipe != null) {
+                this.tickMax = recipe.getProcessingTime() * recipe.getOutputMultiplier(this.getFluidStackInTank(0));
+                this.tickerState = BRANCH_PROCESSING;
+            }
         }
     }
 
-    private List<FermentationBarrelRecipe> getMatchingRecipes() {
-        List<FermentationBarrelRecipe> matchingRecipes = new ArrayList<>();
-
-        List<FermentationBarrelRecipe> recipes = level.getRecipeManager()
-                .getAllRecipesFor(FermentationBarrelRecipe.Type.INSTANCE);
-
-        for(FermentationBarrelRecipe recipe : recipes) {
-            if(recipe.matches(this.itemStackHandler.getStackInSlot(0), this.getFluidStackInTank(0))) {
-                matchingRecipes.add(recipe);
-            }
+    private boolean changed()
+    {
+        if (this.lastFluidStack.isFluidEqual(this.FLUID_TANK_INPUT_0.getFluid())
+                && this.lastFluidStack.getAmount() == this.FLUID_TANK_INPUT_0.getFluid().getAmount()
+                && this.lastItemStack.equals(this.itemStackHandler.getStackInSlot(0), false)) {
+            return false;
+            // yes, item handler and fluid tank have "changed" method which we could override in subclass, but they often have false-positive triggers. not a problem in many cases but here we can't afford to reset processing due to a false positive.
         }
-        return matchingRecipes;
+        else {
+            this.lastFluidStack = this.FLUID_TANK_INPUT_0.getFluid().copy();
+            this.lastItemStack = this.itemStackHandler.getStackInSlot(0).copy();
+            return true;
+        }
     }
+    private ItemStack lastItemStack = ItemStack.EMPTY;
+    private FluidStack lastFluidStack = FluidStack.EMPTY;
 
-    private List<FermentationBarrelRecipe> getMatchingRecipes(FluidStack fluidStack) {
-        List<FermentationBarrelRecipe> matchingRecipes = new ArrayList<>();
 
-        List<FermentationBarrelRecipe> recipes = level.getRecipeManager()
-                .getAllRecipesFor(FermentationBarrelRecipe.Type.INSTANCE);
-
-        for(FermentationBarrelRecipe recipe : recipes) {
-            if(recipe.matches(fluidStack)) {
-                matchingRecipes.add(recipe);
+    private FermentationBarrelRecipe getFirstMatchingRecipe() {
+        this.yeastWarning = this.yeastError = false;
+        List<FermentationBarrelRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor(FermentationBarrelRecipe.Type.INSTANCE);
+        for (FermentationBarrelRecipe recipe : recipes) {
+            if (recipe.matchesInput(this.getFluidStackInTank(0))) {
+                if (recipe.matches(this.itemStackHandler.getStackInSlot(0), this.getFluidStackInTank(0))) {
+                    return recipe;
+                }
+                else if (this.itemStackHandler.getStackInSlot(0).isEmpty()) {
+                    return null;
+                }
+                else if (recipe.matches(this.itemStackHandler.getStackInSlot(0).copyWithCount(64), this.getFluidStackInTank(0))) {
+                    this.yeastWarning = true;
+                    return null;
+                }
+                else {
+                    this.yeastError = true;
+                    return null;
+                }
             }
         }
-        return matchingRecipes;
+        return null;
     }
 
     @Nullable
     public ItemStack getResultingPotionItemStack() {
-        List<FermentationBarrelRecipe> matchingRecipes = this.getMatchingRecipes(this.getFluidStackInTank(0));
-        FermentationBarrelRecipe recipe = matchingRecipes.isEmpty() ? null : matchingRecipes.get(0);
+        FermentationBarrelRecipe recipe = null;
+        List<FermentationBarrelRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor(FermentationBarrelRecipe.Type.INSTANCE);
+        for (FermentationBarrelRecipe recipe0 : recipes) {
+            if (recipe0.matchesOutput(this.getFluidStackInTank(0))) {
+                recipe = recipe0;
+                break;
+            }
+        }
         return recipe != null ? recipe.getBottleItemStack().copy() : null;
     }
 
@@ -257,6 +294,8 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         this.FLUID_TANK_INPUT_0.readFromNBT(nbt.getCompound("fluid_tank_input_0"));
         this.tickClock = nbt.getInt("CurrentProcessTicks");
         this.tickMax = nbt.getInt("MaxProcessTicks");
+        this.yeastWarning = nbt.getBoolean("ShowYeastWarning");
+        this.yeastError = nbt.getBoolean("ShowYeastError");
 
         if (nbt.contains("CustomName", 8)) {
             this.customName = Component.Serializer.fromJson(nbt.getString("CustomName"));
@@ -270,6 +309,8 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         nbt.put("fluid_tank_input_0", FLUID_TANK_INPUT_0.writeToNBT(new CompoundTag()));
         nbt.putInt("CurrentProcessTicks", this.tickClock);
         nbt.putInt("MaxProcessTicks", this.tickMax);
+        nbt.putBoolean("ShowYeastWarning", this.yeastWarning);
+        nbt.putBoolean("ShowYeastError", this.yeastError);
 
         if (this.customName != null) {
             nbt.putString("CustomName", Component.Serializer.toJson(this.customName));
@@ -325,5 +366,13 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         float progress = (float) this.tickClock / this.tickMax;
         float percentage = progress * 100;
         return Math.round(percentage);
+    }
+
+    public boolean hasYeastWarning() {
+        return this.yeastWarning;
+    }
+
+    public boolean hasYeastError() {
+        return this.yeastError;
     }
 }
