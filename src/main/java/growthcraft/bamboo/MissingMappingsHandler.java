@@ -47,10 +47,10 @@ public class MissingMappingsHandler
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_PLANK_PRESSURE_PLATE)) mapping.remap(Items.BAMBOO_PRESSURE_PLATE);
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_PLANK_TRAPDOOR)) mapping.remap(Items.BAMBOO_TRAPDOOR);
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_PLANK_SLAB)) mapping.remap(Items.BAMBOO_SLAB);
-            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD)) mapping.remap(Items.SPRUCE_WOOD);
-            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_LOG)) mapping.remap(Items.JUNGLE_LOG);
-            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_LOG_STRIPPED)) mapping.remap(Items.STRIPPED_MANGROVE_LOG);
-            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_STRIPPED)) mapping.remap(Items.STRIPPED_CHERRY_WOOD);
+            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get().asItem());
+            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_LOG)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get().asItem());
+            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_LOG_STRIPPED)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get().asItem());
+            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_STRIPPED)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get().asItem());
         }
     }
 }
