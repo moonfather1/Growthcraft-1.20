@@ -10,7 +10,6 @@ import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.apples.init.GrowthcraftApplesTags;
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
-import growthcraft.bamboo.init.GrowthcraftBambooTags;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftTags;
@@ -43,16 +42,6 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 		.add(GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get())
 		.add(GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get());
 		
-		tag(GrowthcraftBambooTags.Blocks.BAMBOO_WOOD_LOGS)
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_LOG.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_LOG_STRIPPED.get());
-		tag(GrowthcraftBambooTags.Blocks.BAMBOO_WOOD)
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_LOG.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_STRIPPED.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_LOG_STRIPPED.get());
-
 		tag(GrowthcraftTags.Blocks.HEATSOURCES)
 				.add(Blocks.LAVA)
 				.add(Blocks.MAGMA_BLOCK)
@@ -83,8 +72,7 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 		.add(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get())
 		.add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE.get())
 		.add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get())
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_FENCE_ROPE_LINEN.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get());
 		tag(GrowthcraftTags.Blocks.SALT)
 		.add(GrowthcraftBlocks.SALT_BLOCK.get());
 		
@@ -92,41 +80,28 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 		
 		//Vanilla Tags
 		tag(BlockTags.WOODEN_BUTTONS)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_BUTTON.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_BUTTON.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_BUTTON.get());
 		tag(BlockTags.PLANKS)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK.get());
 		tag(BlockTags.WOODEN_DOORS)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_DOOR.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get());
 		tag(BlockTags.WOODEN_SLABS)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_SLAB.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get());
 		tag(BlockTags.LOGS)
 		.add(GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get())
 		.add(GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get())
 		.add(GrowthcraftApplesBlocks.APPLE_WOOD.get())
-		.add(GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_STRIPPED.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_LOG.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_WOOD_LOG_STRIPPED.get());
+		.add(GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get());
 		tag(BlockTags.WOODEN_STAIRS)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_STAIRS.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get());
 		tag(BlockTags.WOODEN_FENCES)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_FENCE.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get());
 		tag(BlockTags.FENCE_GATES)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_FENCE_GATE.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get());
 		tag(BlockTags.WOODEN_PRESSURE_PLATES)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_PRESSURE_PLATE.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get());
 		tag(BlockTags.WOODEN_TRAPDOORS)
-		.add(GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get())
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_TRAPDOOR.get());
+		.add(GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get());
 		tag(BlockTags.LEAVES)
 		.add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get());
 		tag(BlockTags.MINEABLE_WITH_AXE)

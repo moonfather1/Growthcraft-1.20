@@ -7,7 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
-public class GrowthcraftBambooLootTableProvider extends LootTableProvider{
+public class GrowthcraftBambooLootTableProvider extends LootTableProvider {
 
 	public GrowthcraftBambooLootTableProvider(PackOutput output) {
 		super(output, Collections.emptySet(), List.of(

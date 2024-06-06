@@ -1,14 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
   "group": "growthcraft_bamboo",
   "key": {
-    "B": {
-      "item": "growthcraft_bamboo:bamboo_plank_slab"
-    },
-    "P": {
-      "item": "growthcraft_bamboo:bamboo_plank"
-    },
+    "B": [
+      {
+        "item": "minecraft:bamboo_slab"
+      },
+      {
+        "item": "minecraft:bamboo_mosaic_slab"
+      }
+    ],
+    "P": [
+      {
+        "item": "minecraft:bamboo_planks"
+      },
+      {
+        "item": "minecraft:bamboo_mosaic"
+      }
+    ],
     "S": {
       "tag": "forge:rods/wooden"
     }

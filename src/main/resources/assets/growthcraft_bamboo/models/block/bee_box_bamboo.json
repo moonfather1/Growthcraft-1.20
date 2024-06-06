@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "growthcraft_bamboo:block/bamboo_wood_log",
-		"1": "growthcraft_bamboo:block/bamboo_wood_log_top",
-		"2": "growthcraft_bamboo:block/bamboo_plank",
-		"3": "growthcraft_bamboo:block/bamboo_plank_trapdoor",
+		"0": "growthcraft_bamboo:block/bamboo_bee_box_0",
+		"1": "growthcraft_bamboo:block/bamboo_bee_box_1",
+		"2": "growthcraft_bamboo:block/bamboo_bee_box_2",
+		"3": "growthcraft_bamboo:block/bamboo_bee_box_3",
 		"particle": "growthcraft_bamboo:block/bamboo_wood_log"
 	},
 	"elements": [

@@ -2,6 +2,7 @@ package growthcraft.bamboo.datagen;
 
 import growthcraft.bamboo.datagen.providers.GrowthcraftBambooLootTableProvider;
 import growthcraft.bamboo.datagen.providers.GrowthcraftBambooRecipes;
+import growthcraft.bamboo.datagen.providers.GrowthcraftBambooTagsProvider;
 import growthcraft.bamboo.shared.Reference;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -19,5 +20,6 @@ public class GrowthcraftBambooDataGenerators{
 		
 		generator.addProvider(event.includeServer(), new GrowthcraftBambooRecipes(packOutput));
 		generator.addProvider(event.includeServer(), new GrowthcraftBambooLootTableProvider(packOutput));
+		generator.addProvider(event.includeServer(), new GrowthcraftBambooTagsProvider(packOutput, event.getLookupProvider(), Reference.MODID, null));
 	}
 }

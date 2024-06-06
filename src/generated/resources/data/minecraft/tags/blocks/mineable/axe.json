@@ -1,29 +1,6 @@
 {
   "values": [
-    "growthcraft_apiary:bee_box_acacia",
-    "growthcraft_apiary:bee_box_birch",
-    "growthcraft_apiary:bee_box_cherry",
-    "growthcraft_apiary:bee_box_crimson",
-    "growthcraft_apiary:bee_box_dark_oak",
-    "growthcraft_apiary:bee_box_jungle",
-    "growthcraft_apiary:bee_box_mangrove",
-    "growthcraft_apiary:bee_box_oak",
-    "growthcraft_apiary:bee_box_spruce",
-    "growthcraft_apiary:bee_box_warped",
-    "growthcraft_apiary:honey_fluid",
-    "growthcraft_apiary:honey_mead_fluid",
-    "growthcraft_apiary:honey_mead_must_fluid",
-    "growthcraft_bamboo:bee_box_bamboo",
-    "growthcraft_cellar:fermentation_barrel_oak",
-    "growthcraft:rope_linen_acacia_fence",
-    "growthcraft:rope_linen_birch_fence",
-    "growthcraft:rope_linen_crimson_fence",
-    "growthcraft:rope_linen_dark_oak_fence",
-    "growthcraft:rope_linen_jungle_fence",
-    "growthcraft:rope_linen_nether_brick_fence",
-    "growthcraft:rope_linen_oak_fence",
-    "growthcraft:rope_linen_spruce_fence",
-    "growthcraft:rope_linen_warped_fence",
-    "growthcraft_milk:churn"
+    "growthcraft_bamboo:bamboo_post_horizontal",
+    "growthcraft_bamboo:bamboo_post_vertical"
   ]
 }
