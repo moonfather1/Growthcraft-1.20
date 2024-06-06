@@ -5,7 +5,7 @@
 		"1": "growthcraft_bamboo:block/bamboo_bee_box_1",
 		"2": "growthcraft_bamboo:block/bamboo_bee_box_2",
 		"3": "growthcraft_bamboo:block/bamboo_bee_box_3",
-		"particle": "growthcraft_bamboo:block/bamboo_wood_log"
+		"particle": "minecraft:block/bamboo_fence_particle"
 	},
 	"elements": [
 		{

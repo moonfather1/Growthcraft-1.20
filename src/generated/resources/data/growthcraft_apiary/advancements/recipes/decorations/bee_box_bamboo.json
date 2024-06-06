@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "growthcraft_bamboo:bee_box_bamboo"
+        "recipe": "growthcraft_apiary:bee_box_bamboo"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "growthcraft_bamboo:bee_box_bamboo"
+      "growthcraft_apiary:bee_box_bamboo"
     ]
   },
   "sends_telemetry_event": false

@@ -1,7 +1,5 @@
 package growthcraft.bamboo.init;
 
-import growthcraft.apiary.block.BeeBoxBlock;
-import growthcraft.apiary.init.GrowthcraftApiaryBlockEntities;
 import growthcraft.bamboo.block.BambooPostBlock;
 import growthcraft.bamboo.shared.Reference;
 import net.minecraft.world.item.BlockItem;
@@ -34,8 +32,6 @@ public class GrowthcraftBambooBlocks {
             true
     );
 
-    public static final RegistryObject<Block> BAMBOO_PLANK_BEE_BOX = registerBeeBox(Reference.UnlocalizedName.BAMBOO_PLANK_BEE_BOX, BeeBoxBlock::new);
-
     //--------------------------------//
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> block, boolean excludeBlockItemRegistry) {
@@ -44,12 +40,6 @@ public class GrowthcraftBambooBlocks {
             ITEMS.register(name, () -> new BlockItem(registryObject.get(), new Item.Properties()));
         }
         return registryObject;
-    }
-
-    private static RegistryObject<Block> registerBeeBox(String name, Supplier<Block> block) {
-        RegistryObject<Block> blockRegistryObject = registerBlock(name, block, false);
-        GrowthcraftApiaryBlockEntities.registerBeeBox(blockRegistryObject);
-        return blockRegistryObject;
     }
 
     public static void init(IEventBus modEventBus)

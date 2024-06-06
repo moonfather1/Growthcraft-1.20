@@ -29,7 +29,6 @@ public class GrowthcraftBamboo {
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTab() == GrowthcraftCreativeModeTabs.CREATIVE_TAB.get()) {
-            event.accept(GrowthcraftBambooBlocks.BAMBOO_PLANK_BEE_BOX);
             event.accept(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL);
         }
     }

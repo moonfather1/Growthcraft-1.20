@@ -2,6 +2,7 @@ package growthcraft.core.datagen.providers;
 
 import java.util.concurrent.CompletableFuture;
 
+import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagEntry;
 import org.jetbrains.annotations.Nullable;
@@ -9,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.apples.init.GrowthcraftApplesTags;
-import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftTags;
@@ -105,7 +105,6 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 		tag(BlockTags.LEAVES)
 		.add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get());
 		tag(BlockTags.MINEABLE_WITH_AXE)
-		.add(GrowthcraftBambooBlocks.BAMBOO_PLANK_BEE_BOX.get())
 		.add(GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get())
 		.add(GrowthcraftBlocks.ROPE_LINEN_ACACIA_FENCE.get())
 		.add(GrowthcraftBlocks.ROPE_LINEN_BIRCH_FENCE.get())
@@ -116,6 +115,11 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 		.add(GrowthcraftBlocks.ROPE_LINEN_OAK_FENCE.get())
 		.add(GrowthcraftBlocks.ROPE_LINEN_SPRUCE_FENCE.get())
 		.add(GrowthcraftBlocks.ROPE_LINEN_WARPED_FENCE.get())
+		.add(GrowthcraftBlocks.ROPE_LINEN_BAMBOO_FENCE.get())
+		.add(GrowthcraftBlocks.ROPE_LINEN_CHERRY_FENCE.get())
+		.add(GrowthcraftBlocks.ROPE_LINEN_MANGROVE_FENCE.get())
+		.add(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get())
+		.add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get())
 		.add(GrowthcraftMilkBlocks.CHURN.get());
 		tag(BlockTags.MINEABLE_WITH_PICKAXE)
 		.add(GrowthcraftCellarBlocks.BREW_KETTLE.get())

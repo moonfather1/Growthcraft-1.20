@@ -1,5 +1,6 @@
 package growthcraft.bamboo;
 
+import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.core.init.GrowthcraftBlocks;
@@ -35,6 +36,7 @@ public class MissingMappingsHandler
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_LOG_STRIPPED)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get());
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_STRIPPED)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get());
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_PLANK_FENCE_ROPE_LINEN)) mapping.remap(GrowthcraftBlocks.ROPE_LINEN_BAMBOO_FENCE.get());
+            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_PLANK_BEE_BOX)) mapping.remap(GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO_OLD.get());
         }
         List<MissingMappingsEvent.Mapping<Item>> itemList = event.getMappings(Registries.ITEM, Reference.MODID);
         for (MissingMappingsEvent.Mapping<Item> mapping : itemList) {
@@ -51,6 +53,7 @@ public class MissingMappingsHandler
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_LOG)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get().asItem());
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_LOG_STRIPPED)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get().asItem());
             if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_WOOD_STRIPPED)) mapping.remap(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get().asItem());
+            if (mapping.getKey().getPath().equals(Reference.UnlocalizedName.BAMBOO_PLANK_BEE_BOX)) mapping.remap(GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO_OLD.get().asItem());
         }
     }
 }

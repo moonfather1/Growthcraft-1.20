@@ -20,7 +20,7 @@ public class GrowthcraftBambooTagsProvider extends BlockTagsProvider
     @Override
     protected void addTags(HolderLookup.Provider provider)
     {
-        tag(BlockTags.MINEABLE_WITH_AXE).add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get()).add(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get());
+        // tag(BlockTags.MINEABLE_WITH_AXE) is in core
         tag(BlockTags.CLIMBABLE).add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get());
     }
 }

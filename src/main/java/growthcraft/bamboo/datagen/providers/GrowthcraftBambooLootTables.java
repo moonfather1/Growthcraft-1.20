@@ -11,12 +11,11 @@ public class GrowthcraftBambooLootTables extends VanillaBlockLoot {
 	@Override
 	protected Iterable<Block> getKnownBlocks()
 	{
-		return List.of(GrowthcraftBambooBlocks.BAMBOO_PLANK_BEE_BOX.get(), GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get(), GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get());
+		return List.of(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get(), GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get());
 	}
 
 	@Override
 	protected void generate() {
-        dropSelf(GrowthcraftBambooBlocks.BAMBOO_PLANK_BEE_BOX.get());
         dropSelf(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get());
         dropOther(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get(), GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get());
 	}

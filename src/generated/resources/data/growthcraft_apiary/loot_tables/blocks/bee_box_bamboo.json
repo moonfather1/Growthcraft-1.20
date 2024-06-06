@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "growthcraft_bamboo:bee_box_bamboo"
+          "name": "growthcraft_apiary:bee_box_bamboo"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "growthcraft_bamboo:blocks/bee_box_bamboo"
+  "random_sequence": "growthcraft_apiary:blocks/bee_box_bamboo"
 }
