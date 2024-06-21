@@ -10,8 +10,10 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,6 +24,8 @@ import java.util.Optional;
 public class FermentationBarrelScreen extends AbstractContainerScreen<FermentationBarrelMenu> {
 
     private static final ResourceLocation TEXTURE = TextureHelper.getTextureGui(Reference.MODID, Reference.UnlocalizedName.FERMENT_BARREL);
+    private static final List<Component> YEAST_WARNING = List.of(Component.translatable("growthcraft_cellar.tooltip.fermentation.yeast_warning").withStyle(Style.EMPTY.withColor(0xd5bb88)));
+    private static final List<Component> YEAST_ERROR = List.of(Component.translatable("growthcraft_cellar.tooltip.fermentation.yeast_error").withStyle(Style.EMPTY.withColor(0xd68a71)));
 
     private FluidTankRenderer fluidTankRenderer0;
 
@@ -87,12 +91,11 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
     }
 
     private void renderProgressToolTip(GuiGraphics poseStack, int mouseX, int mouseY, int x, int y) {
-        List<Component> tooltip = new ArrayList<>();
-
-        MutableComponent progressString = Component.translatable(Reference.MODID.concat(".tooltip.fermentation.progress"), menu.getPercentProgress());
-        tooltip.add(progressString);
-
         if (isMouseAboveArea(mouseX, mouseY, x + 48, y + 18, 20, 30, 20, 30)) {
+            List<Component> tooltip = new ArrayList<>();
+            MutableComponent progressString = Component.translatable(Reference.MODID.concat(".tooltip.fermentation.progress"), menu.getPercentProgress());
+            tooltip.add(progressString);
+
             poseStack.renderTooltip(
                     this.font,
                     tooltip,
@@ -112,6 +115,27 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
                     mouseX - x,
                     mouseY - y
             );
+        }
+    }
+
+    @Override     // yeast slot tooltip
+    protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
+            if (this.hoveredSlot.container.getContainerSize() <= 3 && this.hoveredSlot.getSlotIndex() == 0) {
+                if (menu.hasYeastWarning()) {
+                    ItemStack itemstack = this.hoveredSlot.getItem();
+                    graphics.renderTooltip(this.font, YEAST_WARNING, itemstack.getTooltipImage(), ItemStack.EMPTY, mouseX, mouseY);
+                }
+                else if (menu.hasYeastError()) {
+                    graphics.renderTooltip(this.font, YEAST_ERROR, Optional.empty(), ItemStack.EMPTY, mouseX, mouseY);
+                }
+                else {
+                    super.renderTooltip(graphics, mouseX, mouseY);
+                }
+            }
+            else {
+                super.renderTooltip(graphics, mouseX, mouseY);
+            }
         }
     }
 
