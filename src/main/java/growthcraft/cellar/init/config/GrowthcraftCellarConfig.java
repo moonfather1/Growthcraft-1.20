@@ -25,10 +25,19 @@ public class GrowthcraftCellarConfig {
     private static ForgeConfigSpec.IntValue hops_min_fruit;
     private static ForgeConfigSpec.IntValue hops_max_fruit;
 
+    private static ForgeConfigSpec.IntValue loot_chance_pillager_outpost;
+    private static ForgeConfigSpec.IntValue loot_chance_ocean_ruin;
+    private static ForgeConfigSpec.IntValue loot_chance_shipwreck;
+    private static ForgeConfigSpec.IntValue loot_chance_village;
+    private static ForgeConfigSpec.IntValue loot_chance_beach_treasure;
+    private static ForgeConfigSpec.IntValue loot_chance_dark_forest_mansion;
+    private static ForgeConfigSpec.IntValue loot_chance_stronghold;
+
     static {
         initBrewKettleConfig(SERVER_BUILDER);
         initGrapeVineConfig(SERVER_BUILDER);
         initHopsCropConfig(SERVER_BUILDER);
+        initLootConfig(SERVER_BUILDER);
 
         SERVER = SERVER_BUILDER.build();
     }
@@ -76,6 +85,32 @@ public class GrowthcraftCellarConfig {
                 .defineInRange("hops_crop.max_fruit_yield", 3, 1, 100);
     }
 
+    public static void initLootConfig(ForgeConfigSpec.Builder server) {
+        server.push("bottles_in_loot_chest");  // spaces would be fine here but i'll follow the existing style.
+        loot_chance_pillager_outpost = server
+                .comment("Percentage chance you'll find a few bottles of mead in pillager tower chest. Number here seems high but that bum place has only one chest and this fits the theme.")
+                .defineInRange("loot_chance_pillager_outpost", 90, 0, 100);   // spaces would be fine here but i'll follow the existing style.
+        loot_chance_ocean_ruin = server
+                .comment("Percentage chance you'll find a few bottles of wine in underwater ruin chest. Default of 10% is not low because ruins will have half a dozen chests.")
+                .defineInRange("loot_chance_underwater_ruins", 10, 0, 100);
+        loot_chance_shipwreck = server
+                .comment("Percentage chance you'll find a few bottles of ale in shipwreck chest.")
+                .defineInRange("loot_chance_shipwreck", 60, 0, 100);
+        loot_chance_village = server
+                .comment("Percentage chance you'll find a few bottles of wine in villager home chest.")
+                .defineInRange("loot_chance_village", 0, 0, 100);   // default is 0 - disabled for now.
+        loot_chance_beach_treasure = server
+                .comment("Percentage chance you'll find a few bottles of wine in buried beach chest.")
+                .defineInRange("loot_chance_beach_treasure", 0, 0, 100);   // default is 0 - disabled for now.
+        loot_chance_dark_forest_mansion = server
+                .comment("Percentage chance you'll find a few bottles of lager in woodland mansion chest.")
+                .defineInRange("loot_chance_dark_forest_mansion", 15, 0, 100);
+        loot_chance_stronghold = server
+                .comment("Percentage chance you'll find a few bottles of wine in stronghold chest.")
+                .defineInRange("loot_chance_stronghold", 0, 0, 100);   // default is 0 - disabled for now. some absorption won't be too bad.
+        server.pop();
+    }
+
     public static int getBrewKettleLitLightLevel() {
         return brew_kettle_lit_light_level.get();
     }
@@ -99,4 +134,14 @@ public class GrowthcraftCellarConfig {
     public static int getHopsCropMaxFruitYield() {
         return hops_max_fruit.get();
     }
+
+    // bug, may2024: all the above 6 values are unused
+
+    public static int getLootChancePillagerTower() { return loot_chance_pillager_outpost.get(); }
+    public static int getLootChanceOceanRuin()     { return loot_chance_ocean_ruin.get(); }
+    public static int getLootChanceShipwreck()     { return loot_chance_shipwreck.get(); }
+    public static int getLootChanceVillagerHome()  { return loot_chance_village.get(); }
+    public static int getLootChanceBeachTreasure() { return loot_chance_beach_treasure.get(); }
+    public static int getLootChanceMansion()       { return loot_chance_dark_forest_mansion.get(); }
+    public static int getLootChanceStronghold()    { return loot_chance_stronghold.get(); }
 }
