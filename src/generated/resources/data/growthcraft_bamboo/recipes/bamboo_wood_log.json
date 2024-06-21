@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "group": "growthcraft_bamboo",
-  "ingredient": {
-    "item": "minecraft:bamboo"
-  },
-  "result": "growthcraft_bamboo:bamboo_wood_log"
-}

@@ -65,8 +65,6 @@ public class RopeItem extends GrowthcraftBlockItem {
                 state = GrowthcraftBlocks.ROPE_LINEN_BAMBOO_FENCE.get().defaultBlockState();
             } else if (blockState.getBlock() == GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get()) {
                 state = GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get().defaultBlockState();
-            } else if (blockState.getBlock() == GrowthcraftBambooBlocks.BAMBOO_PLANK_FENCE.get()) {
-                state = GrowthcraftBambooBlocks.BAMBOO_PLANK_FENCE_ROPE_LINEN.get().defaultBlockState();
             }
 
             Map<String, Boolean> surroundingStateMap =

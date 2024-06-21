@@ -10,10 +10,11 @@
     "growthcraft_apiary:bee_box_oak",
     "growthcraft_apiary:bee_box_spruce",
     "growthcraft_apiary:bee_box_warped",
+    "growthcraft_apiary:bee_box_bamboo",
+    "growthcraft_apiary:bee_box_bamboo_old",
     "growthcraft_apiary:honey_fluid",
     "growthcraft_apiary:honey_mead_fluid",
     "growthcraft_apiary:honey_mead_must_fluid",
-    "growthcraft_bamboo:bee_box_bamboo",
     "growthcraft_cellar:fermentation_barrel_oak",
     "growthcraft:rope_linen_acacia_fence",
     "growthcraft:rope_linen_birch_fence",
@@ -24,6 +25,11 @@
     "growthcraft:rope_linen_oak_fence",
     "growthcraft:rope_linen_spruce_fence",
     "growthcraft:rope_linen_warped_fence",
+    "growthcraft:rope_linen_bamboo_fence",
+    "growthcraft:rope_linen_cherry_fence",
+    "growthcraft:rope_linen_mangrove_fence",
+    "growthcraft_bamboo:bamboo_post_vertical",
+    "growthcraft_bamboo:bamboo_post_horizontal",
     "growthcraft_milk:churn"
   ]
 }

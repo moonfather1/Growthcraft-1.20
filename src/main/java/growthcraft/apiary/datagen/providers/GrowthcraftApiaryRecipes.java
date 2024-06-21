@@ -19,6 +19,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -52,6 +53,23 @@ public class GrowthcraftApiaryRecipes extends RecipeProvider{
 				Items.SPRUCE_SLAB, Items.SPRUCE_PLANKS, Tags.Items.RODS_WOODEN);
 		this.beeBoxRecipeBuilder(consumer, GrowthcraftApiaryBlocks.BEE_BOX_WARPED.get(),
 				Items.WARPED_SLAB, Items.WARPED_PLANKS, Tags.Items.RODS_WOODEN);
+
+		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO.get())
+						   .pattern("SPS")
+						   .pattern("PBP")
+						   .pattern("SPS")
+						   .define('B', Ingredient.of(Items.BAMBOO_SLAB, Items.BAMBOO_MOSAIC_SLAB))
+						   .define('P', Ingredient.of(Items.BAMBOO_PLANKS, Items.BAMBOO_MOSAIC))
+						   .define('S', Tags.Items.RODS_WOODEN)
+						   .group(growthcraft.bamboo.shared.Reference.MODID)
+						   .unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
+						   .save(consumer);
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO_OLD.get())
+						   .requires(GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO.get())
+						   .group(growthcraft.bamboo.shared.Reference.MODID)
+						   .unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
+						   .save(consumer);
+
 
 		// Bees Wax
 		GrowthcraftApiaryItems.ITEMS.getEntries().forEach(item -> {
