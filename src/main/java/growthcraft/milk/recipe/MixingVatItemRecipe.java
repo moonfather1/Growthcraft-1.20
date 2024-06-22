@@ -60,6 +60,14 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
         return false;
     }
 
+    /**
+     * Checks if the given test fluid stack, test ingredients, and heat source match the recipe criteria.
+     *
+     * @param testFluidStack  The fluid stack to test against the recipe input fluid stack.
+     * @param testIngredients The list of item stacks to test against the recipe ingredients.
+     * @param hasHeatSource   Indicates whether a heat source is present.
+     * @return {@code true} if the test criteria match the recipe criteria, {@code false} otherwise.
+     */
     public boolean matches(FluidStack testFluidStack, List<ItemStack> testIngredients, boolean hasHeatSource) {
 
         boolean fluidMatches = CraftingUtils.doesFluidMatch(testFluidStack, this.getInputFluidStack());
@@ -70,8 +78,14 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
             int itemCount = this.getIngredientList().size();
             int matchCount = 0;
             for (int i = 0; i < this.getIngredientList().size(); i++) {
-                if (this.getIngredientList().get(i).getItem() == testIngredients.get(i).getItem() &&
-                        this.getIngredientList().get(i).getCount() == testIngredients.get(i).getCount()) {
+                int index = i;
+                boolean ingredientMatch = Arrays.stream(
+                        this.getIngredients().get(index).getItems()).anyMatch(
+                        ingredientItem -> ingredientItem.is(testIngredients.get(index).getItem())
+                                && ingredientItem.getCount() == testIngredients.get(index).getCount()
+                );
+
+                if (ingredientMatch) {
                     matchCount++;
                 }
             }
