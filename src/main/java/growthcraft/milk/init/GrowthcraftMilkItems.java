@@ -9,9 +9,11 @@ import growthcraft.milk.item.CheeseCurdsDrainedItem;
 import growthcraft.milk.item.MilkingBucketItem;
 import growthcraft.milk.item.ThistleSeedItem;
 import growthcraft.milk.shared.Reference;
+import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -245,7 +247,7 @@ public class GrowthcraftMilkItems {
         float f3 = 0.85F;
         float f4 = 1.0F;
 
-        // ComposterBlock.COMPOSTABLES.put(GrowthcraftRiceItems.RICE.get(), f2);
+        ComposterBlock.COMPOSTABLES.put(GrowthcraftMilkItems.THISTLE_SEED.get(), f2);
 
     }
 
