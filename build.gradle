@@ -86,7 +86,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // JEI is required for custom recipe lookup.
+    // Compile time mods for integration
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
 
@@ -97,6 +97,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:appleskin-${curseforge_appleskin}")
     runtimeOnly fg.deobf("curse.maven:mekanism-${curseforge_mekanism}")
     runtimeOnly fg.deobf("curse.maven:farmers-delight-${curseforge_farmers_delight}")
+    runtimeOnly fg.deobf("curse.maven:immersive-engineering-${curseforge_immersive_engineering}")
 
     // Nice thing that shows the nbt in scrollable manner
     runtimeOnly fg.deobf("curse.maven:item-nbt-viewer-514135:4578522")
