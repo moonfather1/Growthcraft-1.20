@@ -7,18 +7,19 @@
       "tag": "minecraft:fishes"
     },
     "K": {
-      "item": "minecraft:kelp"
+      "item": "minecraft:dried_kelp"
     },
     "R": {
       "item": "growthcraft_rice:rice_cooked"
     }
   },
   "pattern": [
-    "F",
-    "R",
-    "K"
+    " F ",
+    "RRR",
+    "KKK"
   ],
   "result": {
+    "count": 12,
     "item": "growthcraft_rice:sushi_roll"
   },
   "show_notification": true

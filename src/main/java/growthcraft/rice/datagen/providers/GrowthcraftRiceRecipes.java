@@ -50,13 +50,13 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_STALK.get()))
 		.save(consumer);
 		
-		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.SUSHI_ROLL.get())
-		.pattern("F")
-		.pattern("R")
-		.pattern("K")
+		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.SUSHI_ROLL.get(), 12)
+		.pattern(" F ")
+		.pattern("RRR")
+		.pattern("KKK")
 		.define('F', ItemTags.FISHES)
 		.define('R', GrowthcraftRiceItems.RICE_COOKED.get())
-		.define('K', Items.KELP)
+		.define('K', Items.DRIED_KELP)
 		.group(Reference.MODID)
 		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_COOKED.get()))
 		.save(consumer);
