@@ -183,12 +183,8 @@ public class RoasterBlockEntity extends BlockEntity implements BlockEntityTicker
                     } else if (this.tickMax > 0) {
                         int itemCount = this.itemStackHandler.getStackInSlot(0).getCount();
                         ItemStack resultItemStack = recipe.getResultItem().copy();
-                        resultItemStack.setCount(itemCount);
-
-                        this.itemStackHandler.setStackInSlot(
-                                1,
-                                resultItemStack
-                        );
+                        resultItemStack.setCount(itemCount + this.itemStackHandler.getStackInSlot(1).getCount());
+                        this.itemStackHandler.setStackInSlot(1, resultItemStack);
 
                         // Shrink the input item count.
                         this.itemStackHandler.getStackInSlot(0).shrink(itemCount);
@@ -196,7 +192,9 @@ public class RoasterBlockEntity extends BlockEntity implements BlockEntityTicker
                         // Reset the tick counters and notify all surrounding blocks
                         this.resetTickClock();
                         level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
-                    } else if (this.tickMax == -1) {
+                    } else if (this.tickMax == -1
+                            && (this.itemStackHandler.getStackInSlot(1).isEmpty()
+                                    || ItemStack.isSameItem(recipe.getResultItem(), this.itemStackHandler.getStackInSlot(1)) && this.itemStackHandler.getStackInSlot(0).getCount() * recipe.getResultItem().getCount() + this.itemStackHandler.getStackInSlot(1).getCount() <= this.itemStackHandler.getStackInSlot(0).getMaxStackSize())) {
                         // Roaster processing is based on the roaster level times 600.
                         // Roaster level of 1 will take 600 ticks (30 secs) to process
                         // whereas level 8 will take 4800 ticks (4 minutes) to process.
