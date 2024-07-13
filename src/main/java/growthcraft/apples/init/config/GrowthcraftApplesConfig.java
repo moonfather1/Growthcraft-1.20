@@ -23,9 +23,6 @@ public class GrowthcraftApplesConfig {
         SERVER = SERVER_BUILDER.build();
     }
 
-    /*
-
-     */
     private GrowthcraftApplesConfig() {
         /* Prevent generation of public constructor */
     }
