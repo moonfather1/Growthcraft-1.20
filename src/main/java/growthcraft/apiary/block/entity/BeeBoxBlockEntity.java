@@ -5,6 +5,7 @@ import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.apiary.init.GrowthcraftApiaryTags;
 import growthcraft.apiary.init.config.GrowthcraftApiaryConfig;
 import growthcraft.apiary.screen.BeeBoxMenu;
+import growthcraft.lib.utils.NbtUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -58,6 +59,14 @@ public class BeeBoxBlockEntity extends BlockEntity implements BlockEntityTicker<
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return (slot == 0 && stack.is(GrowthcraftApiaryTags.Items.BEE)) ||
                     (slot > 0 && slot <= 27 && stack.is(GrowthcraftApiaryTags.Items.HONEY_COMB));
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            if(slot > 0 && slot <= 27) {
+                return 1;
+            }
+            return 64;
         }
     };
 
@@ -198,8 +207,8 @@ public class BeeBoxBlockEntity extends BlockEntity implements BlockEntityTicker<
         this.itemStackHandler.deserializeNBT(nbt.getCompound("inventory"));
         this.tickClock = nbt.getInt("CurrentProcessTicks");
 
-        if (nbt.contains("CustomName", 8)) {
-            this.customName = Component.Serializer.fromJson(nbt.getString("CustomName"));
+        if (nbt.contains(NbtUtils.Keys.CUSTOM_NAME, 8)) {
+            this.customName = Component.Serializer.fromJson(nbt.getString(NbtUtils.Keys.CUSTOM_NAME));
         }
     }
 
@@ -211,7 +220,7 @@ public class BeeBoxBlockEntity extends BlockEntity implements BlockEntityTicker<
         nbt.putInt("CurrentProcessTicks", this.tickClock);
 
         if (this.customName != null) {
-            nbt.putString("CustomName", Component.Serializer.toJson(this.customName));
+            nbt.putString(NbtUtils.Keys.CUSTOM_NAME, Component.Serializer.toJson(this.customName));
         }
     }
 
@@ -233,37 +242,77 @@ public class BeeBoxBlockEntity extends BlockEntity implements BlockEntityTicker<
     }
 
     private void tryReplicateFlower(Level level, BlockPos pos) {
-        int beeBoxFlowerRange = GrowthcraftApiaryConfig.getBeeBoxFlowerRange();
+        int beeBoxRadiusRange = GrowthcraftApiaryConfig.getBeeBoxFlowerRange();
+        int beeBoxFlowerSaturation = GrowthcraftApiaryConfig.getFlowerReplicationAreaPercent();
 
         List<BlockState> flowerBlocks = new ArrayList<>();
         List<BlockPos> airBlocks = new ArrayList<>();
 
-        BlockPos lowerBoundPos = pos.below(2).south(beeBoxFlowerRange).west(beeBoxFlowerRange);
-        BlockPos upperBoundPos = pos.above(2).north(beeBoxFlowerRange).east(beeBoxFlowerRange);
+        categorizeSurroundingBlocks(level, pos, beeBoxRadiusRange, flowerBlocks, airBlocks);
+
+        // Check for flower replication saturation.
+        if (isFlowerReplicationSaturated(beeBoxRadiusRange, flowerBlocks.size(), beeBoxFlowerSaturation)) {
+            return;
+        }
+
+        tryFlowerReplicationInAirBlocks(level, flowerBlocks, airBlocks);
+    }
+
+    /**
+     * Categorizes the surrounding blocks of a given position within a specified radius range.
+     *
+     * @param level           the level in which the blocks are located
+     * @param pos             the position to categorize the surrounding blocks around
+     * @param beeBoxRadiusRange the radius range within which to find the surrounding blocks
+     * @param flowerBlocks    the list to add the flower blocks to
+     * @param airBlocks       the list to add the air blocks to
+     */
+    private void categorizeSurroundingBlocks(Level level, BlockPos pos, int beeBoxRadiusRange,
+                                             List<BlockState> flowerBlocks, List<BlockPos> airBlocks) {
+        BlockPos lowerBoundPos = pos.below(2).south(beeBoxRadiusRange).west(beeBoxRadiusRange);
+        BlockPos upperBoundPos = pos.above(2).north(beeBoxRadiusRange).east(beeBoxRadiusRange);
 
         for (BlockPos blockpos : BlockPos.betweenClosed(lowerBoundPos, upperBoundPos)) {
             BlockPos surroundingPos = blockpos.immutable();
-
-            if (level.getBlockState(surroundingPos).is(BlockTags.FLOWERS)) {
+            if (level.getBlockState(surroundingPos).is(BlockTags.SMALL_FLOWERS)) {
                 flowerBlocks.add(level.getBlockState(surroundingPos));
             } else if (level.getBlockState(surroundingPos).isAir() && level.getBlockState(surroundingPos.below()).is(BlockTags.DIRT)) {
                 airBlocks.add(surroundingPos);
-            } else {
-                // Do nothing
             }
-
         }
+    }
 
+    /**
+     * Checks if the replication of flowers in the bee box is saturated.
+     *
+     * @param beeBoxRadiusRange    the radius range of the bee box
+     * @param flowerBlockSize      the total number of flower blocks in the bee box
+     * @param beeBoxFlowerSaturation   the saturation percentage at which the replication is considered saturated
+     * @return true if the replication is saturated, false otherwise
+     */
+    private boolean isFlowerReplicationSaturated(int beeBoxRadiusRange, int flowerBlockSize, int beeBoxFlowerSaturation) {
+        float areaOfBlocks = (float) (beeBoxRadiusRange * beeBoxRadiusRange) - 1;
+        float numberOfFlowers = flowerBlockSize - areaOfBlocks;
+
+        float saturation = (numberOfFlowers / areaOfBlocks) * 100;
+        return saturation >= beeBoxFlowerSaturation;
+    }
+
+    /**
+     * Attempts to replicate a flower in air blocks in the given level.
+     *
+     * @param level         the level in which the blocks are located
+     * @param flowerBlocks  the list containing the flower blocks
+     * @param airBlocks     the list containing the air blocks
+     */
+    private void tryFlowerReplicationInAirBlocks(Level level, List<BlockState> flowerBlocks, List<BlockPos> airBlocks) {
         SecureRandom random = new SecureRandom();
         int rand = random.nextInt(100);
-
         if (!flowerBlocks.isEmpty() && !airBlocks.isEmpty() && rand <= GrowthcraftApiaryConfig.getChanceToReplicateFlowers()) {
-            int randomFlower = level.getRandom().nextInt(flowerBlocks.size());
-            int randomAirBlock = level.getRandom().nextInt(airBlocks.size());
-
-            level.setBlock(airBlocks.get(randomAirBlock), flowerBlocks.get(randomFlower), Block.UPDATE_ALL_IMMEDIATE);
+            int randomFlowerIndex = level.getRandom().nextInt(flowerBlocks.size());
+            int randomAirBlockIndex = level.getRandom().nextInt(airBlocks.size());
+            level.setBlock(airBlocks.get(randomAirBlockIndex), flowerBlocks.get(randomFlowerIndex), Block.UPDATE_ALL_IMMEDIATE);
         }
-
     }
 
     @NotNull

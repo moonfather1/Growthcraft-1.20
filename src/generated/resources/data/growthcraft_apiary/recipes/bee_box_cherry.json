@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_apiary",
+  "key": {
+    "B": {
+      "item": "minecraft:cherry_slab"
+    },
+    "P": {
+      "item": "minecraft:cherry_planks"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PBP",
+    "SPS"
+  ],
+  "result": {
+    "item": "growthcraft_apiary:bee_box_cherry"
+  },
+  "show_notification": true
+}

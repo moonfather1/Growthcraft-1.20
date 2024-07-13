@@ -68,7 +68,7 @@ minecraft {
 
         data {
             workingDirectory project.file('run-data')
-            args '--mod', mod_id+',growthcraft_milk', '--all', '--output', file('src/generated/resources/'),
+            args '--mod', mod_id+',growthcraft_apiary'+',growthcraft_apples'+',growthcraft_bamboo'+',growthcraft_cellar'+',growthcraft_milk'+',growthcraft_rice', '--all', '--output', file('src/generated/resources/'),
             '--existing', file('src/main/resources/'), '--flat'
         }
     }
@@ -86,7 +86,7 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // JEI is required for custom recipe lookup.
+    // Compile time mods for integration
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
 
@@ -96,7 +96,11 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:patchouli-${curseforge_patchouli}")
     runtimeOnly fg.deobf("curse.maven:appleskin-${curseforge_appleskin}")
     runtimeOnly fg.deobf("curse.maven:mekanism-${curseforge_mekanism}")
-    runtimeOnly fg.deobf("curse.maven:mekanism-${curseforge_farmers_delight}")
+    runtimeOnly fg.deobf("curse.maven:farmers-delight-${curseforge_farmers_delight}")
+    runtimeOnly fg.deobf("curse.maven:immersive-engineering-${curseforge_immersive_engineering}")
+
+    // Nice thing that shows the nbt in scrollable manner
+    runtimeOnly fg.deobf("curse.maven:item-nbt-viewer-514135:4578522")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

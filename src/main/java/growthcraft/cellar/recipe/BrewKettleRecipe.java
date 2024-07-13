@@ -184,7 +184,6 @@ public class BrewKettleRecipe implements Recipe<SimpleContainer> {
 
                 for (int j = 0; j < inputIngredients.size(); ++j) {
                     inputIngredients.set(j, Ingredient.fromNetwork(buffer));
-
                 }
 
                 ItemStack byProductItemStack = buffer.readItem();

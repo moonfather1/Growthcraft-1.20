@@ -162,7 +162,7 @@ public class FermentationBarrelBlock extends BaseEntityBlock implements SimpleWa
                             || player.getItemInHand(interactionHand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()
             ) {
                 return InteractionResult.SUCCESS;
-            } else if(player.isCrouching()) {
+            } else {
                 try {
                     // Play sound
                     level.playSound(player, blockPos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 1.0F, 1.0F);

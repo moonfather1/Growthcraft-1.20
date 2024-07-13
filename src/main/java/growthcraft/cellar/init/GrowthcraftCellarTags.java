@@ -34,7 +34,11 @@ public class GrowthcraftCellarTags {
 
     public static class Items {
 
-        public static final TagKey<Item> GRAIN = tag(Reference.UnlocalizedName.GRAIN);
+        public static final TagKey<Item> TAG_GRAIN = tag(Reference.UnlocalizedName.GRAIN);
+        
+        public static final TagKey<Item> TAG_BARLEY = forgeTag(Reference.UnlocalizedName.TAG_BARLEY);
+        public static final TagKey<Item> TAG_GRAPE_SEEDS = forgeTag(Reference.UnlocalizedName.TAG_GRAPE_SEEDS);
+        public static final TagKey<Item> TAG_GRAPE_FRUITS = forgeTag(Reference.UnlocalizedName.TAG_GRAPE_FRUITS);
 
         private static void init() {
             // Do nothing, simply instantiate static variables
@@ -42,6 +46,9 @@ public class GrowthcraftCellarTags {
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Reference.MODID, name));
+        }
+        private static TagKey<Item> forgeTag(String name) {
+            return ItemTags.create(new ResourceLocation("forge", name));
         }
     }
 

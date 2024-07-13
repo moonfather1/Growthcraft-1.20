@@ -232,7 +232,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
                     this.itemStackHandler.getStackInSlot(1),
                     this.FLUID_TANK_0.getFluid(),
                     this.hasLid(),
-                    BlockStateUtils.isHeated(this.getLevel(), this.getBlockPos())
+                    BlockStateUtils.isHeatedFromBelow(this.getLevel(), this.getBlockPos())
             )) {
                 if(!this.FLUID_TANK_1.getFluid().isEmpty()) {
                     if(this.FLUID_TANK_1.getFluid().getRawFluid() == recipe.getOutputFluidStack().getFluid()) {
@@ -251,7 +251,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
     }
 
     public boolean isHeated() {
-        boolean heated = BlockStateUtils.isHeated(this.level, this.getBlockPos());
+        boolean heated = BlockStateUtils.isHeatedFromBelow(this.level, this.getBlockPos());
         // Only change the blockstate if it is different.
         if (this.getBlockState().getValue(LIT).booleanValue() != heated) {
             this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(LIT, heated), Block.UPDATE_ALL);

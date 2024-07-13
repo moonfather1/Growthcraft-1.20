@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_milk",
+  "ingredients": [
+    {
+      "item": "growthcraft_milk:butter"
+    },
+    {
+      "item": "growthcraft:salt"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_milk:butter_salted"
+  }
+}

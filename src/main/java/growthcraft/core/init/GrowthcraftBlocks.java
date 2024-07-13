@@ -56,6 +56,18 @@ public class GrowthcraftBlocks {
             Reference.UnlocalizedName.ROPE_LINEN_SPRUCE_FENCE, RopeBlock::new, true
     );
 
+    public static final RegistryObject<Block> ROPE_LINEN_MANGROVE_FENCE = registerBlock(
+            Reference.UnlocalizedName.ROPE_LINEN_MANGROVE_FENCE, RopeBlock::new, true
+    );
+
+    public static final RegistryObject<Block> ROPE_LINEN_CHERRY_FENCE = registerBlock(
+            Reference.UnlocalizedName.ROPE_LINEN_CHERRY_FENCE, RopeBlock::new, true
+    );
+
+    public static final RegistryObject<Block> ROPE_LINEN_BAMBOO_FENCE = registerBlock(
+            Reference.UnlocalizedName.ROPE_LINEN_BAMBOO_FENCE, RopeBlock::new, true
+    );
+
     public static final RegistryObject<Block> ROPE_LINEN_NETHER_BRICK_FENCE = registerBlock(
             Reference.UnlocalizedName.ROPE_LINEN_NETHER_BRICK_FENCE, RopeBlock::new, true
     );

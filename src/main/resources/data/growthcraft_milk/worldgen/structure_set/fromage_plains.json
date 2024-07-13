@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "growthcraft_milk:fromage_plains",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1644742136,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

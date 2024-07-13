@@ -5,9 +5,13 @@
   "sortnum": 4,
   "pages": [
     {
+      "type": "patchouli:text",
+      "text": "Yeast is used by the $(l:cellar/ferment_barrel)Fermentation Barrel$() to ferment fluids.  Each type of fermented fluid requires a different yeast.$(br2)Yeast can be multiplied with the $(l:cellar/culture_jar)Culture Jar$()."
+    },
+    {
       "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:culture_jar",
-      "text": "The culture jar is used to grow more yeast. By placing the yeast with it's corresponding fluid, it will grow more. You must already have at least one yeast in order to culture it. Culturing yeast does not require any heat under the culture jar."
+      "item": "growthcraft_cellar:yeast_bayanus",
+      "text": "$(bold)Bayanus Yeast$() - This yeast is used to ferment wine.$(br2)$(bold)Source$() - You can find Bayanus Yeast by harvesting grass.$(br2)$(bold)Culturing$() - Needs either Red, Purple or White grape juice."
     },
     {
       "type": "patchouli:spotlight",
@@ -16,13 +20,8 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:yeast_bayanus",
-      "text": "$(bold)Bayanus Yeast$() - This yeast is used for fermenting wine.$(br2)$(bold)Source$() - You can find Bayanus Yeast by harvesting grass.$(br2)$(bold)Culturing$() - Needs either Red, Purple or White grape juice."
-    },
-    {
-      "type": "patchouli:spotlight",
       "item": "growthcraft_cellar:yeast_lager",
-      "text": "$(bold)Lager Yeast$() - Lager yeast is used to ferment lager types of ales.$(br2)$(bold)Source$() - You can find Lager Yeast by harvesting snow in snowy biomes.$(br2)$(bold)Culturing$() - Needs generic Wort from wheat."
+      "text": "$(bold)Lager Yeast$() - Lager yeast is used to ferment lagers.$(br2)$(bold)Source$() - You can find Lager Yeast by harvesting snow in snowy biomes.$(br2)$(bold)Culturing$() - Needs generic Wort from wheat."
     },
     {
       "type": "patchouli:spotlight",

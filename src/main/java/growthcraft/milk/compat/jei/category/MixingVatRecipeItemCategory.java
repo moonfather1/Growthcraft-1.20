@@ -23,6 +23,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 public class MixingVatRecipeItemCategory implements IRecipeCategory<MixingVatItemRecipe> {
@@ -75,12 +76,12 @@ public class MixingVatRecipeItemCategory implements IRecipeCategory<MixingVatIte
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder builder, MixingVatItemRecipe recipe, @NotNull IFocusGroup focuses) {
 
-        int ingredientCount = recipe.getIngredientList().size();
-
         // Input Inventory
-        for (int i = 0; i < ingredientCount; i++) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 61, 8 + (i * 18))
-                    .addItemStack(recipe.getIngredientList().get(i));
+        int ingredientIndex = 0;
+        for (Ingredient ingredient : recipe.getIngredients()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 61, 8 + ( ingredientIndex * 18))
+                    .addIngredients(ingredient);
+            ingredientIndex++;
         }
 
         // Fluid Tank 1

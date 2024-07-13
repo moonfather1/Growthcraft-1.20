@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "growthcraft_apples",
+  "key": {
+    "#": {
+      "item": "growthcraft_apples:apple_wood_log"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 3,
+    "item": "growthcraft_apples:apple_wood"
+  },
+  "show_notification": true
+}

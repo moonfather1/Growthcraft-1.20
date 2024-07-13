@@ -91,7 +91,7 @@ public class MixingVatBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
-                .setValue(LIT, BlockStateUtils.isHeated(context.getLevel(), context.getClickedPos()));
+                .setValue(LIT, BlockStateUtils.isHeatedFromBelow(context.getLevel(), context.getClickedPos()));
     }
 
     @Override

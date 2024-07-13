@@ -15,6 +15,14 @@ public class GrowthcraftCellarConfig {
 
     private static final String CATEGORY_BREW_KETTLE = "brew_kettle";
 
+    private static ForgeConfigSpec.IntValue loot_chance_pillager_outpost;
+    private static ForgeConfigSpec.IntValue loot_chance_ocean_ruin;
+    private static ForgeConfigSpec.IntValue loot_chance_shipwreck;
+    private static ForgeConfigSpec.IntValue loot_chance_village;
+    private static ForgeConfigSpec.IntValue loot_chance_beach_treasure;
+    private static ForgeConfigSpec.IntValue loot_chance_dark_forest_mansion;
+    private static ForgeConfigSpec.IntValue loot_chance_stronghold;
+
     static {
         initBrewKettleConfig(SERVER_BUILDER);
         SERVER = SERVER_BUILDER.build();

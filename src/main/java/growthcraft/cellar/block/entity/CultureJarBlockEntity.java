@@ -115,15 +115,27 @@ public class CultureJarBlockEntity extends BlockEntity implements BlockEntityTic
                 : Component.translatable("container.growthcraft_cellar.culture_jar");
     }
 
+    public void dropHeldItems() {
+        // called when the block is destroyed. drops items from item slots.
+        if (this.level != null && !this.itemStackHandler.getStackInSlot(0).isEmpty()) {
+            Block.popResource(this.level, this.getBlockPos(), this.itemStackHandler.getStackInSlot(0));
+            this.itemStackHandler.setStackInSlot(0, ItemStack.EMPTY);
+        }
+    }
+
     @Override
     public void tick(Level level, BlockPos blockPos, BlockState blockState, CultureJarBlockEntity blockEntity) {
+        if (level.isClientSide) {
+            return; // do nothing; below code will send client updates.
+        }
 
-        if(!level.isClientSide && this.isHeated()) {
-            // Do nothing, we are just ensuring that the LIT property is accurate.
+        // every two seconds we update heated state based on surrounding blocks.
+        if (level.getGameTime() % 40 == 14) {
+            this.verifyHeatedState();
         }
 
         // The Culture Jar requires a fluid and an item in order to do anything.
-        if(!level.isClientSide && this.getFluidTank(0).getFluidAmount() > 0 && !this.itemStackHandler.getStackInSlot(0).isEmpty()) {
+        if (this.getFluidTank(0).getFluidAmount() > 0 && !this.itemStackHandler.getStackInSlot(0).isEmpty()) {
             // Check for recipe.
             List<CultureJarRecipe> recipes = this.getMatchingRecipes(this.getFluidStackInTank(0), this.itemStackHandler.getStackInSlot(0));
             CultureJarRecipe recipe = recipes.isEmpty() ? null : recipes.get(0);
@@ -152,9 +164,14 @@ public class CultureJarBlockEntity extends BlockEntity implements BlockEntityTic
                     this.tickClock = 0;
                 }
 
-                this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+                // valid action was done and sendBlockUpdated will send slot info and those two data integers to client.
+                // but we won't do it every tick. no need to update a tiny progressbar 20x per second.
+                // we'll do it one per second for now.
+                if (level.getGameTime() % 20 == 17) {
+                    this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+                }
             }
-        } else if(!level.isClientSide && this.getFluidTank(0).getFluidAmount() > 0 && this.itemStackHandler.getStackInSlot(0).isEmpty()) {
+        } else if(this.getFluidTank(0).getFluidAmount() > 0 && this.itemStackHandler.getStackInSlot(0).isEmpty()) {
             // Check for recipe.
             List<CultureJarStarterRecipe> recipes = this.getMatchingRecipes(this.getFluidStackInTank(0));
             CultureJarStarterRecipe recipe = recipes.isEmpty() ? null : recipes.get(0);
@@ -183,10 +200,14 @@ public class CultureJarBlockEntity extends BlockEntity implements BlockEntityTic
                     this.tickClock = 0;
                 }
 
-                this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+                // valid action was done and sendBlockUpdated will send slot info and those two data integers to client.
+                // but we won't do it every tick. no need to update a tiny progressbar 20x per second.
+                // we'll do it one per second for now.
+                if (level.getGameTime() % 20 == 17) {
+                    this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+                }
             }
         }
-
     }
 
     @Nullable
@@ -202,16 +223,21 @@ public class CultureJarBlockEntity extends BlockEntity implements BlockEntityTic
     }
 
     public boolean isHeated() {
-        boolean heated = BlockStateUtils.isHeated(this.level, this.getBlockPos());
-        // Only change the blockstate if it is different.
-        if(this.getBlockState().getValue(LIT).booleanValue() != heated) {
-            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(LIT, heated), Block.UPDATE_ALL);
+        if (this.level == null) {
+            return false;
         }
-        return heated;
+        return this.getBlockState().getValue(LIT);
     }
 
-    public boolean isInputTankFull() {
-        return this.getFluidTank(0).getCapacity() == this.getFluidTank(0).getFluidAmount();
+    public void verifyHeatedState() {
+        if (this.level == null) {
+            return;
+        }
+        boolean heated = BlockStateUtils.isHeatedFromTwoBlockRange(this.level, this.getBlockPos());
+        // Only change the blockstate if it is different.
+        if (this.getBlockState().getValue(LIT) != heated) {
+            this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(LIT, heated), Block.UPDATE_CLIENTS);
+        }
     }
 
     public void setFluidStackInTank(int tankID, FluidStack fluidStack) {
@@ -343,6 +369,4 @@ public class CultureJarBlockEntity extends BlockEntity implements BlockEntityTic
         }
         return super.getCapability(cap, side);
     }
-
-
 }

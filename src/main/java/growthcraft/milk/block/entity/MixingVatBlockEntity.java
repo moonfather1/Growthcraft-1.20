@@ -539,7 +539,7 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
     }
 
     public boolean isHeated() {
-        boolean heated = BlockStateUtils.isHeated(this.level, this.getBlockPos());
+        boolean heated = BlockStateUtils.isHeatedFromBelow(this.level, this.getBlockPos());
         // Only change the blockstate if it is different.
         if(this.getBlockState().getValue(LIT).booleanValue() != heated) {
             this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(LIT, heated), Block.UPDATE_ALL);
