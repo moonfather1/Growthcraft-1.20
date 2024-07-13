@@ -12,7 +12,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class BrewKettleFluidTankPacket {
-    private FluidStack fluidStack;
+    private final FluidStack fluidStack;
     private int tankID;
 
     private final BlockPos blockPos;
@@ -41,8 +41,7 @@ public class BrewKettleFluidTankPacket {
 
                         LocalPlayer player = Minecraft.getInstance().player;
 
-                        if(player.containerMenu instanceof BrewKettleMenu) {
-                            BrewKettleMenu menu = (BrewKettleMenu) player.containerMenu;
+                        if(player.containerMenu instanceof BrewKettleMenu menu) {
                             if(menu.getBlockEntity().getBlockPos().equals(this.blockPos)) {
                                 menu.setFluid(this.tankID, this.fluidStack);
                            }

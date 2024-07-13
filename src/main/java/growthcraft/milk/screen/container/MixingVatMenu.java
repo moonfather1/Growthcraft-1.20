@@ -26,7 +26,7 @@ public class MixingVatMenu extends AbstractContainerMenu {
     private final MixingVatBlock block;
     private final Level level;
 
-    private ContainerData data;
+    private final ContainerData data;
 
     public MixingVatMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
         this(containerId, inventory, Objects.requireNonNull(inventory.player.level().getBlockEntity(extraData.readBlockPos())), new SimpleContainerData(2));
@@ -145,7 +145,7 @@ public class MixingVatMenu extends AbstractContainerMenu {
             case 0 -> this.blockEntity.getFluidStackInTank(0);
             case 1 -> this.blockEntity.getFluidStackInTank(1);
             default ->
-                    throw new NullPointerException(String.format("MixingVatmenu getFluidStack at <%s> does not have a fluid tank with the ID of %d!", blockEntity.getBlockPos().toString(), tankID));
+                    throw new NullPointerException(String.format("MixingVatmenu getFluidStack at <%s> does not have a fluid tank with the ID of %d!", blockEntity.getBlockPos(), tankID));
         };
     }
 

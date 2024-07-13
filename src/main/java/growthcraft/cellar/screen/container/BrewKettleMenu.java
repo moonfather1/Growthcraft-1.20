@@ -17,10 +17,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class BrewKettleMenu extends AbstractContainerMenu {
-    private BrewKettleBlockEntity blockEntity;
-    private BrewKettleBlock block;
+    private final BrewKettleBlockEntity blockEntity;
+    private final BrewKettleBlock block;
     private final Level level;
-    private ContainerData data;
+    private final ContainerData data;
 
     public BrewKettleMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
         this(containerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));

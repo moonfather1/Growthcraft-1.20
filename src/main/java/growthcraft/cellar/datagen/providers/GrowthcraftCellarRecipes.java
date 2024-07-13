@@ -80,9 +80,9 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.WHEAT), RecipeCategory.FOOD, GrowthcraftCellarItems.GRAIN.get())
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
-		.save(consumer);;
-		
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.ROASTER.get())
+		.save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.ROASTER.get())
 		.pattern(" I ")
 		.pattern(" B ")
 		.pattern("I I")

@@ -46,12 +46,12 @@ public class FruitPressPistonBlock  extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
 
-    private VoxelShape[] VOXEL_SHAPES_UP = new VoxelShape[] {
+    private final VoxelShape[] VOXEL_SHAPES_UP = new VoxelShape[] {
             Block.box(0, 15, 0, 16, 16, 16),
             Block.box(3, 0, 3, 13, 16, 13)
     };
 
-    private VoxelShape[] VOXEL_SHAPES_DOWN = new VoxelShape[] {
+    private final VoxelShape[] VOXEL_SHAPES_DOWN = new VoxelShape[] {
             Block.box(0, 15, 0, 16, 16, 16),
             Block.box(6.5, 0, 6.5, 9.5, 9, 9.5),
             Block.box(3, 9, 3, 13, 16, 13)

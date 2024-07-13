@@ -12,16 +12,16 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GrowthcraftApiaryDataGenerators {
 
-	private GrowthcraftApiaryDataGenerators() {
-		/* Prevent generation of public constructor */
-	}
+    private GrowthcraftApiaryDataGenerators() {
+        /* Prevent generation of public constructor */
+    }
 
-	@SubscribeEvent
-	public static void gatherData(GatherDataEvent event) {
-		DataGenerator generator = event.getGenerator();
-		PackOutput packOutput = generator.getPackOutput();
+    @SubscribeEvent
+    public static void gatherData(GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
 
-		generator.addProvider(event.includeServer(), new GrowthcraftApiaryRecipes(packOutput));
-		generator.addProvider(event.includeServer(), new GrowthcraftApiaryLootTableProvider(packOutput));
-	}
+        generator.addProvider(event.includeServer(), new GrowthcraftApiaryRecipes(packOutput));
+        generator.addProvider(event.includeServer(), new GrowthcraftApiaryLootTableProvider(packOutput));
+    }
 }

@@ -132,7 +132,7 @@ public class PancheonMenu extends AbstractContainerMenu {
             case 1 -> this.fluidStack1 = fluidStack;
             case 2 -> this.fluidStack2 = fluidStack;
             default ->
-                    throw new NullPointerException(String.format("PancheonMenu setFluidStack at <%s> does not have a fluid tank with the ID of %d!", blockEntity.getBlockPos().toString(), tankID));
+                    throw new NullPointerException(String.format("PancheonMenu setFluidStack at <%s> does not have a fluid tank with the ID of %d!", blockEntity.getBlockPos(), tankID));
         }
     }
     
@@ -142,7 +142,7 @@ public class PancheonMenu extends AbstractContainerMenu {
             case 1 -> this.blockEntity.getFluidStackInTank(1);
             case 2 -> this.blockEntity.getFluidStackInTank(2);
             default ->
-                    throw new NullPointerException(String.format("PancheonMenu getFluidStack at <%s> does not have a fluid tank with the ID of %d!", blockEntity.getBlockPos().toString(), tankID));
+                    throw new NullPointerException(String.format("PancheonMenu getFluidStack at <%s> does not have a fluid tank with the ID of %d!", blockEntity.getBlockPos(), tankID));
         };
     }
 

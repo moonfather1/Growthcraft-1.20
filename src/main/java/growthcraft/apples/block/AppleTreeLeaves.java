@@ -1,7 +1,6 @@
 package growthcraft.apples.block;
 
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
-import growthcraft.core.utils.BlockPropertiesUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -25,6 +24,12 @@ public class AppleTreeLeaves extends LeavesBlock {
 
     public AppleTreeLeaves(Properties p_54422_) {
         super(p_54422_);
+    }
+
+    private static Properties getInitProperties() {
+        Properties properties = Properties.copy(Blocks.OAK_LEAVES);
+        properties.sound(SoundType.GRASS);
+        return properties;
     }
 
     @Override
@@ -65,11 +70,5 @@ public class AppleTreeLeaves extends LeavesBlock {
             }
         }
 
-    }
-
-    private static Properties getInitProperties() {
-        Properties properties = Properties.copy(Blocks.OAK_LEAVES);
-        properties.sound(SoundType.GRASS);
-        return properties;
     }
 }
