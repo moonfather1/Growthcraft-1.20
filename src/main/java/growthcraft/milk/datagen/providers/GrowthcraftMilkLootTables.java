@@ -31,26 +31,26 @@ public class GrowthcraftMilkLootTables extends VanillaBlockLoot{
 	@Override
 	protected void generate() {
 		createStandardTable(
-				GrowthcraftMilkBlocks.CHEESE_PRESS.get(),
-				GrowthcraftMilkBlockEntities.CHEESE_PRESS_BLOCK_ENTITY.get(),
-				FormatUtils.INVENTORY);
+			GrowthcraftMilkBlocks.CHEESE_PRESS.get(),
+			GrowthcraftMilkBlockEntities.CHEESE_PRESS_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY);
 		createStandardTable(
-				GrowthcraftMilkBlocks.CHURN.get(),
-				GrowthcraftMilkBlockEntities.CHURN_BLOCK_ENTITY.get(),
-				FormatUtils.INVENTORY,
-				FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+			GrowthcraftMilkBlocks.CHURN.get(),
+			GrowthcraftMilkBlockEntities.CHURN_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY,
+			FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
 		createStandardTable(
-				GrowthcraftMilkBlocks.MIXING_VAT.get(),
-				GrowthcraftMilkBlockEntities.MIXING_VAT_BLOCK_ENTITY.get(),
-				FormatUtils.INVENTORY,
-				FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+			GrowthcraftMilkBlocks.MIXING_VAT.get(),
+			GrowthcraftMilkBlockEntities.MIXING_VAT_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY,
+			FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
 		createStandardTable(
-				GrowthcraftMilkBlocks.PANCHEON.get(),
-				GrowthcraftMilkBlockEntities.PANCHEON_BLOCK_ENTITY.get(),
-				FormatUtils.INVENTORY,
-				FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0),
-				FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 0),
-				FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 1));
+			GrowthcraftMilkBlocks.PANCHEON.get(),
+			GrowthcraftMilkBlockEntities.PANCHEON_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY,
+			FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0),
+			FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 0),
+			FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 1));
 	}
 	
     @Override
