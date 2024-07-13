@@ -7,6 +7,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
 
+@Deprecated(since = "9.2.0", forRemoval = true)
 public class GrowthcraftRiceConfig {
 
     public static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
