@@ -87,32 +87,75 @@ public class GrowthcraftMilkConfig {
 
     }
 
+    /**
+     * Checks if the Churn GUI is enabled.
+     * TODO: This is intended to be able to implement a hard mode. Will require non-GUI
+     *       block interaction to be implemented.
+     *
+     * @return true if the Churn GUI is enabled, false otherwise.
+     */
     public static boolean isChurnGuiEnabled() {
         return churnGuiEnabled.get();
     }
 
+    /**
+     * Checks if the Pancheon GUI is enabled.
+     * TODO: This is intended to be able to implement a hard mode. Will require non-GUI
+     *       block interaction to be implemented.
+     *
+     * @return true if the Pancheon GUI is enabled, false otherwise.
+     */
     public static boolean isPancheonGuiEnabled() {
         return pancheonGuiEnabled.get();
     }
 
+    /**
+     * Checks if the Mixing Vat GUI is enabled.
+     * TODO: This is intended to be able to implement a hard mode. Will require non-GUI
+     *       block interaction to be implemented.
+     *
+     * @return true if the Mixing Vat GUI is enabled, false otherwise.
+     */
     public static boolean isMixingVatGuiEnabled() {
         return mixingVatGuiEnabled.get();
     }
 
+    /**
+     * Checks if the debugging mode for the Mixing Vat is enabled.
+     *
+     * @return true if the debugging mode is enabled, false otherwise.
+     */
     public static boolean isMixingDebugEnabled() {
         return mixingVatDebugEnabled.get();
     }
 
+    /**
+     * Checks if the consume mixing vat activator feature is enabled.
+     *
+     * @return true if the consume mixing vat activator is enabled, false otherwise.
+     */
     public static boolean isConsumeMixingVatActivator() {
         return mixingVatConsumeActivationItem.get();
     }
 
+    /**
+     * Checks if looting of stomach from cows is enabled. If disabled, then rennet is only
+     * made from thistle.
+     *
+     * @return true if stomach looting is enabled, false otherwise.
+     */
     public static boolean isStomachLootingEnabled() {
         return stomachLootEnabled.get();
     }
 
+    /**
+     * Retrieves the chance to loot a stomach from a cow. If stomachLootEnabled is false
+     * then automatically sets it to 0 chance.
+     *
+     * @return The chance to loot a stomach as an integer value, ranging from 0 to 100.
+     */
     public static int getStomachLootChance() {
-        return stomachLootChance.get();
+        return Boolean.TRUE.equals(stomachLootEnabled.get()) ? stomachLootChance.get() : 0;
     }
 
     public static boolean getVillageStructuresEnabled() {
