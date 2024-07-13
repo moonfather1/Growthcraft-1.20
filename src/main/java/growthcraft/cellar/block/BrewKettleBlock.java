@@ -236,7 +236,7 @@ public class BrewKettleBlock extends BaseEntityBlock {
                 level.playSound(null, blockPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
         } catch (Exception e) {
-            GrowthcraftCellar.LOGGER.error("BrewKettleBlockEntity at %d threw an Exception: %s", blockPos.toString(), e.getMessage());
+            GrowthcraftCellar.LOGGER.error(String.format("BrewKettleBlockEntity at %s threw an Exception (%s): %s", blockPos.toString(), e.getClass(), e.getMessage()));
         }
 
     }
