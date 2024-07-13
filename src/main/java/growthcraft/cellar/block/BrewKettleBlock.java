@@ -113,9 +113,8 @@ public class BrewKettleBlock extends BaseEntityBlock {
                 level.playSound(null, blockPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
         } catch (Exception e) {
-            GrowthcraftCellar.LOGGER.error("BrewKettleBlockEntity at %d threw an Exception: %s", blockPos.toString(), e.getMessage());
+            GrowthcraftCellar.LOGGER.error(String.format("BrewKettleBlockEntity at %s threw an Exception (%s): %s", blockPos.toString(), e.getClass(), e.getMessage()));
         }
-
     }
 
     @Override
@@ -239,32 +238,6 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @Override
     public boolean canSurvive(BlockState p_60525_, LevelReader p_60526_, BlockPos p_60527_) {
         return true;
-    }
-
-    public static void makeParticles(Level level, BlockPos blockPos, BlockState blockState) {
-        try {
-            BrewKettleBlockEntity blockEntity = (BrewKettleBlockEntity) level.getBlockEntity(blockPos);
-
-            if (blockState.getValue(LIT) && blockEntity.getTickClock("current") > 0) {
-                RandomSource randomsource = level.getRandom();
-                SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
-
-                level.addAlwaysVisibleParticle(
-                        simpleparticletype,
-                        true,
-                        (double) blockPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        (double) blockPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(),
-                        (double) blockPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        0.0D,
-                        0.07D,
-                        0.0D
-                );
-
-                level.playSound(null, blockPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-        } catch (Exception e) {
-            GrowthcraftCellar.LOGGER.error(String.format("BrewKettleBlockEntity at %s threw an Exception (%s): %s", blockPos.toString(), e.getClass(), e.getMessage()));
-        }
     }
 
 }

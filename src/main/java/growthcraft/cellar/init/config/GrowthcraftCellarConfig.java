@@ -48,7 +48,7 @@ public class GrowthcraftCellarConfig {
         server.push("bottles_in_loot_chest");  // spaces would be fine here but i'll follow the existing style.
         loot_chance_pillager_outpost = server
                 .comment("Percentage chance you'll find a few bottles of mead in pillager tower chest. Number here seems high but that bum place has only one chest and this fits the theme.")
-                .defineInRange("loot_chance_pillager_outpost", 90, 0, 100);   // spaces would be fine here but i'll follow the existing style.
+                .defineInRange("loot_chance_pillager_outpost", 90, 0, 100);
         loot_chance_ocean_ruin = server
                 .comment("Percentage chance you'll find a few bottles of wine in underwater ruin chest. Default of 10% is not low because ruins will have half a dozen chests.")
                 .defineInRange("loot_chance_underwater_ruins", 10, 0, 100);
