@@ -11,7 +11,7 @@
     "growthcraft_cellar:yeast_ethereal_from_chorus_flower",
     "growthcraft_cellar:yeast_lager_from_snow",
     "growthcraft_milk:thistle_seeds_from_grass",
-    "growthcraft_rice:rice_from_grass"
-
+    "growthcraft_rice:rice_from_grass",
+    "growthcraft_cellar:bottles_in_loot_chests"
   ]
 }

@@ -193,12 +193,9 @@ public class MixingVatFluidRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public MixingVatFluidRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            RecipeUtils.Category category
-                    = RecipeUtils.Category.with(GsonHelper.getAsString(json, "result_type"));
 
             int processingTime = GsonHelper.getAsInt(json, "processing_time", 1200);
             boolean requiresHeat = GsonHelper.getAsBoolean(json, "requires_heat");
-
 
             FluidStack inputFluid = CraftingUtils.getFluidStack(
                     GsonHelper.getAsJsonObject(json, "input_fluid"));
@@ -223,8 +220,6 @@ public class MixingVatFluidRecipe implements Recipe<SimpleContainer> {
         @Override
         public @Nullable MixingVatFluidRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             try {
-                RecipeUtils.Category category = RecipeUtils.Category.with(buffer.readUtf());
-
                 int processingTime = buffer.readVarInt();
                 boolean requiresHeat = buffer.readBoolean();
 
@@ -242,7 +237,7 @@ public class MixingVatFluidRecipe implements Recipe<SimpleContainer> {
                 FluidStack outputFluidStack = buffer.readFluidStack();
                 FluidStack wasteFluidStack = buffer.readFluidStack();
 
-                return new MixingVatFluidRecipe(recipeId, category, inputFluidStack, reagentFluidStack,
+                return new MixingVatFluidRecipe(recipeId, RecipeUtils.Category.ITEM, inputFluidStack, reagentFluidStack,
                         ingredients, processingTime, outputFluidStack, wasteFluidStack, activationTool, requiresHeat);
 
             } catch (Exception ex) {
@@ -253,8 +248,6 @@ public class MixingVatFluidRecipe implements Recipe<SimpleContainer> {
         }
 
         public void toNetwork(FriendlyByteBuf buffer, MixingVatFluidRecipe recipe) {
-            buffer.writeUtf(recipe.getCategory().toString());
-
             buffer.writeVarInt(recipe.getProcessingTime());
             buffer.writeBoolean(recipe.isHeatRequired());
 
@@ -270,7 +263,6 @@ public class MixingVatFluidRecipe implements Recipe<SimpleContainer> {
             buffer.writeFluidStack(recipe.getReagentFluidStack());
             buffer.writeFluidStack(recipe.getOutputFluidStack());
             buffer.writeFluidStack(recipe.getWasteFluidStack());
-
         }
 
     }

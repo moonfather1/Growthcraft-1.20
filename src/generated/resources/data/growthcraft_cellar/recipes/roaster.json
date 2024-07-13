@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_cellar",
+  "key": {
+    "B": {
+      "item": "growthcraft_cellar:brew_kettle"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "pattern": [
+    " I ",
+    " B ",
+    "I I"
+  ],
+  "result": {
+    "item": "growthcraft_cellar:roaster"
+  },
+  "show_notification": true
+}

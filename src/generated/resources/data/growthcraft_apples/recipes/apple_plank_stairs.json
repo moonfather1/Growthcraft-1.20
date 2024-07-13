@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "growthcraft_apples",
+  "key": {
+    "#": {
+      "item": "growthcraft_apples:apple_plank"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "growthcraft_apples:apple_plank_stairs"
+  },
+  "show_notification": true
+}

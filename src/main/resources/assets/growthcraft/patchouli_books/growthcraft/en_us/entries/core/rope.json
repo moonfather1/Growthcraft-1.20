@@ -11,7 +11,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "growthcraft:rope_linen_base",
+      "recipe": "growthcraft:rope_linen",
       "recipe2": "growthcraft:rope_linen_lengthen"
     },
     {

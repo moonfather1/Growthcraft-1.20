@@ -69,12 +69,7 @@ public class AppleTreeLeaves extends LeavesBlock {
 
     private static Properties getInitProperties() {
         Properties properties = Properties.copy(Blocks.OAK_LEAVES);
-        properties.strength(0.2F);
-        properties.randomTicks();
         properties.sound(SoundType.GRASS);
-        properties.noOcclusion();
-        properties.isViewBlocking(BlockPropertiesUtils::never);
-        properties.isSuffocating(BlockPropertiesUtils::never);
         return properties;
     }
 }

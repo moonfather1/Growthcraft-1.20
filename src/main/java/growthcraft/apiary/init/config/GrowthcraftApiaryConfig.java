@@ -1,11 +1,9 @@
 package growthcraft.apiary.init.config;
 
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.electronwill.nightconfig.core.io.WritingMode;
+import growthcraft.core.init.config.GrowthcraftConfig;
+import growthcraft.lib.utils.FormatUtils;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.loading.FMLPaths;
-
-import java.io.File;
 
 public class GrowthcraftApiaryConfig {
 
@@ -16,11 +14,12 @@ public class GrowthcraftApiaryConfig {
 
     private static final String CATEGORY_BEE_BOX = "beeBox";
 
-    private static ForgeConfigSpec.IntValue bee_box_flower_range;
-    private static ForgeConfigSpec.IntValue bee_box_max_processing_time;
-    private static ForgeConfigSpec.BooleanValue replicate_flowers;
-    private static ForgeConfigSpec.IntValue bee_box_chance_bee_increment;
-    private static ForgeConfigSpec.IntValue bee_box_chance_chance_replicate_flower;
+    private static ForgeConfigSpec.IntValue flowerReplicationRange;
+    private static ForgeConfigSpec.IntValue beeBoxCycleUpdateTicks;
+    private static ForgeConfigSpec.BooleanValue doFlowerReplication;
+    private static ForgeConfigSpec.IntValue beeBreedingChance;
+    private static ForgeConfigSpec.IntValue flowerReplicationChance;
+    private static ForgeConfigSpec.IntValue flowerSaturationPercent;
 
     static {
         initServerConfig(SERVER_BUILDER);
@@ -36,49 +35,52 @@ public class GrowthcraftApiaryConfig {
     }
 
     public static void loadConfig(ForgeConfigSpec configSpec, String path) {
-        final CommentedFileConfig fileConfig = CommentedFileConfig.builder(
-                new File(path)).sync().autosave().writingMode(WritingMode.REPLACE).build();
-
-        fileConfig.load();
-        configSpec.setConfig(fileConfig);
+        GrowthcraftConfig.loadConfig(configSpec, path);
     }
 
     public static void initServerConfig(ForgeConfigSpec.Builder specBuilder) {
-        bee_box_flower_range = specBuilder
+        flowerReplicationRange = specBuilder
                 .comment("Set the range for the bee box to look for flowers.")
-                .defineInRange(String.format("%s.%s", CATEGORY_BEE_BOX, "flowerRange"), 9, 0, 18);
-        bee_box_max_processing_time = specBuilder
+                .defineInRange(String.format(FormatUtils.STRING_DOT_STRING, CATEGORY_BEE_BOX, "flowerRange"), 4, 0, 18);
+        beeBoxCycleUpdateTicks = specBuilder
                 .comment("Set the process time for the bee box to update. Default is once a minute.")
-                .defineInRange(String.format("%s.%s", CATEGORY_BEE_BOX, "maxProcessingTime"), 1200, 200, 1728000);
-        bee_box_chance_bee_increment = specBuilder
+                .defineInRange(String.format(FormatUtils.STRING_DOT_STRING, CATEGORY_BEE_BOX, "maxProcessingTime"), 1200, 200, 1728000);
+        beeBreedingChance = specBuilder
                 .comment("Set the percentage chance to increment bee population in the Bee Box.")
-                .defineInRange(String.format("%s.%s", CATEGORY_BEE_BOX, "chanceBeeIncrement"), 33, 1, 100);
-        bee_box_chance_chance_replicate_flower = specBuilder
+                .defineInRange(String.format(FormatUtils.STRING_DOT_STRING, CATEGORY_BEE_BOX, "chanceBeeIncrement"), 33, 1, 100);
+        flowerReplicationChance = specBuilder
                 .comment("Set the percentage chance to replicate a flower near by.")
-                .defineInRange(String.format("%s.%s", CATEGORY_BEE_BOX, "chanceReplicateFlower"), 10, 1, 100);
-        replicate_flowers = specBuilder
+                .defineInRange(String.format(FormatUtils.STRING_DOT_STRING, CATEGORY_BEE_BOX, "chanceReplicateFlower"), 10, 1, 100);
+        doFlowerReplication = specBuilder
                 .comment("Set to false to disable flower replication by the bee box")
-                .define(String.format("%s.%s", CATEGORY_BEE_BOX, "replicateFlowers"), true);
+                .define(String.format(FormatUtils.STRING_DOT_STRING, CATEGORY_BEE_BOX, "replicateFlowers"), true);
+        flowerSaturationPercent = specBuilder
+                .comment("Set the percentage of the area to be filled with replicated flowers.")
+                .defineInRange(String.format(FormatUtils.STRING_DOT_STRING, CATEGORY_BEE_BOX, "flowerReplicationAreaPercent"), 100, 1, 100);
     }
 
     public static int getBeeBoxFlowerRange() {
-        return bee_box_flower_range.get();
+        return flowerReplicationRange.get();
     }
 
     public static int getBeeBoxMaxProcessingTime() {
-        return bee_box_max_processing_time.get();
+        return beeBoxCycleUpdateTicks.get();
     }
 
     public static boolean shouldReplicateFlowers() {
-        return replicate_flowers.get();
+        return doFlowerReplication.get();
     }
 
     public static int getChanceToIncreaseBees() {
-        return bee_box_chance_bee_increment.get();
+        return beeBreedingChance.get();
     }
 
     public static int getChanceToReplicateFlowers() {
-        return bee_box_chance_chance_replicate_flower.get();
+        return flowerReplicationChance.get();
+    }
+
+    public static int getFlowerReplicationAreaPercent() {
+        return flowerSaturationPercent.get();
     }
 
 }

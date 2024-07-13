@@ -81,6 +81,8 @@ public class Reference {
         public static final String YOGURT_PUMPKIN = "yogurt_pumpkin";
         public static final String YOGURT_WATERMELON = "yogurt_watermelon";
         public static final String TAG_MIXING_VAT_TOOLS = "mixing_vat_tools";
+		public static final String TAG_MILK_BUCKETS = "milk_buckets";
+		public static final String TAG_MILKABLE = "milkable";
 
         private UnlocalizedName() {
             /* Disable Automatic Creation of Public Constructor */

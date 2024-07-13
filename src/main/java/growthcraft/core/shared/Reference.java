@@ -6,7 +6,7 @@ public class Reference {
     public static final String MODID = "growthcraft";
     public static final String NAME = "Growthcraft";
     public static final String NAME_SHORT = "core";
-    public static final String VERSION = "9.1.3";
+    public static final String VERSION = "9.2.0";
 
     private Reference() { /* Prevent default public constructor */ }
 
@@ -42,6 +42,9 @@ public class Reference {
         public static final String ROPE_LINEN_CRIMSON_FENCE = "rope_linen_crimson_fence";
         public static final String ROPE_LINEN_JUNGLE_FENCE = "rope_linen_jungle_fence";
         public static final String ROPE_LINEN_DARK_OAK_FENCE = "rope_linen_dark_oak_fence";
+        public static final String ROPE_LINEN_CHERRY_FENCE = "rope_linen_cherry_fence";
+        public static final String ROPE_LINEN_MANGROVE_FENCE = "rope_linen_mangrove_fence";
+        public static final String ROPE_LINEN_BAMBOO_FENCE = "rope_linen_bamboo_fence";
         public static final String ROPE_LINEN_NETHER_BRICK_FENCE = "rope_linen_nether_brick_fence";
 
         public static final String ROPE_LINEN_OAK_FENCE = "rope_linen_oak_fence";
@@ -56,6 +59,10 @@ public class Reference {
         public static final String TAG_HEATSOURCES = "heatsources";
         public static final String WRENCH = "wrench";
         public static final String CREATIVE_TAB = "tab";
+		public static final String TAG_CROPS_RICE = "crops/rice";
+		public static final String TAG_GRAIN_RICE = "grain/rice";
+		public static final String DUSTS_SALT = "dusts/salt";
+		public static final String TAG_KNIVES = "tools/knives";
 
         private UnlocalizedName() { /* Disable default public constructor. */ }
 

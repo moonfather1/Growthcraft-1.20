@@ -79,8 +79,27 @@ public class BlockStateUtils {
         return blockStateMap;
     }
 
-    public static boolean isHeated(BlockGetter blockGetter, BlockPos blockPos) {
-        Map<String, BlockState> blockMap = BlockStateUtils.getSurroundingBlockState(blockGetter, blockPos);
-        return blockMap.get("below").is(GrowthcraftTags.Blocks.HEATSOURCES);
+    public static boolean isHeatedFromBelow(BlockGetter blockGetter, BlockPos blockPos) {
+        return blockGetter.getBlockState(blockPos.below()).is(GrowthcraftTags.Blocks.HEATSOURCES);
+    }
+
+    public static boolean isHeatedFromTwoBlockRange(BlockGetter blockGetter, BlockPos blockPos) {
+        BlockPos.MutableBlockPos positionToCheck = new BlockPos.MutableBlockPos();
+        for (int dx = -2; dx <= 2; dx++) {
+            for (int dy = -2; dy <= 2; dy++) {
+                for (int dz = -2; dz <= 2; dz++) {
+                    // loops give us a diameter of 2 cube...
+                    if (dx * dx + dy * dy + dz * dz < 7) {
+                        // we consider edges to be too far.
+                        // so: two blocks away and maybe one to the side
+                        positionToCheck.set(blockPos.getX() + dx, blockPos.getY() + dy, blockPos.getZ() + dz);
+                        if (blockGetter.getBlockState(positionToCheck).is(GrowthcraftTags.Blocks.HEATSOURCES)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

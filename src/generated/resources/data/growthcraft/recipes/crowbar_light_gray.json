@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "growthcraft",
+  "key": {
+    "A": {
+      "tag": "forge:nuggets/iron"
+    },
+    "B": {
+      "tag": "forge:ingots/iron"
+    },
+    "C": {
+      "item": "minecraft:light_gray_carpet"
+    }
+  },
+  "pattern": [
+    "  A",
+    "CBC",
+    "A  "
+  ],
+  "result": {
+    "item": "growthcraft:crowbar_light_gray"
+  },
+  "show_notification": true
+}

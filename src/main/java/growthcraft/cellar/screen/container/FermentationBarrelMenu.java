@@ -158,4 +158,12 @@ public class FermentationBarrelMenu extends AbstractContainerMenu {
     public int getPercentProgress() {
         return this.blockEntity.getPercentProgress();
     }
+
+    public boolean hasYeastWarning() {
+        return this.blockEntity.hasYeastWarning();
+    }
+
+    public boolean hasYeastError() {
+        return this.blockEntity.hasYeastError();
+    }
 }

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "growthcraft_bamboo",
+  "key": {
+    "B": {
+      "item": "minecraft:bamboo_block"
+    }
+  },
+  "pattern": [
+    "B",
+    "B",
+    "B"
+  ],
+  "result": {
+    "count": 2,
+    "item": "growthcraft_bamboo:bamboo_post_vertical"
+  },
+  "show_notification": true
+}

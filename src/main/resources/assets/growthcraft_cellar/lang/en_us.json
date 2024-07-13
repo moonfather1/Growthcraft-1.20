@@ -117,6 +117,8 @@
   "item.growthcraft_cellar.yeast_lager_ethereal": "Lager Yeast (Ethereal)",
   "growthcraft_cellar.tooltip.roaster.progress": "Roast Level %s (%d%%)",
   "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
+  "growthcraft_cellar.tooltip.fermentation.yeast_warning": "Insufficient yeast.",
+  "growthcraft_cellar.tooltip.fermentation.yeast_error": "Not a valid yeast for this fluid.",
   "jei.growthcraft_cellar.category.culture_jar": "Culture Jar (Culturing)",
   "jei.growthcraft_cellar.category.culture_jar_starter": "Culture Jar (Starters)",
   "jei.growthcraft_cellar.category.fermentation_barrel": "Fermenting",

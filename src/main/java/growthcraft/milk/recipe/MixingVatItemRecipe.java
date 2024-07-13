@@ -60,6 +60,14 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
         return false;
     }
 
+    /**
+     * Checks if the given test fluid stack, test ingredients, and heat source match the recipe criteria.
+     *
+     * @param testFluidStack  The fluid stack to test against the recipe input fluid stack.
+     * @param testIngredients The list of item stacks to test against the recipe ingredients.
+     * @param hasHeatSource   Indicates whether a heat source is present.
+     * @return {@code true} if the test criteria match the recipe criteria, {@code false} otherwise.
+     */
     public boolean matches(FluidStack testFluidStack, List<ItemStack> testIngredients, boolean hasHeatSource) {
 
         boolean fluidMatches = CraftingUtils.doesFluidMatch(testFluidStack, this.getInputFluidStack());
@@ -70,8 +78,14 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
             int itemCount = this.getIngredientList().size();
             int matchCount = 0;
             for (int i = 0; i < this.getIngredientList().size(); i++) {
-                if (this.getIngredientList().get(i).getItem() == testIngredients.get(i).getItem() &&
-                        this.getIngredientList().get(i).getCount() == testIngredients.get(i).getCount()) {
+                int index = i;
+                boolean ingredientMatch = Arrays.stream(
+                        this.getIngredients().get(index).getItems()).anyMatch(
+                        ingredientItem -> ingredientItem.is(testIngredients.get(index).getItem())
+                                && ingredientItem.getCount() == testIngredients.get(index).getCount()
+                );
+
+                if (ingredientMatch) {
                     matchCount++;
                 }
             }
@@ -157,10 +171,10 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
     }
 
     public static class Type implements RecipeType<MixingVatItemRecipe> {
-        private Type() { /* Prevent default constructor */ }
-
         public static final MixingVatItemRecipe.Type INSTANCE = new MixingVatItemRecipe.Type();
         public static final String ID = Reference.UnlocalizedName.MIXING_VAT_ITEM_RECIPE;
+
+        private Type() { /* Prevent default constructor */ }
     }
 
 
@@ -175,8 +189,6 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public MixingVatItemRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            RecipeUtils.Category category
-                    = RecipeUtils.Category.with(GsonHelper.getAsString(json, "result_type"));
 
             int processingTime = GsonHelper.getAsInt(json, "processing_time", 1200);
             boolean requiresHeat = GsonHelper.getAsBoolean(json, "requires_heat");
@@ -189,25 +201,19 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
 
             NonNullList<Ingredient> ingredients = CraftingUtils.readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
 
-            if (category == RecipeUtils.Category.ITEM) {
-                ItemStack resultItemStack = CraftingHelper.getItemStack(
-                        GsonHelper.getAsJsonObject(json, "result_item"), false);
-                ItemStack resultActivationTool = CraftingHelper.getItemStack(
-                        GsonHelper.getAsJsonObject(json, "result_activation_tool"), false);
+            ItemStack resultItemStack = CraftingHelper.getItemStack(
+                    GsonHelper.getAsJsonObject(json, "result_item"), false);
+            ItemStack resultActivationTool = CraftingHelper.getItemStack(
+                    GsonHelper.getAsJsonObject(json, "result_activation_tool"), false);
 
-                return new MixingVatItemRecipe(recipeId, RecipeUtils.Category.ITEM,
-                        inputFluid, ingredients, processingTime, resultItemStack, activationTool, resultActivationTool, requiresHeat);
-            }
+            return new MixingVatItemRecipe(recipeId, RecipeUtils.Category.ITEM,
+                    inputFluid, ingredients, processingTime, resultItemStack, activationTool, resultActivationTool, requiresHeat);
 
-
-            return null;
         }
 
         @Override
         public @Nullable MixingVatItemRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             try {
-                RecipeUtils.Category category = RecipeUtils.Category.with(buffer.readUtf());
-
                 int processingTime = buffer.readVarInt();
                 boolean requiresHeat = buffer.readBoolean();
 
@@ -215,16 +221,16 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
                 ItemStack activationTool = buffer.readItem();
 
                 int ingredientSize = buffer.readVarInt();
-                NonNullList<Ingredient> ingredients = NonNullList.withSize(ingredientSize, Ingredient.EMPTY);
+                NonNullList<Ingredient> inputIngredients = NonNullList.withSize(ingredientSize, Ingredient.EMPTY);
 
                 for (int i = 0; i < ingredientSize; i++) {
-                    ingredients.set(i, Ingredient.fromNetwork(buffer));
+                    inputIngredients.set(i, Ingredient.fromNetwork(buffer));
                 }
 
                 ItemStack resultingItemStack = buffer.readItem();
                 ItemStack resultActivationTool = buffer.readItem();
 
-                return new MixingVatItemRecipe(recipeId, category, inputFluidStack, ingredients,
+                return new MixingVatItemRecipe(recipeId, RecipeUtils.Category.ITEM, inputFluidStack, inputIngredients,
                         processingTime, resultingItemStack, activationTool, resultActivationTool, requiresHeat);
             } catch (Exception ex) {
                 String message = String.format("Unable to read recipe (%s) from network buffer.", recipeId);
@@ -235,23 +241,19 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, MixingVatItemRecipe recipe) {
-            buffer.writeUtf(recipe.getCategory().toString());
-
             buffer.writeVarInt(recipe.getProcessingTime());
             buffer.writeBoolean(recipe.isHeatRequired());
 
             buffer.writeFluidStack(recipe.getInputFluidStack());
             buffer.writeItemStack(recipe.getActivationTool(), false);
 
-            buffer.writeVarInt(recipe.getIngredientList().size());
-
+            buffer.writeVarInt(recipe.ingredients.size());
             for (Ingredient ingredient : recipe.getIngredients()) {
                 ingredient.toNetwork(buffer);
             }
 
             buffer.writeItemStack(recipe.getResultItemStack(), false);
             buffer.writeItemStack(recipe.getResultActivationTool(), false);
-
         }
 
     }

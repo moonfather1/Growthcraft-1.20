@@ -72,20 +72,17 @@ public class FermentationBarrelRecipe implements Recipe<SimpleContainer> {
     public boolean matches(ItemStack matchInputItemStack, FluidStack matchInputFluidStack) {
 
         boolean inputFluidMatches = this.inputFluidStack.getFluid() == matchInputFluidStack.getFluid()
-                && this.inputFluidStack.getAmount() <= matchInputFluidStack.getAmount()
+                && matchInputFluidStack.getAmount() >= this.inputFluidStack.getAmount()
                 && this.getOutputMultiplier(matchInputFluidStack) > 0;
 
         boolean inputItemMatches = this.inputItemStack.getItem() == matchInputItemStack.getItem()
-                && this.inputItemStack.getCount() <= matchInputItemStack.getCount() * this.getOutputMultiplier(matchInputFluidStack);
+                && matchInputItemStack.getCount() >= this.inputItemStack.getCount() * this.getOutputMultiplier(matchInputFluidStack);
 
         return inputItemMatches && inputFluidMatches;
     }
 
     /**
      * Determines the output multiplier based on the amount of fluid in the tank.
-     *
-     * @param fluidStackInTank
-     * @return
      */
     public int getOutputMultiplier(FluidStack fluidStackInTank) {
         return fluidStackInTank.getAmount() % this.inputFluidStack.getAmount() == 0
@@ -94,24 +91,23 @@ public class FermentationBarrelRecipe implements Recipe<SimpleContainer> {
     }
 
     /**
-     * Determine if a FluidStack matches this recipe output.
-     *
-     * @param fluidStack
-     * @return
+     * Determine if a FluidStack matches this recipe's output.
      */
-    public boolean matches(FluidStack fluidStack) {
+    public boolean matchesOutput(FluidStack fluidStack) {
         return this.outputFluidStack.getFluid() == fluidStack.getFluid();
+    }
+
+    /**
+     * Determine if a FluidStack matches this recipe's input.
+     */
+    public boolean matchesInput(FluidStack fluidStack) {
+        return this.inputFluidStack.getFluid() == fluidStack.getFluid();
     }
 
     /**
      * Determine id an ItemStack and two FluidStacks match this recipe.
      *
      * @deprecated Method not specific enough, use {@link #matches(ItemStack, FluidStack)} instead.
-     *
-     * @param inputItemStack
-     * @param inputFluidStack
-     * @param outputFluidStack
-     * @return
      */
     @Deprecated(since = "8.1.0", forRemoval = true)
     public boolean matches(ItemStack inputItemStack, FluidStack inputFluidStack, FluidStack outputFluidStack) {

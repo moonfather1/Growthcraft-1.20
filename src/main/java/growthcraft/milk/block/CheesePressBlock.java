@@ -112,7 +112,7 @@ public class CheesePressBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
 
-        if (level != null && !level.isClientSide) {
+        if (!level.isClientSide) {
             CheesePressBlockEntity blockEntity = (CheesePressBlockEntity) level.getBlockEntity(blockPos);
             if (blockEntity == null) return InteractionResult.FAIL;
 
@@ -184,11 +184,12 @@ public class CheesePressBlock extends BaseEntityBlock {
         RandomSource randomSource = level.getRandom();
 
         CheesePressBlockEntity blockEntity = (CheesePressBlockEntity) level.getBlockEntity(blockPos);
+        if(blockEntity == null) return;
 
         if (blockState.getValue(ROTATION) == 7 && blockEntity.getTickClock("current") > 0) {
-            double d0 = (double) blockPos.getX() + randomSource.nextDouble() / 1.0D;
-            double d1 = (double) blockPos.getY() - 0.05D;
-            double d2 = (double) blockPos.getZ() + randomSource.nextDouble() / 1.0D;
+            double d0 = blockPos.getX() + randomSource.nextDouble();
+            double d1 = blockPos.getY() - 0.05D;
+            double d2 = blockPos.getZ() + randomSource.nextDouble();
 
             level.addParticle(ParticleTypes.FALLING_HONEY, d0, d1, d2, 0.0D, 0.0D, 0.0D);
         }

@@ -114,5 +114,9 @@
   "item.growthcraft_cellar.yeast_brewers_ethereal": "Эфирные пивные дрожжи",
   "item.growthcraft_cellar.yeast_ethereal": "Эфирные дрожжи",
   "item.growthcraft_cellar.yeast_lager": "Лагерные дрожжи",
-  "item.growthcraft_cellar.yeast_lager_ethereal": "Эфирные лагерные дрожжи"
+  "item.growthcraft_cellar.yeast_lager_ethereal": "Эфирные лагерные дрожжи",
+  "growthcraft_cellar.tooltip.roaster.progress": "Roast Level %s (%d%%)",
+  "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
+  "growthcraft_cellar.tooltip.fermentation.yeast_warning": "Insufficient yeast.",
+  "growthcraft_cellar.tooltip.fermentation.yeast_error": "Not a valid yeast for this fluid."
 }

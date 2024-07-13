@@ -8,5 +8,11 @@
       "item": "minecraft:book"
     }
   ],
-  "book": "growthcraft:growthcraft"
+  "book": "growthcraft:growthcraft",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "patchouli"
+    }
+  ]
 }
