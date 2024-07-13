@@ -66,7 +66,7 @@ public class GrowthcraftMilkLootTables extends VanillaBlockLoot{
 
     }
 
-	/*
+	/**
 	 * @deprecated ("9.2.0", Used to be used for excluding from the item registration so that JEI and creative tab would not have these blocks include.)
 	 */
 	@Deprecated(since = "9.2.0", forRemoval = false)
