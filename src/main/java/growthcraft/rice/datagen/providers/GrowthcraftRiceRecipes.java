@@ -16,6 +16,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 
+import static growthcraft.lib.utils.FormatUtils.HAS_ITEM;
+
 public class GrowthcraftRiceRecipes extends RecipeProvider{
 
 	public GrowthcraftRiceRecipes(PackOutput packOutput) {
@@ -32,7 +34,7 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.define('I', Tags.Items.INGOTS_IRON)
 		.define('S', Tags.Items.RODS_WOODEN)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, GrowthcraftRiceItems.KNIFE.get())
@@ -42,12 +44,12 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.define('I', Tags.Items.INGOTS_IRON)
 		.define('S', Tags.Items.RODS_WOODEN)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
 		
 		SingleItemRecipeBuilder.stonecutting(Ingredient.of(GrowthcraftRiceItems.RICE_STALK.get()), RecipeCategory.FOOD, GrowthcraftRiceItems.RICE.get())
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_STALK.get()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_STALK.get()))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.SUSHI_ROLL.get(), 12)
@@ -58,7 +60,7 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.define('R', GrowthcraftRiceItems.RICE_COOKED.get())
 		.define('K', Items.DRIED_KELP)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_COOKED.get()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_COOKED.get()))
 		.save(consumer);
 	}
 	

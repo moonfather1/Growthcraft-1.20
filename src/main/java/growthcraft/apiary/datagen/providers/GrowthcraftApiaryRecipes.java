@@ -24,6 +24,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import static growthcraft.lib.utils.FormatUtils.HAS_ITEM;
+
 public class GrowthcraftApiaryRecipes extends RecipeProvider{
 
 	public GrowthcraftApiaryRecipes(PackOutput packOutput) {
@@ -62,14 +64,13 @@ public class GrowthcraftApiaryRecipes extends RecipeProvider{
 						   .define('P', Ingredient.of(Items.BAMBOO_PLANKS, Items.BAMBOO_MOSAIC))
 						   .define('S', Tags.Items.RODS_WOODEN)
 						   .group(growthcraft.bamboo.shared.Reference.MODID)
-						   .unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
+						   .unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
 						   .save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO_OLD.get())
 						   .requires(GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO.get())
 						   .group(growthcraft.bamboo.shared.Reference.MODID)
-						   .unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
+						   .unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
 						   .save(consumer);
-
 
 		// Bees Wax
 		GrowthcraftApiaryItems.ITEMS.getEntries().forEach(item -> {
@@ -81,7 +82,7 @@ public class GrowthcraftApiaryRecipes extends RecipeProvider{
 				.define('A', GrowthcraftApiaryItems.BEES_WAX.get())
 				.define('B', ((GrowthcraftItem) item.get()).getDyeColor().getTag())
 				.group(Reference.MODID)
-				.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftApiaryItems.BEES_WAX.get()))
+				.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftApiaryItems.BEES_WAX.get()))
 				.save(consumer);
 			}
 		});
@@ -92,7 +93,7 @@ public class GrowthcraftApiaryRecipes extends RecipeProvider{
 		.pattern("H")
 		.define('S', Items.STRING)
 		.define('H', GrowthcraftApiaryTags.Items.HONEY_COMB)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.HONEYCOMB))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.HONEYCOMB))
 		.save(consumer);
 
 		// Dyed Candles
@@ -101,7 +102,7 @@ public class GrowthcraftApiaryRecipes extends RecipeProvider{
 			.requires(Items.CANDLE)
 			.requires(dye.getTag())
 			.group("dyed_candle")
-			.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CANDLE))
+			.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.CANDLE))
 			.save(consumer);
 		}
 	}

@@ -20,6 +20,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 
+import static growthcraft.lib.utils.FormatUtils.HAS_ITEM;
+
 public class GrowthcraftCellarRecipes extends RecipeProvider{
 
 	public GrowthcraftCellarRecipes(PackOutput packOutput) {
@@ -31,7 +33,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftCellarBlocks.BREW_KETTLE.get())
 		.requires(Blocks.CAULDRON)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAULDRON))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAULDRON))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.BREW_KETTLE_LID.get())
@@ -40,7 +42,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		.define('I', Tags.Items.INGOTS_IRON)
 		.define('i', Tags.Items.NUGGETS_IRON)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.CULTURE_JAR.get())
@@ -50,7 +52,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		.define('A', ItemTags.PLANKS)
 		.define('B', Tags.Items.GLASS_PANES)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ItemTags.PLANKS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ItemTags.PLANKS).build()))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get())
@@ -60,7 +62,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		.define('A', Tags.Items.INGOTS_IRON)
 		.define('B', Blocks.OAK_PLANKS)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.OAK_PLANKS))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.OAK_PLANKS))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.FRUIT_PRESS.get())
@@ -72,12 +74,12 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		.define('C', Tags.Items.INGOTS_IRON)
 		.define('D', ItemTags.PLANKS)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.PISTON))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.PISTON))
 		.save(consumer);
 		
 		SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.WHEAT), RecipeCategory.FOOD, GrowthcraftCellarItems.GRAIN.get())
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
 		.save(consumer);;
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.ROASTER.get())
@@ -87,7 +89,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		.define('I', Tags.Items.INGOTS_IRON)
 		.define('B', GrowthcraftCellarBlocks.BREW_KETTLE.get())
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftCellarBlocks.BREW_KETTLE.get()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftCellarBlocks.BREW_KETTLE.get()))
 		.save(consumer);
 	}
 	
