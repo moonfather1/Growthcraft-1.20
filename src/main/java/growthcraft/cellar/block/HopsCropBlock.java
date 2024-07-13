@@ -2,7 +2,6 @@ package growthcraft.cellar.block;
 
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
-import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.core.block.RopeBlock;
 import growthcraft.core.init.GrowthcraftTags;
 import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
@@ -13,7 +12,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;

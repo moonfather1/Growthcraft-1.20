@@ -143,6 +143,6 @@ public class GrowthcraftMilkConfig {
      * @return The chance to loot a stomach as an integer value, ranging from 0 to 100.
      */
     public static int getStomachLootChance() {
-        return stomachLootEnabled.get() ? stomachLootChance.get() : 0;
+        return Boolean.TRUE.equals(stomachLootEnabled.get()) ? stomachLootChance.get() : 0;
     }
 }

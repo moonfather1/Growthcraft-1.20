@@ -3,7 +3,6 @@ package growthcraft.cellar.block;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
-import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.core.utils.BlockPropertiesUtils;
 import growthcraft.lib.utils.BlockStateUtils;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
@@ -53,9 +52,6 @@ public class BrewKettleBlock extends BaseEntityBlock {
 
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final BooleanProperty HAS_LID = BooleanProperty.create("has_lid");
-
-    private int lightLevel = 0;
-
     private final VoxelShape[] VOXEL_SHAPES_LID = new VoxelShape[]{
             Block.box(0, 0, 2, 2, 3, 4),
             Block.box(1, 3, 1, 15, 4, 15),
@@ -72,11 +68,10 @@ public class BrewKettleBlock extends BaseEntityBlock {
             Block.box(1, 15, 1, 15, 16, 15),
             Block.box(0, 0, 12, 2, 3, 14)
     };
+    private final int lightLevel = 0;
 
     public BrewKettleBlock() {
         this(getInitProperties());
-        this.lightLevel = GrowthcraftCellarConfig.getBrewKettleLitLightLevel();
-
     }
 
     public BrewKettleBlock(Properties properties) {
@@ -96,6 +91,33 @@ public class BrewKettleBlock extends BaseEntityBlock {
         return properties;
     }
 
+    public static void makeParticles(Level level, BlockPos blockPos, BlockState blockState) {
+        try {
+            BrewKettleBlockEntity blockEntity = (BrewKettleBlockEntity) level.getBlockEntity(blockPos);
+
+            if (blockState.getValue(LIT) && blockEntity.getTickClock("current") > 0) {
+                RandomSource randomsource = level.getRandom();
+                SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
+
+                level.addAlwaysVisibleParticle(
+                        simpleparticletype,
+                        true,
+                        (double) blockPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
+                        (double) blockPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(),
+                        (double) blockPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
+                        0.0D,
+                        0.07D,
+                        0.0D
+                );
+
+                level.playSound(null, blockPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+        } catch (Exception e) {
+            GrowthcraftCellar.LOGGER.error("BrewKettleBlockEntity at %d threw an Exception: %s", blockPos.toString(), e.getMessage());
+        }
+
+    }
+
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
@@ -104,20 +126,6 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
         return Arrays.stream(VOXEL_SHAPES_LID).reduce((v1, v2) -> Shapes.join(v1, v2, OR)).get();
-    }
-
-    /**
-     * Returns the light emission of the BrewKettleBlock. If configuration has set the light level, when LIT is true
-     * then the brew kettle will emit the custom light level, giving a visualization that the kettle is processing.
-     *
-     * @param state The current BlockState of the BrewKettleBlock.
-     * @param level The BlockGetter instance representing the world.
-     * @param pos   The position of the BrewKettleBlock in the world.
-     * @return The light emission value of the BrewKettleBlock.
-     */
-    @Override
-    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.getValue(LIT) ? this.lightLevel : super.getLightEmission(state, level, pos);
     }
 
     @Override
@@ -150,7 +158,7 @@ public class BrewKettleBlock extends BaseEntityBlock {
         if (level.isClientSide) {
             return blockState.getValue(LIT)
                     ? createTickerHelper(blockEntityType,
-                        GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::particleTick)
+                    GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::particleTick)
                     : null;
         } else {
             return createTickerHelper(
@@ -167,10 +175,10 @@ public class BrewKettleBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
         if (!level.isClientSide) {
             BrewKettleBlockEntity blockEntity = (BrewKettleBlockEntity) level.getBlockEntity(blockPos);
-            if(blockEntity == null) return InteractionResult.FAIL;
+            if (blockEntity == null) return InteractionResult.FAIL;
 
             // Try to do fluid handling first.
-            if(player.getItemInHand(interactionHand)
+            if (player.getItemInHand(interactionHand)
                     .getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
                     .isPresent()
             ) {
@@ -231,33 +239,6 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @Override
     public boolean canSurvive(BlockState p_60525_, LevelReader p_60526_, BlockPos p_60527_) {
         return true;
-    }
-
-    public static void makeParticles(Level level, BlockPos blockPos, BlockState blockState) {
-        try {
-            BrewKettleBlockEntity blockEntity = (BrewKettleBlockEntity) level.getBlockEntity(blockPos);
-
-            if (blockState.getValue(LIT) && blockEntity.getTickClock("current") > 0) {
-                RandomSource randomsource = level.getRandom();
-                SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
-
-                level.addAlwaysVisibleParticle(
-                        simpleparticletype,
-                        true,
-                        (double) blockPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        (double) blockPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(),
-                        (double) blockPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        0.0D,
-                        0.07D,
-                        0.0D
-                );
-
-                level.playSound(null, blockPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-        } catch (Exception e) {
-            GrowthcraftCellar.LOGGER.error("BrewKettleBlockEntity at %d threw an Exception: %s", blockPos.toString(), e.getMessage());
-        }
-
     }
 
 

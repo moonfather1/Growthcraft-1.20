@@ -15,8 +15,6 @@ public class GrowthcraftCellarConfig {
 
     private static final String CATEGORY_BREW_KETTLE = "brew_kettle";
 
-    private static ForgeConfigSpec.IntValue brew_kettle_lit_light_level;
-
     static {
         initBrewKettleConfig(SERVER_BUILDER);
         SERVER = SERVER_BUILDER.build();
@@ -39,13 +37,9 @@ public class GrowthcraftCellarConfig {
     }
 
     public static void initBrewKettleConfig(ForgeConfigSpec.Builder server) {
-        brew_kettle_lit_light_level = server
-                .comment("Set the light level for the brew kettle when it is lit. Setting to 0 uses neighbor light level.")
-                .defineInRange(String.format("%s.%s", CATEGORY_BREW_KETTLE, "LitLightLevel"), 15, 0, 15);
-    }
-
-    public static int getBrewKettleLitLightLevel() {
-        return brew_kettle_lit_light_level.get();
+        // brew_kettle_lit_light_level = server
+        //        .comment("Set the light level for the brew kettle when it is lit. Setting to 0 uses neighbor light level.")
+        //        .defineInRange(String.format("%s.%s", CATEGORY_BREW_KETTLE, "LitLightLevel"), 15, 0, 15);
     }
 
 }

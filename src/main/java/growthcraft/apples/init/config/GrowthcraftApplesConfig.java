@@ -7,6 +7,9 @@ import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
 
+/**
+ * @deprecated (9.2.0, "This config does not have a use.")
+ */
 @Deprecated(since = "9.2.0", forRemoval = true)
 public class GrowthcraftApplesConfig {
 
@@ -20,6 +23,9 @@ public class GrowthcraftApplesConfig {
         SERVER = SERVER_BUILDER.build();
     }
 
+    /*
+
+     */
     private GrowthcraftApplesConfig() {
         /* Prevent generation of public constructor */
     }
