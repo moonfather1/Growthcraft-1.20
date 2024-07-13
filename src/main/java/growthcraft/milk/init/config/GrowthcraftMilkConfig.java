@@ -86,7 +86,7 @@ public class GrowthcraftMilkConfig {
                 .define(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresEnabled"), false);
         villageStructuresWeight = specBuilder
                 .comment("The weight of the villager structures.")
-                .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresWeight"), 10, 0, 16000);
+                .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresWeight"), 1, 0, 16000);
 
         cheeseDebugEnabled = specBuilder
                 .comment("Set to true to add additional logging to debug the cheese wheel and curds blocks.")

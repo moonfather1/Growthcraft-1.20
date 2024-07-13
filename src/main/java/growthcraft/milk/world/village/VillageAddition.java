@@ -1,6 +1,7 @@
 package growthcraft.milk.world.village;
 
 import com.mojang.datafixers.util.Pair;
+import growthcraft.milk.init.config.GrowthcraftMilkConfig;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -81,31 +82,33 @@ public class VillageAddition {
         Registry<StructureTemplatePool> templatePoolRegistry = event.getServer().registryAccess().registry(Registries.TEMPLATE_POOL).orElseThrow();
         Registry<StructureProcessorList> processorListRegistry = event.getServer().registryAccess().registry(Registries.PROCESSOR_LIST).orElseThrow();
 
-        // Adds our piece to all village houses pool
-        // Note, the resourcelocation is getting the pool files from the data folder. Not assets folder.
-        addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                new ResourceLocation("minecraft:village/plains/houses"),
-                 String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
-                250);
+        if(GrowthcraftMilkConfig.getVillageStructuresEnabled()) {
+            // Adds our piece to all village houses pool
+            // Note, the resourcelocation is getting the pool files from the data folder. Not assets folder.
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    new ResourceLocation("minecraft:village/plains/houses"),
+                    String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                    GrowthcraftMilkConfig.getVillageStructuresWeight());
 
-        addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                new ResourceLocation("minecraft:village/snowy/houses"),
-                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
-                250);
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    new ResourceLocation("minecraft:village/snowy/houses"),
+                    String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                    GrowthcraftMilkConfig.getVillageStructuresWeight());
 
-        addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                new ResourceLocation("minecraft:village/savanna/houses"),
-                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
-                250);
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    new ResourceLocation("minecraft:village/savanna/houses"),
+                    String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                    GrowthcraftMilkConfig.getVillageStructuresWeight());
 
-        addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                new ResourceLocation("minecraft:village/taiga/houses"),
-                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
-                250);
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    new ResourceLocation("minecraft:village/taiga/houses"),
+                    String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                    GrowthcraftMilkConfig.getVillageStructuresWeight());
 
-        addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                new ResourceLocation("minecraft:village/desert/houses"),
-                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
-                250);
+            addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                    new ResourceLocation("minecraft:village/desert/houses"),
+                    String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                    GrowthcraftMilkConfig.getVillageStructuresWeight());
+        }
     }
 }
