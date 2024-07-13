@@ -14,22 +14,11 @@ public class GrowthcraftCellarConfig {
     public static final String SERVER_CONFIG = "growthcraft-cellar-server.toml";
 
     private static final String CATEGORY_BREW_KETTLE = "brew_kettle";
-    private static final String CATEGORY_GRAPE_VINES = "grape_vines";
 
     private static ForgeConfigSpec.IntValue brew_kettle_lit_light_level;
-    private static ForgeConfigSpec.IntValue default_brewing_ticks;
-
-    private static ForgeConfigSpec.IntValue grape_vine_min_fruit;
-    private static ForgeConfigSpec.IntValue grape_vine_max_fruit;
-
-    private static ForgeConfigSpec.IntValue hops_min_fruit;
-    private static ForgeConfigSpec.IntValue hops_max_fruit;
 
     static {
         initBrewKettleConfig(SERVER_BUILDER);
-        initGrapeVineConfig(SERVER_BUILDER);
-        initHopsCropConfig(SERVER_BUILDER);
-
         SERVER = SERVER_BUILDER.build();
     }
 
@@ -52,51 +41,11 @@ public class GrowthcraftCellarConfig {
     public static void initBrewKettleConfig(ForgeConfigSpec.Builder server) {
         brew_kettle_lit_light_level = server
                 .comment("Set the light level for the brew kettle when it is lit. Setting to 0 uses neighbor light level.")
-                .defineInRange("brewKettle.LitLightLevel", 15, 0, 15);
-        default_brewing_ticks = server
-                .comment("Set the Brew Kettle processing time in ticks.")
-                .defineInRange("brewKettle.DefaultProcessingTime", 600, 20, 24000);
-    }
-
-    public static void initGrapeVineConfig(ForgeConfigSpec.Builder server) {
-        grape_vine_min_fruit = server
-                .comment("Set to the minimum amount of fruit dropped by grape vines.")
-                .defineInRange("grape_vine.min_fruit_yield", 1, 1, 100);
-        grape_vine_max_fruit = server
-                .comment("Set to the maximum amount of fruit dropped by grape vines.")
-                .defineInRange("grape_vine.max_fruit_yield", 4, 1, 100);
-    }
-
-    public static void initHopsCropConfig(ForgeConfigSpec.Builder server) {
-        hops_min_fruit = server
-                .comment("Set to the minimum amount of hops dropped by Hope crops.")
-                .defineInRange("hops_crop.min_fruit_yield", 1, 1, 100);
-        hops_max_fruit = server
-                .comment("Set to the maximum amount of hops dropped by Hope crops.")
-                .defineInRange("hops_crop.max_fruit_yield", 3, 1, 100);
+                .defineInRange(String.format("%s.%s", CATEGORY_BREW_KETTLE, "LitLightLevel"), 15, 0, 15);
     }
 
     public static int getBrewKettleLitLightLevel() {
         return brew_kettle_lit_light_level.get();
     }
 
-    public static int getDefaultProcessingTime() {
-        return default_brewing_ticks.get();
-    }
-
-    public static int getGrapeVineMinFruitYield() {
-        return grape_vine_min_fruit.get();
-    }
-
-    public static int getGrapeVineMaxFruitYield() {
-        return grape_vine_max_fruit.get();
-    }
-
-    public static int getHopsCropMinFruitYield() {
-        return hops_min_fruit.get();
-    }
-
-    public static int getHopsCropMaxFruitYield() {
-        return hops_max_fruit.get();
-    }
 }
