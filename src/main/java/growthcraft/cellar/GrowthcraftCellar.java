@@ -6,7 +6,7 @@ import growthcraft.cellar.init.client.GrowthcraftCellarBlockEntityRenderers;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenderers;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.lib.networking.GrowthcraftCellarMessages;
-import growthcraft.cellar.other.LootModifierForBottlesInChests;
+import growthcraft.cellar.init.LootModifierForBottlesInChests;
 import growthcraft.cellar.screen.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.core.init.GrowthcraftCreativeModeTabs;

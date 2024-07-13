@@ -18,6 +18,10 @@ import java.util.List;
 @Mod.EventBusSubscriber
 public class MissingMappingsHandler
 {
+    private MissingMappingsHandler() {
+        /* Prevent generation of public constructor */
+    }
+
     @SubscribeEvent
     public static void mappingEvent(MissingMappingsEvent event) {
         List<MissingMappingsEvent.Mapping<Block>> blockList = event.getMappings(Registries.BLOCK, Reference.MODID);

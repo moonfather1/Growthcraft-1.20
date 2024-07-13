@@ -9,6 +9,7 @@ import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.shared.Reference;
+import growthcraft.lib.utils.FormatUtils;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -30,12 +31,33 @@ public class GrowthcraftCellarLootTables extends VanillaBlockLoot{
 	
 	@Override
 	protected void generate() {
-		createStandardTable(GrowthcraftCellarBlocks.BREW_KETTLE.get(), GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), "inventory", "fluid_tank_input_0", "fluid_tank_output_0");
-		createStandardTable(GrowthcraftCellarBlocks.CULTURE_JAR.get(), GrowthcraftCellarBlockEntities.CULTURE_JAR_BLOCK_ENTITY.get(), "fluid_tank_input_0");
-		createStandardTable(GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get(), GrowthcraftCellarBlockEntities.FERMENTATION_BARREL_BLOCK_ENTITY.get(), "fluid_tank_input_0");
-		createStandardTable(GrowthcraftCellarBlocks.FRUIT_PRESS.get(), GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(), "fluid_tank_input_0");
-		createStandardTable(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get(), GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(), "fluid_tank_input_0");
-		createStandardTable(GrowthcraftCellarBlocks.ROASTER.get(), GrowthcraftCellarBlockEntities.ROASTER_BLOCK_ENTITY.get(), "inventory");
+		createStandardTable(
+                GrowthcraftCellarBlocks.BREW_KETTLE.get(),
+                GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(),
+                FormatUtils.INVENTORY,
+                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0),
+                FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 0));
+		createStandardTable(
+                GrowthcraftCellarBlocks.CULTURE_JAR.get(),
+                GrowthcraftCellarBlockEntities.CULTURE_JAR_BLOCK_ENTITY.get(),
+                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+		createStandardTable(
+                GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get(),
+                GrowthcraftCellarBlockEntities.FERMENTATION_BARREL_BLOCK_ENTITY.get(),
+                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+		createStandardTable(
+                GrowthcraftCellarBlocks.FRUIT_PRESS.get(),
+                GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(),
+                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+		createStandardTable(
+                GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get(),
+                GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(),
+                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+		createStandardTable(
+                GrowthcraftCellarBlocks.ROASTER.get(),
+                GrowthcraftCellarBlockEntities.ROASTER_BLOCK_ENTITY.get(),
+                FormatUtils.INVENTORY);
+
 		add(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get(), createMangroveLeavesDrops(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get()));
 		add(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get(), createMangroveLeavesDrops(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get()));
 		add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get(), createMangroveLeavesDrops(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get()));
@@ -47,7 +69,8 @@ public class GrowthcraftCellarLootTables extends VanillaBlockLoot{
         		.filter(e -> !e.getKey().location().getPath().contains("fluid"))
         		.map(RegistryObject::get)
         		.collect(Collectors.toList());
-    	
+
+        // Exclude any blocks that do not need loot table generator.
         allBlocks.remove(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_FRUIT.get());
         allBlocks.remove(GrowthcraftCellarBlocks.RED_GRAPE_VINE_FRUIT.get());
         allBlocks.remove(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_FRUIT.get());
@@ -56,8 +79,7 @@ public class GrowthcraftCellarLootTables extends VanillaBlockLoot{
         allBlocks.remove(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE.get());
         allBlocks.remove(GrowthcraftCellarBlocks.HOPS_VINE.get());
         allBlocks.removeAll(GrowthcraftCellarFluids.FLUIDS.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList()));
-        
-    	
+
     	return allBlocks;
     }
     

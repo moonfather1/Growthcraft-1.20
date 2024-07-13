@@ -40,19 +40,16 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class FermentationBarrelBlockEntity extends BlockEntity implements BlockEntityTicker<FermentationBarrelBlockEntity>, MenuProvider {
 
-    private int tickClock = 0;
-    private int tickMax = -1;
-    private boolean yeastWarning = false, yeastError = false;
+    private static final int BRANCH_PROCESSING = 1;
+    private static final int BRANCH_RESET_HAPPENED = 2;
+    private static final int BRANCH_IDLE = 0;
 
     protected final ContainerData data;
-
-    private Component customName;
 
     private final ItemStackHandler itemStackHandler = new ItemStackHandler(1) {
         @Override
@@ -60,8 +57,6 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
             setChanged();
         }
     };
-
-    private LazyOptional<IItemHandler> itemHandlerLazyOptional = LazyOptional.empty();
 
     private final GrowthcraftFluidTank FLUID_TANK_INPUT_0 = new GrowthcraftFluidTank(4000) {
         @Override
@@ -73,8 +68,21 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         }
     };
 
+    private int tickerState = BRANCH_IDLE;
+    private int tickClock = 0;
+    private int tickMax = -1;
+
+    private boolean yeastWarning = false;
+    private boolean yeastError = false;
+
+    private Component customName;
+
+    private LazyOptional<IItemHandler> itemHandlerLazyOptional = LazyOptional.empty();
     private LazyOptional<IFluidHandler> lazyInputFluidHandler0 = LazyOptional.empty();
 
+    private ItemStack lastItemStack = ItemStack.EMPTY;
+    private FluidStack lastFluidStack = FluidStack.EMPTY;
+    
     public FermentationBarrelBlockEntity(BlockPos blockPos, BlockState blockState) {
         this(GrowthcraftCellarBlockEntities.FERMENTATION_BARREL_BLOCK_ENTITY.get(), blockPos, blockState);
     }
@@ -122,9 +130,6 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         }
     }
 
-    private static final int BRANCH_PROCESSING = 1, BRANCH_RESET_HAPPENED = 2, BRANCH_IDLE = 0;
-    private int tickerState = BRANCH_IDLE;
-
     @Override
     public void tick(Level level, BlockPos blockPos, BlockState blockState, FermentationBarrelBlockEntity blockEntity) {
         if (level.isClientSide || this.getFluidTank(0).isEmpty()) {
@@ -136,18 +141,16 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
             this.resetTickClock();
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
             this.tickerState = BRANCH_RESET_HAPPENED;
-        }
-        else if (this.tickerState == BRANCH_PROCESSING && this.tickClock <= this.tickMax) {
+        } else if (this.tickerState == BRANCH_PROCESSING && this.tickClock <= this.tickMax) {
             // processing, somewhere in the middle
             this.tickClock++; // move the counter
             if (tickClock % 10 == 7) {  // sent client update twice per second. it's a tiny progress bar for a rather long process.
                 this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
             }
-        }
-        else if (this.tickerState == BRANCH_PROCESSING && this.tickClock > this.tickMax) {
+        } else if (this.tickerState == BRANCH_PROCESSING && this.tickClock > this.tickMax) {
             // hitting the specified processing time (specified in the recipe)
             FermentationBarrelRecipe recipe = this.getFirstMatchingRecipe();
-            int multiplier = recipe.getOutputMultiplier(this.getFluidStackInTank(0) );
+            int multiplier = recipe.getOutputMultiplier(this.getFluidStackInTank(0));
             this.itemStackHandler.getStackInSlot(0).shrink(multiplier);
 
             FluidStack resultingFluidStack = recipe.getResultingFluid().copy();
@@ -158,9 +161,8 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
             this.resetTickClock();
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
             this.tickerState = BRANCH_IDLE;
-        }
-        else if (this.tickerState == BRANCH_RESET_HAPPENED   // barrel contents changed? second part of the condition (once per second) is in case of recipe data reload.
-               || (this.tickerState == BRANCH_IDLE && level.getGameTime() % 20 == 9)) {   // we may improve this second part in another pr as multiple machines should share it.
+        } else if (this.tickerState == BRANCH_RESET_HAPPENED   // barrel contents changed? second part of the condition (once per second) is in case of recipe data reload.
+                || (this.tickerState == BRANCH_IDLE && level.getGameTime() % 20 == 9)) {   // we may improve this second part in another pr as multiple machines should share it.
             FermentationBarrelRecipe recipe = this.getFirstMatchingRecipe();
             if (this.tickerState == BRANCH_RESET_HAPPENED || recipe != null) {
                 this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL); // this is to update tooltips on the gui
@@ -173,23 +175,18 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         }
     }
 
-    private boolean changed()
-    {
+    private boolean changed() {
         if (this.lastFluidStack.isFluidEqual(this.FLUID_TANK_INPUT_0.getFluid())
                 && this.lastFluidStack.getAmount() == this.FLUID_TANK_INPUT_0.getFluid().getAmount()
                 && this.lastItemStack.equals(this.itemStackHandler.getStackInSlot(0), false)) {
             return false;
             // yes, item handler and fluid tank have "changed" method which we could override in subclass, but they often have false-positive triggers. not a problem in many cases but here we can't afford to reset processing due to a false positive.
-        }
-        else {
+        } else {
             this.lastFluidStack = this.FLUID_TANK_INPUT_0.getFluid().copy();
             this.lastItemStack = this.itemStackHandler.getStackInSlot(0).copy();
             return true;
         }
     }
-    private ItemStack lastItemStack = ItemStack.EMPTY;
-    private FluidStack lastFluidStack = FluidStack.EMPTY;
-
 
     private FermentationBarrelRecipe getFirstMatchingRecipe() {
         this.yeastWarning = this.yeastError = false;
@@ -198,15 +195,12 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
             if (recipe.matchesInput(this.getFluidStackInTank(0))) {
                 if (recipe.matches(this.itemStackHandler.getStackInSlot(0), this.getFluidStackInTank(0))) {
                     return recipe;
-                }
-                else if (this.itemStackHandler.getStackInSlot(0).isEmpty()) {
+                } else if (this.itemStackHandler.getStackInSlot(0).isEmpty()) {
                     return null;
-                }
-                else if (recipe.matches(this.itemStackHandler.getStackInSlot(0).copyWithCount(64), this.getFluidStackInTank(0))) {
+                } else if (recipe.matches(this.itemStackHandler.getStackInSlot(0).copyWithCount(64), this.getFluidStackInTank(0))) {
                     this.yeastWarning = true;
                     return null;
-                }
-                else {
+                } else {
                     this.yeastError = true;
                     return null;
                 }

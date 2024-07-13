@@ -15,13 +15,13 @@ public class GrowthcraftCellarConfig {
 
     private static final String CATEGORY_BREW_KETTLE = "brew_kettle";
 
-    private static ForgeConfigSpec.IntValue loot_chance_pillager_outpost;
-    private static ForgeConfigSpec.IntValue loot_chance_ocean_ruin;
-    private static ForgeConfigSpec.IntValue loot_chance_shipwreck;
-    private static ForgeConfigSpec.IntValue loot_chance_village;
-    private static ForgeConfigSpec.IntValue loot_chance_beach_treasure;
-    private static ForgeConfigSpec.IntValue loot_chance_dark_forest_mansion;
-    private static ForgeConfigSpec.IntValue loot_chance_stronghold;
+    private static ForgeConfigSpec.IntValue lootChancePillagerOutpost;
+    private static ForgeConfigSpec.IntValue lootChanceOceanRuin;
+    private static ForgeConfigSpec.IntValue lootChanceShipwreck;
+    private static ForgeConfigSpec.IntValue lootChanceVillage;
+    private static ForgeConfigSpec.IntValue lootChanceBeachTreasure;
+    private static ForgeConfigSpec.IntValue lootChanceDarkForestMansion;
+    private static ForgeConfigSpec.IntValue lootChanceStronghold;
 
     static {
         initLootConfig(SERVER_BUILDER);
@@ -46,56 +46,56 @@ public class GrowthcraftCellarConfig {
 
     public static void initLootConfig(ForgeConfigSpec.Builder server) {
         server.push("bottles_in_loot_chest");  // spaces would be fine here but i'll follow the existing style.
-        loot_chance_pillager_outpost = server
+        lootChancePillagerOutpost = server
                 .comment("Percentage chance you'll find a few bottles of mead in pillager tower chest. Number here seems high but that bum place has only one chest and this fits the theme.")
                 .defineInRange("loot_chance_pillager_outpost", 90, 0, 100);
-        loot_chance_ocean_ruin = server
+        lootChanceOceanRuin = server
                 .comment("Percentage chance you'll find a few bottles of wine in underwater ruin chest. Default of 10% is not low because ruins will have half a dozen chests.")
                 .defineInRange("loot_chance_underwater_ruins", 10, 0, 100);
-        loot_chance_shipwreck = server
+        lootChanceShipwreck = server
                 .comment("Percentage chance you'll find a few bottles of ale in shipwreck chest.")
                 .defineInRange("loot_chance_shipwreck", 60, 0, 100);
-        loot_chance_village = server
+        lootChanceVillage = server
                 .comment("Percentage chance you'll find a few bottles of wine in villager home chest.")
                 .defineInRange("loot_chance_village", 0, 0, 100);   // default is 0 - disabled for now.
-        loot_chance_beach_treasure = server
+        lootChanceBeachTreasure = server
                 .comment("Percentage chance you'll find a few bottles of wine in buried beach chest.")
                 .defineInRange("loot_chance_beach_treasure", 0, 0, 100);   // default is 0 - disabled for now.
-        loot_chance_dark_forest_mansion = server
+        lootChanceDarkForestMansion = server
                 .comment("Percentage chance you'll find a few bottles of lager in woodland mansion chest.")
                 .defineInRange("loot_chance_dark_forest_mansion", 15, 0, 100);
-        loot_chance_stronghold = server
+        lootChanceStronghold = server
                 .comment("Percentage chance you'll find a few bottles of wine in stronghold chest.")
                 .defineInRange("loot_chance_stronghold", 0, 0, 100);   // default is 0 - disabled for now. some absorption won't be too bad.
         server.pop();
     }
 
     public static int getLootChancePillagerTower() {
-        return loot_chance_pillager_outpost.get();
+        return lootChancePillagerOutpost.get();
     }
 
     public static int getLootChanceOceanRuin() {
-        return loot_chance_ocean_ruin.get();
+        return lootChanceOceanRuin.get();
     }
 
     public static int getLootChanceShipwreck() {
-        return loot_chance_shipwreck.get();
+        return lootChanceShipwreck.get();
     }
 
     public static int getLootChanceVillagerHome() {
-        return loot_chance_village.get();
+        return lootChanceVillage.get();
     }
 
     public static int getLootChanceBeachTreasure() {
-        return loot_chance_beach_treasure.get();
+        return lootChanceBeachTreasure.get();
     }
 
     public static int getLootChanceMansion() {
-        return loot_chance_dark_forest_mansion.get();
+        return lootChanceDarkForestMansion.get();
     }
 
     public static int getLootChanceStronghold() {
-        return loot_chance_stronghold.get();
+        return lootChanceStronghold.get();
     }
 
 }

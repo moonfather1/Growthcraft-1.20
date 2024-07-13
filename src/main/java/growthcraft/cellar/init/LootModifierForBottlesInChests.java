@@ -1,9 +1,8 @@
-package growthcraft.cellar.other;
+package growthcraft.cellar.init;
 
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.nbt.CompoundTag;
@@ -65,7 +64,7 @@ public class LootModifierForBottlesInChests extends LootModifier
         {
             chance = GrowthcraftCellarConfig.getLootChanceStronghold();
         }
-        if (!(context.getRandom().nextInt(100) < chance))
+        if (context.getRandom().nextInt(100) >= chance)
         {
             return generatedLoot; // random chance failed, pack it in. chance is 0 for the majority of cases anyway.
         }
@@ -73,8 +72,10 @@ public class LootModifierForBottlesInChests extends LootModifier
         // step 2: decide on loot item. if there are multiple bottles in a chest (no reason why not), we want them of the same type so that they don't take more than 1 inventory slot.
         // yes we're repeating branches from above. above, there was a 99% chance the chance would be 0, and we didn't want to do any more logic other than rolling.
         CompoundTag tag = new CompoundTag();
-        int min = 1, max = 2;
-        MobEffectInstance effect1 = null, effect2 = null;
+        int min = 1;
+        int max = 2;
+        MobEffectInstance effect1 = null;
+        MobEffectInstance effect2 = null;
         String nameKey = "asd";
         if (lootTableId.equals(BuiltInLootTables.PILLAGER_OUTPOST))
         {
@@ -166,6 +167,7 @@ public class LootModifierForBottlesInChests extends LootModifier
     {
         return null;
     }
+
     public static final Supplier<Codec<LootModifierForBottlesInChests>> CODEC = Suppliers.memoize(() ->
             RecordCodecBuilder.create(inst -> codecStart(inst)
                     // no fields. if there were, we'd call .and() here

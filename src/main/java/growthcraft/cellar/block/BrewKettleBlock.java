@@ -68,7 +68,6 @@ public class BrewKettleBlock extends BaseEntityBlock {
             Block.box(1, 15, 1, 15, 16, 15),
             Block.box(0, 0, 12, 2, 3, 14)
     };
-    private final int lightLevel = 0;
 
     public BrewKettleBlock() {
         this(getInitProperties());

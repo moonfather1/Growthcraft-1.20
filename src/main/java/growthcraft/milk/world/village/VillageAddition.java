@@ -18,10 +18,18 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.List;
 
+import static growthcraft.lib.utils.FormatUtils.STRING_COLON_STRING;
+
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class VillageAddition {
-    private static final ResourceKey<StructureProcessorList> EMPTY_PROCESSOR_LIST_KEY = ResourceKey.create(
-            Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty"));
+    private static final ResourceKey<StructureProcessorList> EMPTY_PROCESSOR_LIST_KEY
+            = ResourceKey.create(Registries.PROCESSOR_LIST,
+            new ResourceLocation("minecraft", "empty")
+    );
+
+    private VillageAddition() {
+        /* Prevent generation of public constructor. */
+    }
 
     /**
      * Adds the building to the targeted pool.
@@ -77,22 +85,27 @@ public class VillageAddition {
         // Note, the resourcelocation is getting the pool files from the data folder. Not assets folder.
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/plains/houses"),
-                "growthcraft_milk:fromage_plains", 250);
+                 String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                250);
 
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/snowy/houses"),
-                "growthcraft_milk:fromage_plains", 250);
+                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                250);
 
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/savanna/houses"),
-                "growthcraft_milk:fromage_plains", 250);
+                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                250);
 
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/taiga/houses"),
-                "growthcraft_milk:fromage_plains", 250);
+                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                250);
 
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/desert/houses"),
-                "growthcraft_milk:fromage_plains", 250);
+                String.format(STRING_COLON_STRING, Reference.MODID, Reference.UnlocalizedName.STRUCTURE_FROMAGE_PLAINS),
+                250);
     }
 }

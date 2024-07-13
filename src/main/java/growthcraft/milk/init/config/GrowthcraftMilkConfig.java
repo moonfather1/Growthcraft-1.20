@@ -19,6 +19,7 @@ public class GrowthcraftMilkConfig {
     private static final String CATEGORY_PANCHEON = "pancheon";
     private static final String CATEGORY_LOOT_CHANCES = "loot_modifiers";
     private static final String CATEGORY_WORLDGEN = "worldgen";
+    private static final String CATEGORY_CHEESE = "cheese";
 
     private static ForgeConfigSpec.BooleanValue churnGuiEnabled;
     private static ForgeConfigSpec.BooleanValue mixingVatGuiEnabled;
@@ -31,6 +32,8 @@ public class GrowthcraftMilkConfig {
 
     private static ForgeConfigSpec.BooleanValue villageStructuresEnabled;
     private static ForgeConfigSpec.IntValue villageStructuresWeight;
+
+    private static ForgeConfigSpec.BooleanValue cheeseDebugEnabled;
 
     static {
         initServerConfig(SERVER_BUILDER);
@@ -84,6 +87,10 @@ public class GrowthcraftMilkConfig {
         villageStructuresWeight = specBuilder
                 .comment("The weight of the villager structures.")
                 .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresWeight"), 10, 0, 16000);
+
+        cheeseDebugEnabled = specBuilder
+                .comment("Set to true to add additional logging to debug the cheese wheel and curds blocks.")
+                .define(String.format("%s.%s", CATEGORY_CHEESE, "debugEnabled"), false);
 
     }
 
@@ -164,5 +171,14 @@ public class GrowthcraftMilkConfig {
 
     public static int getVillageStructuresWeight() {
         return villageStructuresWeight.get();
+    }
+
+    /**
+     * Checks if the debugging mode for the cheese wheel and curds blocks is enabled.
+     *
+     * @return true if the debugging mode is enabled, false otherwise.
+     */
+    public static boolean isCheeseDebugEnabled() {
+        return cheeseDebugEnabled.get();
     }
 }

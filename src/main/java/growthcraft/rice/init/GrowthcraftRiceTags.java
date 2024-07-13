@@ -23,6 +23,10 @@ public class GrowthcraftRiceTags {
 
     public static class Blocks {
 
+        private Blocks() {
+            /* Private constructor to hide the implicit public one. */
+        }
+
         private static void init(){
             // Do nothing, simply instantiate static variables
         }
@@ -33,6 +37,9 @@ public class GrowthcraftRiceTags {
     }
 
     public static class Items {
+        private Items() {
+            /* Private constructor to hide the implicit public one. */
+        }
 
         private static void init(){
             // Do nothing, simply instantiate static variables
@@ -51,6 +58,10 @@ public class GrowthcraftRiceTags {
     }
 
     public static class Fluids {
+        private Fluids() {
+            /* Private constructor to hide the implicit public one. */
+        }
+
         private static void init() {
             // Do nothing, simply instantiate static variables
         }
