@@ -59,8 +59,10 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
     private int tickMax = -1;
 
     protected final ContainerData data;
-
     private Component customName;
+
+    public static final int SLOT_BYPRODUCT = 2;
+    public static final int SLOT_LID = 0;
 
     private final ItemStackHandler itemStackHandler = new ItemStackHandler(3) {
         @Override
@@ -71,8 +73,8 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0 -> stack.getItem() == GrowthcraftCellarItems.BREW_KETTLE_LID.get();
-                case 2 -> false;
+                case SLOT_LID -> false; // was lid; will possibly turn into seasoning in the future.
+                case SLOT_BYPRODUCT -> false;
                 default -> true;
             };
         }
@@ -84,7 +86,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         @Override
         public void onContentsChanged() {
             setChanged();
-            if (!level.isClientSide) {
+            if (level != null && !level.isClientSide) {
                 GrowthcraftCellarMessages.sendToClients(new BrewKettleFluidTankPacket(0, this.getFluid(), worldPosition));
             }
         }
@@ -96,7 +98,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         @Override
         public void onContentsChanged() {
             setChanged();
-            if (!level.isClientSide) {
+            if (level != null && !level.isClientSide) {
                 GrowthcraftCellarMessages.sendToClients(new BrewKettleFluidTankPacket(1, this.fluid, worldPosition));
             }
         }
@@ -172,7 +174,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
                 if (recipe != null && this.getFluidTank(1).canFluidStackFit(recipe.getOutputFluidStack())) {
                     if(this.tickClock <= this.tickMax) {
                         this.tickClock++;
-                    } else if(this.tickMax > 0) {
+                    } else if (this.tickMax > 0) {
                         // Process recipe results.
                         this.itemStackHandler.getStackInSlot(1).shrink(
                                 recipe.getInputItemStack().getCount()
@@ -195,7 +197,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
                             if (existingByProductInSlot.isEmpty() || existingByProductInSlot.getItem() == byProductItemStack.getItem()) {
                                 byProductItemStack.setCount(byProductItemStack.getCount() + existingByProductInSlot.getCount());
                                 // Using insertStack does a check against isValiditem which is false by default for output only slots.
-                                this.itemStackHandler.setStackInSlot(2, byProductItemStack);
+                                this.itemStackHandler.setStackInSlot(SLOT_BYPRODUCT, byProductItemStack);
                             }
                         }
 
@@ -247,7 +249,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
     }
 
     public boolean hasLid() {
-        return this.itemStackHandler.getStackInSlot(0).getItem() == GrowthcraftCellarItems.BREW_KETTLE_LID.get();
+        return this.getBlockState().getValue(BrewKettleBlock.HAS_LID);
     }
 
     public boolean isHeated() {
@@ -376,13 +378,12 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
 
-        if(cap == ForgeCapabilities.FLUID_HANDLER) {
-            if(DirectionUtils.isSide(side)) {
+        if (cap == ForgeCapabilities.FLUID_HANDLER) {
+            if (DirectionUtils.isSide(side)) {
                 return this.fluidHandler1.cast();
 
-            } else if(DirectionUtils.isTop(side)) {
+            } else if (DirectionUtils.isTop(side)) {
                 return this.fluidHandler0.cast();
-
             }
         } else if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return this.inventoryItemHandler.cast();
@@ -406,7 +407,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
 
     public static <E extends BlockEntity> void particleTick(Level level, BlockPos blockPos, BlockState blockState, BrewKettleBlockEntity blockEntity) {
         RandomSource randomsource = level.random;
-        if (randomsource.nextFloat() < 0.11F) {
+        if (randomsource.nextFloat() < 0.11F && !blockEntity.hasLid()) {
             for (int i = 0; i < randomsource.nextInt(2) + 2; ++i) {
                 BrewKettleBlock.makeParticles(level, blockPos, blockState);
             }
@@ -427,10 +428,11 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         return Math.round(percentage);
     }
 
-    public void playSound(String sound) {
-        if(Objects.equals(sound, "open") && this.level != null) {
+    public void playSound(String sound)
+    {
+        if (Objects.equals(sound, "open") && this.level != null)
+        {
             this.level.playSound(null, this.getBlockPos(), SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS);
         }
     }
-
 }

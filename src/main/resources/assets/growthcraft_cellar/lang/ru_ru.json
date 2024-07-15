@@ -118,5 +118,9 @@
   "growthcraft_cellar.tooltip.roaster.progress": "Roast Level %s (%d%%)",
   "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
   "growthcraft_cellar.tooltip.fermentation.yeast_warning": "Insufficient yeast.",
-  "growthcraft_cellar.tooltip.fermentation.yeast_error": "Not a valid yeast for this fluid."
+  "growthcraft_cellar.tooltip.fermentation.yeast_error": "Not a valid yeast for this fluid.",
+  "message.growthcraft_cellar.kettle.outside_lid_on": "Lid put on.",
+  "message.growthcraft_cellar.kettle.outside_lid_off": "Lid taken off.",
+  "message.growthcraft_cellar.kettle.gui_lid_on": "Put the lid on.",
+  "message.growthcraft_cellar.kettle.gui_lid_off": "Take the lid off."
 }
