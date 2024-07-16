@@ -1,5 +1,6 @@
 package growthcraft.apiary.datagen;
 
+import growthcraft.apiary.datagen.providers.GrowthcraftApiaryGlobalLootModifiersProvider;
 import growthcraft.apiary.datagen.providers.GrowthcraftApiaryLootTableProvider;
 import growthcraft.apiary.datagen.providers.GrowthcraftApiaryRecipes;
 import growthcraft.apiary.shared.Reference;
@@ -19,5 +20,6 @@ public class GrowthcraftApiaryDataGenerators {
 
 		generator.addProvider(event.includeServer(), new GrowthcraftApiaryRecipes(packOutput));
 		generator.addProvider(event.includeServer(), new GrowthcraftApiaryLootTableProvider(packOutput));
+//		generator.addProvider(event.includeServer(), new GrowthcraftApiaryGlobalLootModifiersProvider(packOutput));
 	}
 }

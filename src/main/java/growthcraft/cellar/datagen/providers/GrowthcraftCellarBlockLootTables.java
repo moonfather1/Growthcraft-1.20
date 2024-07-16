@@ -1,14 +1,11 @@
 package growthcraft.cellar.datagen.providers;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
-import growthcraft.cellar.shared.Reference;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -23,10 +20,9 @@ import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetContainerContents;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class GrowthcraftCellarLootTables extends VanillaBlockLoot{
+public class GrowthcraftCellarBlockLootTables extends VanillaBlockLoot{
 	
 	@Override
 	protected void generate() {

@@ -1,0 +1,10 @@
+{
+  "type": "growthcraft:add_loot_table",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/buried_treasure"
+    }
+  ],
+  "lootTable": "growthcraft_cellar:chests/buried_treasure"
+}

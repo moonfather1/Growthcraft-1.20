@@ -1,5 +1,6 @@
 package growthcraft.cellar.datagen;
 
+import growthcraft.cellar.datagen.providers.GrowthcraftCellarGlobalLootModifiersProvider;
 import growthcraft.cellar.datagen.providers.GrowthcraftCellarLootTableProvider;
 import growthcraft.cellar.datagen.providers.GrowthcraftCellarRecipes;
 import growthcraft.cellar.shared.Reference;
@@ -19,7 +20,6 @@ public class GrowthcraftCellarDataGenerators {
 		
 		generator.addProvider(event.includeServer(), new GrowthcraftCellarRecipes(packOutput));
 		generator.addProvider(event.includeServer(), new GrowthcraftCellarLootTableProvider(packOutput));
-//		generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
-//                List.of(new LootTableProvider.SubProviderEntry(GrowthcraftCellarLootTables::new, LootContextParamSets.BLOCK))));
+//		generator.addProvider(event.includeServer(), new GrowthcraftCellarGlobalLootModifiersProvider(packOutput));
 	}
 }

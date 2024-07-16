@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "chance": 90.0,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 14.0,
+                "min": 6.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:set_name",
+              "name": {
+                "translate": "fluid_type.growthcraft_apiary.honey_mead_fluid"
+              }
+            },
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{CustomPotionEffects:[{Ambient:1b,Amplifier:1b,CurativeItems:[{Count:1b,id:\"minecraft:milk_bucket\"}],Duration:3600,Id:21,ShowIcon:0b,ShowParticles:0b,\"forge:id\":\"minecraft:health_boost\"}]}"
+            }
+          ],
+          "name": "growthcraft_cellar:potion_wine"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "growthcraft_cellar:chests/pillager_outpost"
+}
