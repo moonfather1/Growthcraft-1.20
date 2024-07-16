@@ -2,13 +2,13 @@
   "type": "growthcraft:add_item",
   "conditions": [
     {
-      "chance": 0.01,
+      "chance": 0.05,
       "condition": "minecraft:random_chance"
     },
     {
-      "block": "minecraft:grass",
+      "block": "minecraft:chorus_flower",
       "condition": "minecraft:block_state_property"
     }
   ],
-  "item": "growthcraft_rice:rice_stalk"
+  "item": "growthcraft_cellar:yeast_ethereal"
 }

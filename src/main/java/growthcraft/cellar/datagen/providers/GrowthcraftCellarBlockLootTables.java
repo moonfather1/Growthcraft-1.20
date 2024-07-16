@@ -1,5 +1,9 @@
 package growthcraft.cellar.datagen.providers;
 
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
@@ -20,56 +24,21 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class GrowthcraftCellarLootTables extends VanillaBlockLoot {
-
-    /**
-     * Generates loot tables for various blocks.
-     */
-    @Override
-    protected void generate() {
-        createStandardTable(
-                GrowthcraftCellarBlocks.BREW_KETTLE.get(),
-                GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(),
-                FormatUtils.INVENTORY,
-                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0),
-                FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 0));
-        createStandardTable(
-                GrowthcraftCellarBlocks.CULTURE_JAR.get(),
-                GrowthcraftCellarBlockEntities.CULTURE_JAR_BLOCK_ENTITY.get(),
-                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
-        createStandardTable(
-                GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get(),
-                GrowthcraftCellarBlockEntities.FERMENTATION_BARREL_BLOCK_ENTITY.get(),
-                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
-        createStandardTable(
-                GrowthcraftCellarBlocks.FRUIT_PRESS.get(),
-                GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(),
-                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
-        createStandardTable(
-                GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get(),
-                GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(),
-                FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
-        createStandardTable(
-                GrowthcraftCellarBlocks.ROASTER.get(),
-                GrowthcraftCellarBlockEntities.ROASTER_BLOCK_ENTITY.get(),
-                FormatUtils.INVENTORY);
-
-        add(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get(),
-                createMangroveLeavesDrops(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get()));
-        add(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get(),
-                createMangroveLeavesDrops(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get()));
-        add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get(),
-                createMangroveLeavesDrops(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get()));
-    }
-
-    /**
-     * Retrieves all the known blocks for generating loot tables.
-     *
-     * @return An iterable containing all the known blocks excluding specific blocks.
-     */
+public class GrowthcraftCellarBlockLootTables extends VanillaBlockLoot{
+	
+	@Override
+	protected void generate() {
+		createStandardTable(GrowthcraftCellarBlocks.BREW_KETTLE.get(), GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), "inventory", "fluid_tank_input_0", "fluid_tank_output_0");
+		createStandardTable(GrowthcraftCellarBlocks.CULTURE_JAR.get(), GrowthcraftCellarBlockEntities.CULTURE_JAR_BLOCK_ENTITY.get(), "fluid_tank_input_0");
+		createStandardTable(GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get(), GrowthcraftCellarBlockEntities.FERMENTATION_BARREL_BLOCK_ENTITY.get(), "fluid_tank_input_0");
+		createStandardTable(GrowthcraftCellarBlocks.FRUIT_PRESS.get(), GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(), "fluid_tank_input_0");
+		createStandardTable(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get(), GrowthcraftCellarBlockEntities.FRUIT_PRESS_BLOCK_ENTITY.get(), "fluid_tank_input_0");
+		createStandardTable(GrowthcraftCellarBlocks.ROASTER.get(), GrowthcraftCellarBlockEntities.ROASTER_BLOCK_ENTITY.get(), "inventory");
+		add(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get(), createMangroveLeavesDrops(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get()));
+		add(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get(), createMangroveLeavesDrops(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get()));
+		add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get(), createMangroveLeavesDrops(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get()));
+	}
+	
     @Override
     protected Iterable<Block> getKnownBlocks() {
         List<Block> allBlocks = GrowthcraftCellarBlocks.BLOCKS.getEntries().stream()

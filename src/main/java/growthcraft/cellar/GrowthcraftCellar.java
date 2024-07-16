@@ -1,20 +1,29 @@
 package growthcraft.cellar;
 
-import com.mojang.serialization.Codec;
-import growthcraft.cellar.init.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarFluids;
+import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.init.GrowthcraftCellarMenus;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockEntityRenderers;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenderers;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.lib.networking.GrowthcraftCellarMessages;
-import growthcraft.cellar.init.LootModifierForBottlesInChests;
-import growthcraft.cellar.screen.*;
+import growthcraft.cellar.screen.BrewKettleScreen;
+import growthcraft.cellar.screen.CultureJarScreen;
+import growthcraft.cellar.screen.FermentationBarrelScreen;
+import growthcraft.cellar.screen.FruitPressScreen;
+import growthcraft.cellar.screen.RoasterScreen;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.core.init.GrowthcraftCreativeModeTabs;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,19 +32,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 
 @Mod(Reference.MODID)
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GrowthcraftCellar {
     public static final Logger LOGGER = LogManager.getLogger(Reference.MODID);
-    private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Reference.MODID);
-    private static final RegistryObject<Codec<? extends IGlobalLootModifier>> GLMSerializer1 = LOOT_MODIFIERS.register("bottles_in_loot_chests", LootModifierForBottlesInChests.CODEC);
+//    private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Reference.MODID);
+//    private static final RegistryObject<Codec<? extends IGlobalLootModifier>> GLMSerializer1 = LOOT_MODIFIERS.register("bottles_in_loot_chests", LootModifierForBottlesInChests.CODEC);
 
     public GrowthcraftCellar() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -54,7 +58,7 @@ public class GrowthcraftCellar {
         GrowthcraftCellarFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarMenus.MENUS.register(modEventBus);
-        LOOT_MODIFIERS.register(modEventBus);
+//        GrowthcraftCellarGlobalLootModifier.register(modEventBus);
 
         GrowthcraftCellarRecipes.register(modEventBus);
 

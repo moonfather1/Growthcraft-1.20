@@ -11,7 +11,8 @@ public class GrowthcraftCellarLootTableProvider extends LootTableProvider{
 
 	public GrowthcraftCellarLootTableProvider(PackOutput output) {
 		super(output, Collections.emptySet(), List.of(
-                new LootTableProvider.SubProviderEntry(GrowthcraftCellarLootTables::new, LootContextParamSets.BLOCK)
+                new LootTableProvider.SubProviderEntry(GrowthcraftCellarBlockLootTables::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(GrowthcraftCellarChestLootTables::new, LootContextParamSets.CHEST)
         ));
 	}
 

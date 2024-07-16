@@ -1,0 +1,23 @@
+{
+  "entries": [
+    "growthcraft:thistle_seeds_from_grass",
+    "growthcraft:add_loot_village",
+    "growthcraft:hops_seeds_white_from_grass",
+    "growthcraft:add_loot_buried_treasure",
+    "growthcraft:yeast_bayanus_from_grass",
+    "growthcraft:add_loot_pillager_outpost",
+    "growthcraft:add_loot_shipwreck",
+    "growthcraft:bee_from_vanilla_bee_nest",
+    "growthcraft:grape_seeds_red_from_grass",
+    "growthcraft:yeast_lager_from_snow",
+    "growthcraft:add_loot_woodland_mansion",
+    "growthcraft:grape_seeds_white_from_grass",
+    "growthcraft:add_loot_stronghold",
+    "growthcraft:grape_seeds_purple_from_grass",
+    "growthcraft:yeast_brewers_from_grass",
+    "growthcraft:rice_from_grass",
+    "growthcraft:yeast_ethereal_from_chorus_flower",
+    "growthcraft:add_loot_underwater_ruin"
+  ],
+  "replace": false
+}

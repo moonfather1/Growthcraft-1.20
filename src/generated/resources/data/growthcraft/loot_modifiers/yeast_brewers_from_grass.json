@@ -10,5 +10,5 @@
       "condition": "minecraft:block_state_property"
     }
   ],
-  "item": "growthcraft_rice:rice_stalk"
+  "item": "growthcraft_cellar:yeast_brewers"
 }

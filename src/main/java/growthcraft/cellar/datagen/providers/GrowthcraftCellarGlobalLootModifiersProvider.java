@@ -1,12 +1,9 @@
-package growthcraft.core.datagen.providers;
+package growthcraft.cellar.datagen.providers;
 
-import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
-import growthcraft.core.shared.Reference;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.lib.loot.AddItemModifier;
 import growthcraft.lib.loot.AddLootTableModifier;
-import growthcraft.milk.init.GrowthcraftMilkItems;
-import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -18,27 +15,20 @@ import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 
-public class GrowthcraftCoreGlobalLootModifiersProvider extends GlobalLootModifierProvider{
-	public GrowthcraftCoreGlobalLootModifiersProvider(PackOutput output) {
+public class GrowthcraftCellarGlobalLootModifiersProvider extends GlobalLootModifierProvider{
+	public GrowthcraftCellarGlobalLootModifiersProvider(PackOutput output) {
 		super(output, Reference.MODID);
 	}
 	
 	@Override
 	protected void start() {
-		//GC Apiary
-		add("bee_from_vanilla_bee_nest", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.50f).build(),
-				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.BEE_NEST).build()}, 
-				GrowthcraftApiaryItems.BEE.get().asItem()));
-		
-		//GC Cellar
-		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.PILLAGER_OUTPOST_CHEST_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.PILLAGER_OUTPOST_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.PILLAGER_OUTPOST).build()));
-		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.UNDERWATER_RUIN_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.UNDERWATER_RUIN_LOOT), LootTableIdCondition.builder(BuiltInLootTables.UNDERWATER_RUIN_SMALL).or(LootTableIdCondition.builder(BuiltInLootTables.UNDERWATER_RUIN_BIG)).build()));
-		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.SHIPWRECK_CHEST_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.SHIPWRECK_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY).or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_MAP)).build()));
-		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.VILLAGE_CHEST_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.VILLAGE_CHEST_LOOT),  LootTableIdCondition.builder(BuiltInLootTables.VILLAGE_BUTCHER).build()));
-		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.BURIED_TREASURE_CHEST_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.BURIED_TREASURE_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.BURIED_TREASURE).build()));
-		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.WOODLAND_MANSION_CHEST_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.WOODLAND_MANSION_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.WOODLAND_MANSION).build()));
-		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.STRONGHOLD_CHEST_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.STRONGHOLD_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.STRONGHOLD_CORRIDOR).or(LootTableIdCondition.builder(BuiltInLootTables.STRONGHOLD_CROSSING)).build()));
+		add("add_loot_"+ Reference.LootTable.PILLAGER_OUTPOST_CHEST_LOOT , loot(name(Reference.LootTable.PILLAGER_OUTPOST_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.PILLAGER_OUTPOST).build()));
+		add("add_loot_"+ Reference.LootTable.UNDERWATER_RUIN_LOOT , loot(name(Reference.LootTable.UNDERWATER_RUIN_LOOT), LootTableIdCondition.builder(BuiltInLootTables.UNDERWATER_RUIN_SMALL).or(LootTableIdCondition.builder(BuiltInLootTables.UNDERWATER_RUIN_BIG)).build()));
+		add("add_loot_"+ Reference.LootTable.SHIPWRECK_CHEST_LOOT , loot(name(Reference.LootTable.SHIPWRECK_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY).or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_MAP)).build()));
+		add("add_loot_"+ Reference.LootTable.VILLAGE_CHEST_LOOT , loot(name(Reference.LootTable.VILLAGE_CHEST_LOOT),  LootTableIdCondition.builder(BuiltInLootTables.VILLAGE_BUTCHER).build()));
+		add("add_loot_"+ Reference.LootTable.BURIED_TREASURE_CHEST_LOOT , loot(name(Reference.LootTable.BURIED_TREASURE_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.BURIED_TREASURE).build()));
+		add("add_loot_"+ Reference.LootTable.WOODLAND_MANSION_CHEST_LOOT , loot(name(Reference.LootTable.WOODLAND_MANSION_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.WOODLAND_MANSION).build()));
+		add("add_loot_"+ Reference.LootTable.STRONGHOLD_CHEST_LOOT , loot(name(Reference.LootTable.STRONGHOLD_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.STRONGHOLD_CORRIDOR).or(LootTableIdCondition.builder(BuiltInLootTables.STRONGHOLD_CROSSING)).build()));
 		
 		add("grape_seeds_purple_from_grass", new AddItemModifier(new LootItemCondition[]{
 				LootItemRandomChanceCondition.randomChance(0.01f).build(),
@@ -80,18 +70,6 @@ public class GrowthcraftCoreGlobalLootModifiersProvider extends GlobalLootModifi
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.SNOW).build()}, 
 				GrowthcraftCellarItems.YEAST_LAGER.get().asItem()));
 		
-//		GC Milk
-		add("thistle_seeds_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
-				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
-				GrowthcraftMilkItems.THISTLE_SEED.get().asItem()));
-		
-//		GC Rice
-		add("rice_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
-				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
-				GrowthcraftRiceItems.RICE_STALK.get().asItem()));
-		
 	}
 	
 	private static LootModifier loot(ResourceLocation id, LootItemCondition... cond) {
@@ -99,6 +77,6 @@ public class GrowthcraftCoreGlobalLootModifiersProvider extends GlobalLootModifi
 	}
 	
 	private static ResourceLocation name(String lootTableName) {
-		return new ResourceLocation(growthcraft.cellar.shared.Reference.MODID, "chests/" + lootTableName);
+		return new ResourceLocation(Reference.MODID, "chests/" + lootTableName);
 	}
 }
