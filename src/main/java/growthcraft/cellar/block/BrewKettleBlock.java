@@ -9,14 +9,11 @@ import growthcraft.lib.utils.BlockStateUtils;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -50,9 +47,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
-
-import static net.minecraft.world.phys.shapes.BooleanOp.OR;
 
 public class BrewKettleBlock extends BaseEntityBlock {
 
@@ -101,32 +95,6 @@ public class BrewKettleBlock extends BaseEntityBlock {
         return properties;
     }
 
-    public static void makeParticles(Level level, BlockPos blockPos, BlockState blockState) {
-        try {
-            BrewKettleBlockEntity blockEntity = (BrewKettleBlockEntity) level.getBlockEntity(blockPos);
-
-            if (blockState.getValue(LIT) && blockEntity.getTickClock("current") > 0) {
-                RandomSource randomsource = level.getRandom();
-                SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
-
-                level.addAlwaysVisibleParticle(
-                        simpleparticletype,
-                        true,
-                        (double) blockPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        (double) blockPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(),
-                        (double) blockPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        0.0D,
-                        0.07D,
-                        0.0D
-                );
-
-                level.playSound(null, blockPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-        } catch (Exception e) {
-            GrowthcraftCellar.LOGGER.error(String.format("BrewKettleBlockEntity at %s threw an Exception (%s): %s", blockPos.toString(), e.getClass(), e.getMessage()));
-        }
-    }
-
     @Override
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
@@ -165,16 +133,10 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
         if (level.isClientSide) {
-            return blockState.getValue(LIT)
-                    ? createTickerHelper(blockEntityType,
-                    GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::particleTick)
-                    : null;
-        } else {
-            return createTickerHelper(
-                    blockEntityType,
-                    GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(),
-                    (worldLevel, pos, state, blockEntity) -> (blockEntity).tick()
-            );
+            return createTickerHelper(blockEntityType, GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::clientTick);
+        }
+        else  {
+            return createTickerHelper(blockEntityType, GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::serverTick);
         }
     }
 
@@ -226,11 +188,12 @@ public class BrewKettleBlock extends BaseEntityBlock {
                     fluidInteractionResult = FluidUtil.interactWithFluidHandler(player, interactionHand, level, blockPos, Direction.UP);
                 }
 
+                level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
                 // Return based on whether interaction with the fluid handler item was successful or not.
                 return fluidInteractionResult ? InteractionResult.SUCCESS : InteractionResult.FAIL;
             } else {
                 try {
-                    blockEntity.playSound("open");
+                    level.playSound(null, blockPos, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS);
                     NetworkHooks.openScreen(((ServerPlayer) player), blockEntity, blockPos);
                     return InteractionResult.SUCCESS;
                 } catch (Exception ex) {
@@ -254,6 +217,14 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @Override
     public boolean canSurvive(BlockState p_60525_, LevelReader p_60526_, BlockPos p_60527_) {
         return true;
+    }
+
+    @Override
+    public void neighborChanged(BlockState p_60509_, Level level, BlockPos blockPos, Block p_60512_, BlockPos p_60513_, boolean p_60514_)  {
+        super.neighborChanged(p_60509_, level, blockPos, p_60512_, p_60513_, p_60514_);
+        if (level.getBlockEntity(blockPos) instanceof BrewKettleBlockEntity kettle) {
+            kettle.verifyHeated();
+        }
     }
 
     /////////////// message when block is placed //////////////

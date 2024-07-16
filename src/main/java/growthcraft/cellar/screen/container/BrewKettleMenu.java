@@ -160,8 +160,7 @@ public class BrewKettleMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int buttonId) {
-        // we're on server, don't actually care for ContainerLevelAccess
-        BlockState state = this.level.getBlockState(this.blockEntity.getBlockPos());
+        BlockState state = this.level.getBlockState(this.blockEntity.getBlockPos());  // we're on server, don't actually care for ContainerLevelAccess
         this.level.setBlockAndUpdate(this.blockEntity.getBlockPos(), state.setValue(BrewKettleBlock.HAS_LID, !state.getValue(BrewKettleBlock.HAS_LID)));
         this.sendAllDataToRemote();
         return true;
