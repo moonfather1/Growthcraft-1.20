@@ -19,6 +19,9 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
+// this thing will turn the subdirectory "legacy_bamboo" into a built-in resource pack.
+// change the files in there to edit the resource pack, no need to change anything in this class.
+
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ResourcePackHandler
 {

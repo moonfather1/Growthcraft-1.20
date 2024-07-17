@@ -5,7 +5,7 @@ public class Reference {
 
     public static final String MODID = growthcraft.core.shared.Reference.MODID + "_" + NAME_SHORT;
 
-    public static final String VERSION = "2.0-clean-slate";
+    public static final String VERSION = "2.1-clean-slate";
 
     public static class UnlocalizedName {
         public static final String BAMBOO_PLANK = "bamboo_plank";

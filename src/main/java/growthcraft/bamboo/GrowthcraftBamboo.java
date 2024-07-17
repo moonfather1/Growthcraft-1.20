@@ -1,7 +1,6 @@
 package growthcraft.bamboo;
 
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
-import growthcraft.bamboo.init.config.GrowthcraftBambooConfig;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.core.init.GrowthcraftCreativeModeTabs;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -19,9 +18,6 @@ public class GrowthcraftBamboo {
     public GrowthcraftBamboo() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::buildCreativeTabContents);
-
-        // Config
-        GrowthcraftBambooConfig.loadConfig();
 
         // Blocks, Items, Fluids, Block Entities, Containers
         GrowthcraftBambooBlocks.init(modEventBus);
