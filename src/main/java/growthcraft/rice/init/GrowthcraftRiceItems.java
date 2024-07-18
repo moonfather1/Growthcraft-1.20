@@ -28,10 +28,15 @@ public class GrowthcraftRiceItems {
             Reference.UnlocalizedName.KNIFE,
             GrowthcraftItem::new
     );
-
-    public static final RegistryObject<RiceSeedItem> RICE = ITEMS.register(
-            Reference.UnlocalizedName.RICE,
+    
+    public static final RegistryObject<RiceSeedItem> RICE_GRAINS = ITEMS.register(
+            Reference.UnlocalizedName.RICE_GRAINS,
             RiceSeedItem::new
+    );
+
+    public static final RegistryObject<GrowthcraftItem> RICE = ITEMS.register(
+            Reference.UnlocalizedName.RICE,
+            GrowthcraftItem::new
     );
 
     public static final RegistryObject<GrowthcraftFoodItem> RICE_COOKED = ITEMS.register(
@@ -46,6 +51,16 @@ public class GrowthcraftRiceItems {
 
     public static final RegistryObject<GrowthcraftFoodItem> SUSHI_ROLL = ITEMS.register(
             Reference.UnlocalizedName.SUSHI_ROLL,
+            GrowthcraftFoodItem::new
+    );
+    
+    public static final RegistryObject<GrowthcraftFoodItem> ONIGIRI = ITEMS.register(
+            Reference.UnlocalizedName.ONIGIRI,
+            GrowthcraftFoodItem::new
+    );
+    
+    public static final RegistryObject<GrowthcraftFoodItem> CHICKEN_RICE = ITEMS.register(
+            Reference.UnlocalizedName.CHICKEN_RICE,
             GrowthcraftFoodItem::new
     );
 

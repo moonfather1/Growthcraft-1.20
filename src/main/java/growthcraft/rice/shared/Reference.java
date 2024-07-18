@@ -22,11 +22,17 @@ public class Reference {
         public static final String RICE_CROP = "rice_crop";
         public static final String RICE_STALK = "rice_stalk";
         public static final String SUSHI_ROLL = "sushi_roll";
+		public static final String RICE_GRAINS = "rice_grains";
+		public static final String ONIGIRI = "onigiri";
+		public static final String CHICKEN_RICE = "chicken_rice";
         // Fluids
         public static final String RICE_WATER = "rice_water";
         public static final String RICE_WINE = "rice_wine";
         public static final String SAKE = "sake";
         public static final String YEAST_SEISHU = "yeast_seishu";
+
+
+
 
         private UnlocalizedName() {
             /* Disable Automatic Creation of Public Constructor */

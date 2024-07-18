@@ -5,7 +5,6 @@ import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -36,14 +35,16 @@ public class RiceCropBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return GrowthcraftRiceItems.RICE.get();
+        return GrowthcraftRiceItems.RICE_GRAINS.get();
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if (state.getValue(AGE) == this.getMaxAge()) {
-            ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(GrowthcraftRiceItems.RICE_STALK.get()));
-            level.addFreshEntity(itemEntity);
+        	popResource(level, pos, new ItemStack(GrowthcraftRiceItems.RICE.get()));
+        	popResource(level, pos, new ItemStack(GrowthcraftRiceItems.RICE_STALK.get()));
+//            ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(GrowthcraftRiceItems.RICE.get()));
+//            level.addFreshEntity(itemEntity);
             level.setBlock(pos, this.getStateForAge(0), 2);
         }
         return InteractionResult.PASS;

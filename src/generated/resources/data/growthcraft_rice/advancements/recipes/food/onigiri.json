@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "growthcraft_rice:rice_stalk"
+              "growthcraft_rice:rice_cooked"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "growthcraft_rice:rice"
+        "recipe": "growthcraft_rice:onigiri"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "growthcraft_rice:rice"
+      "growthcraft_rice:onigiri"
     ]
   },
   "sends_telemetry_event": false
