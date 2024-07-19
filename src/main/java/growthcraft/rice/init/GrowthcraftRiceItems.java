@@ -46,7 +46,7 @@ public class GrowthcraftRiceItems {
 
     public static final RegistryObject<GrowthcraftItem> RICE_STALK = ITEMS.register(
             Reference.UnlocalizedName.RICE_STALK,
-            GrowthcraftItem::new
+            RiceSeedItem::new
     );
 
     public static final RegistryObject<GrowthcraftFoodItem> SUSHI_ROLL = ITEMS.register(

@@ -43,8 +43,6 @@ public class RiceCropBlock extends CropBlock {
         if (state.getValue(AGE) == this.getMaxAge()) {
         	popResource(level, pos, new ItemStack(GrowthcraftRiceItems.RICE.get()));
         	popResource(level, pos, new ItemStack(GrowthcraftRiceItems.RICE_STALK.get()));
-//            ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(GrowthcraftRiceItems.RICE.get()));
-//            level.addFreshEntity(itemEntity);
             level.setBlock(pos, this.getStateForAge(0), 2);
         }
         return InteractionResult.PASS;
