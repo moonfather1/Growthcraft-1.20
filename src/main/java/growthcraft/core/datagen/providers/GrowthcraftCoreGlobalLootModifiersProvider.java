@@ -90,7 +90,7 @@ public class GrowthcraftCoreGlobalLootModifiersProvider extends GlobalLootModifi
 		add("rice_from_grass", new AddItemModifier(new LootItemCondition[]{
 				LootItemRandomChanceCondition.randomChance(0.01f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
-				GrowthcraftRiceItems.RICE_STALK.get().asItem()));
+				GrowthcraftRiceItems.RICE_GRAINS.get().asItem()));
 		
 	}
 	
