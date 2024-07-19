@@ -120,7 +120,7 @@ public class GrowthcraftCoreItemTags extends ItemTagsProvider{
 		tag(GrowthcraftRiceTags.Items.TAG_CROPS_RICE)
 		.add(GrowthcraftRiceItems.RICE.get());
 		tag(GrowthcraftRiceTags.Items.TAG_GRAIN_RICE)
-		.add(GrowthcraftRiceItems.RICE_GRAINS.get());
+		.add(GrowthcraftRiceItems.RICE.get());
 		tag(GrowthcraftRiceTags.Items.TAG_SEEDS_RICE)
 		.add(GrowthcraftRiceItems.RICE_GRAINS.get());
 		tag(GrowthcraftTags.Items.TAG_KNIFE)
