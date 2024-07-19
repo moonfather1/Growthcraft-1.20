@@ -63,6 +63,10 @@ public class Reference {
 		public static final String TAG_GRAIN_RICE = "grain/rice";
 		public static final String DUSTS_SALT = "dusts/salt";
 		public static final String TAG_KNIVES = "tools/knives";
+		public static final String SPRING_CROPS = "spring_crops";
+		public static final String SUMMER_CROPS = "summer_crops";
+		public static final String AUTUMN_CROPS = "autumn_crops";
+		public static final String WINTER_CROPS = "winter_crops";
 
         private UnlocalizedName() { /* Disable default public constructor. */ }
 
