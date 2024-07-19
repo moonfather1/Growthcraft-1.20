@@ -67,11 +67,6 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftRiceItems.RICE.get()).build()))
 		.save(consumer);
 		
-//		SingleItemRecipeBuilder.stonecutting(Ingredient.of(GrowthcraftRiceItems.RICE_STALK.get()), RecipeCategory.FOOD, GrowthcraftRiceItems.RICE.get())
-//		.group(Reference.MODID)
-//		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_STALK.get()))
-//		.save(consumer);
-		
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.SUSHI_ROLL.get(), 12)
 		.pattern(" F ")
 		.pattern("RRR")
@@ -100,6 +95,13 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.define('K', Items.DRIED_KELP)
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftRiceItems.RICE_COOKED.get()))
+		.save(consumer);
+		
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Blocks.PACKED_MUD)
+		.requires(GrowthcraftRiceItems.RICE_STALK.get())
+		.requires(Blocks.MUD)
+		.group(Reference.MODID)
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftRiceItems.RICE_STALK.get()).build()))
 		.save(consumer);
 
 		//Mekanism Bio Fule recipe, may not be needed in 1.21
