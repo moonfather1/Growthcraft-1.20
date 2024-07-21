@@ -45,7 +45,6 @@ public class GrowthcraftApiaryBlockEntities {
         list.add(GrowthcraftApiaryBlocks.BEE_BOX_SPRUCE.get());
         list.add(GrowthcraftApiaryBlocks.BEE_BOX_WARPED.get());
         list.add(GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO.get());
-        list.add(GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO_OLD.get());
         for (var b : blocksForBeeBoxBE) { list.add(b.get()); }
         return list.toArray(new Block[0]);
     }
