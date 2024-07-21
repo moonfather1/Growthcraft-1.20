@@ -194,15 +194,19 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements BlockE
         for (FermentationBarrelRecipe recipe : recipes) {
             if (recipe.matchesInput(this.getFluidStackInTank(0))) {
                 if (recipe.matches(this.itemStackHandler.getStackInSlot(0), this.getFluidStackInTank(0))) {
-                    return recipe;
+                    this.yeastWarning = this.yeastError = false;
+                    return recipe; // found it.
                 } else if (this.itemStackHandler.getStackInSlot(0).isEmpty()) {
-                    return null;
+                    this.yeastWarning = this.yeastError = false;
+                    return null;  // nothing in yeast slot. not an error.
                 } else if (recipe.matches(this.itemStackHandler.getStackInSlot(0).copyWithCount(64), this.getFluidStackInTank(0))) {
                     this.yeastWarning = true;
-                    return null;
+                    this.yeastError = false;
+                    continue; // not returning in order to allow multiple recipes with the same fluid.
                 } else {
                     this.yeastError = true;
-                    return null;
+                    this.yeastWarning = false;
+                    continue; // not returning in order to allow multiple recipes with the same fluid.
                 }
             }
         }

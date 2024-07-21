@@ -19,7 +19,6 @@ public class Reference {
         public static final String AMBER_LAGER = "amber_lager";
         public static final String AMBER_WORT = "amber_wort";
         public static final String BREW_KETTLE = "brew_kettle";
-        public static final String BREW_KETTLE_LID = "brew_kettle_lid";
         public static final String BREW_KETTLE_RECIPE = "brew_kettle_recipe";
         public static final String BROWN_ALE = "brown_ale";
         public static final String BROWN_LAGER = "brown_lager";

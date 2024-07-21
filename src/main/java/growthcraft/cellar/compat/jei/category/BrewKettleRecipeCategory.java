@@ -22,6 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -32,10 +33,13 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
 
     private static final ResourceLocation TEXTURE = TextureHelper.getTextureGui(Reference.MODID, Reference.UnlocalizedName.BREW_KETTLE);
 
+    private static final Component INFO_NO_LID = Component.translatable("message.growthcraft_cellar.kettle.jei_info_no_lid").withStyle(Style.EMPTY.withColor(0xff787070));
+    private static final Component INFO_NEED_LID = Component.translatable("message.growthcraft_cellar.kettle.jei_info_need_lid").withStyle(Style.EMPTY.withColor(0xff787070));
+
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableStatic overlayHeated;
-    private final IDrawableStatic overlayTank;
+    private final IDrawableStatic iconInfo, timeInfo;
 
     public BrewKettleRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(
@@ -47,13 +51,18 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
                 new ItemStack(GrowthcraftCellarBlocks.BREW_KETTLE.get())
         );
 
-        // Tank gauge overlay
-        overlayTank = guiHelper.createDrawable(
-                TEXTURE, 176, 64, 12, 13
+        // info icon
+        this.iconInfo = guiHelper.createDrawable(
+                TEXTURE, 66, 184, 11, 11
+        );
+
+        // hourglass icon
+        this.timeInfo = guiHelper.createDrawable(
+                TEXTURE, 54, 184, 11, 11
         );
 
         // Heated Overlay
-        overlayHeated = guiHelper.createDrawable(
+        this.overlayHeated = guiHelper.createDrawable(
                 TEXTURE, 176, 28, 12, 13
         );
     }
@@ -80,12 +89,6 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, BrewKettleRecipe recipe, IFocusGroup focuses) {
-        // Optional Lid Item
-        if(recipe.isLidRequired()) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 9, 7)
-                    .addItemStack(new ItemStack(GrowthcraftCellarItems.BREW_KETTLE_LID.get()));
-        }
-
         // Input Item with Tag Support
         for (Ingredient ingredient : recipe.getIngredients()) {
             builder.addSlot(RecipeIngredientRole.INPUT, 70, 25)
@@ -126,7 +129,11 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
         Font font = Minecraft.getInstance().font;
         guiGraphics.drawString(font, String.format("(%d%%)", recipe.getByProductChance()), 131, 26,0x404040, false );
 
-        guiGraphics.drawString(font, TickUtils.toHoursMinutesSeconds(recipe.getProcessingTime()), 59, 60,0x404040, false );
+        timeInfo.draw(guiGraphics, 2, 27);
+        guiGraphics.drawString(font, TickUtils.toHoursMinutesSeconds(recipe.getProcessingTime()), 5, 40,0x404040, false );
+        iconInfo.draw(guiGraphics, 1, 50);
+        Component steamingOrBoiling = recipe.isLidRequired() ? INFO_NEED_LID : INFO_NO_LID;
+        guiGraphics.drawString(font, steamingOrBoiling, 5, 62,0x606068, false );
     }
 
 }
