@@ -40,16 +40,7 @@ public class GrapeVineCropBlock extends GrowthcraftCropsRopeBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        VoxelShape ropeVoxel = super.getShape(state, blockGetter, pos, context);
-
-        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
-        voxelShapeArrayList.add(CUSTOM_SHAPE_BY_AGE[state.getValue(AGE)]);
-        voxelShapeArrayList.add(ropeVoxel);
-
-        VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
-        voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
-
-        return Shapes.or(KNOT_BOUNDING_BOX, voxelShapes);
+        return CUSTOM_SHAPE_BY_AGE[state.getValue(AGE)]; // good enough. we could include the rope in earlier stages but that doesn't matter too much and this does affect game speed a little.
     }
 
     @Override
