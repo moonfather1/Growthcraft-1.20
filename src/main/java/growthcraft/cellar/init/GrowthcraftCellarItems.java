@@ -25,10 +25,6 @@ public class GrowthcraftCellarItems {
             Reference.UnlocalizedName.KINDLING, GrowthcraftItem::new
     );
 
-    public static final RegistryObject<GrowthcraftItem> BREW_KETTLE_LID = ITEMS.register(
-            Reference.UnlocalizedName.BREW_KETTLE_LID, GrowthcraftItem::new
-    );
-
     public static final RegistryObject<GrowthcraftItem> GRAIN = ITEMS.register(
             Reference.UnlocalizedName.GRAIN, () -> new GrowthcraftItem(64, Reference.GrainColor.GRAIN.getColor())
     );

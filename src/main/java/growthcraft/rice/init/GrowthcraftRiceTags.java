@@ -47,6 +47,7 @@ public class GrowthcraftRiceTags {
         
         public static final TagKey<Item> TAG_CROPS_RICE = forgeTag(Reference.UnlocalizedName.TAG_CROPS_RICE);
         public static final TagKey<Item> TAG_GRAIN_RICE = forgeTag(Reference.UnlocalizedName.TAG_GRAIN_RICE);
+		public static final TagKey<Item> TAG_SEEDS_RICE = forgeTag(Reference.UnlocalizedName.TAG_SEEDS_RICE);;
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Reference.MODID, name));

@@ -2,7 +2,6 @@ package growthcraft.cellar.block.entity;
 
 import growthcraft.cellar.block.BrewKettleBlock;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
-import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.lib.networking.GrowthcraftCellarMessages;
 import growthcraft.cellar.lib.networking.packet.BrewKettleFluidTankPacket;
 import growthcraft.cellar.recipe.BrewKettleRecipe;
@@ -13,6 +12,8 @@ import growthcraft.lib.utils.DirectionUtils;
 import growthcraft.lib.utils.RandomGeneratorUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -59,8 +60,11 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
     private int tickMax = -1;
 
     protected final ContainerData data;
-
     private Component customName;
+
+    public static final int SLOT_BYPRODUCT = 2;
+    public static final int SLOT_INPUT = 1;
+    public static final int SLOT_LID = 0;
 
     private final ItemStackHandler itemStackHandler = new ItemStackHandler(3) {
         @Override
@@ -71,8 +75,8 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case 0 -> stack.getItem() == GrowthcraftCellarItems.BREW_KETTLE_LID.get();
-                case 2 -> false;
+                case SLOT_LID -> false; // was lid; will possibly turn into seasoning in the future.
+                case SLOT_BYPRODUCT -> false;
                 default -> true;
             };
         }
@@ -84,7 +88,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         @Override
         public void onContentsChanged() {
             setChanged();
-            if (!level.isClientSide) {
+            if (level != null && !level.isClientSide) {
                 GrowthcraftCellarMessages.sendToClients(new BrewKettleFluidTankPacket(0, this.getFluid(), worldPosition));
             }
         }
@@ -96,7 +100,7 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         @Override
         public void onContentsChanged() {
             setChanged();
-            if (!level.isClientSide) {
+            if (level != null && !level.isClientSide) {
                 GrowthcraftCellarMessages.sendToClients(new BrewKettleFluidTankPacket(1, this.fluid, worldPosition));
             }
         }
@@ -154,109 +158,106 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
                 : Component.translatable("container.growthcraft_cellar.brew_kettle");
     }
 
-    public void tick() {
-        if (this.getLevel() != null) {
-            this.tick(this.getLevel(), this.getBlockPos(), this.getBlockState(), this);
-        }
-    }
+    private int lastInputTankAmount = 0, lastInputSlotAmount = 0; // to know if the contents have changed
 
     @Override
     public void tick(Level level, BlockPos blockPos, BlockState blockState, BrewKettleBlockEntity blockEntity) {
-        if(!level.isClientSide) {
-            
-            if(!this.itemStackHandler.getStackInSlot(1).isEmpty() 
-                && !this.FLUID_TANK_0.isEmpty()) {
-                List<BrewKettleRecipe> recipes = this.getMatchingRecipes();
-                BrewKettleRecipe recipe = recipes.isEmpty() ? null : recipes.get(0);
-
-                if (recipe != null && this.getFluidTank(1).canFluidStackFit(recipe.getOutputFluidStack())) {
-                    if(this.tickClock <= this.tickMax) {
-                        this.tickClock++;
-                    } else if(this.tickMax > 0) {
-                        // Process recipe results.
-                        this.itemStackHandler.getStackInSlot(1).shrink(
-                                recipe.getInputItemStack().getCount()
-                        );
-
-                        this.getFluidTank(0).drain(
-                                recipe.getInputFluidStack().getAmount(),
-                                IFluidHandler.FluidAction.EXECUTE
-                        );
-
-                        this.getFluidTank(1).fill(
-                                recipe.getOutputFluidStack().copy(),
-                                IFluidHandler.FluidAction.EXECUTE
-                        );
-
-                        // Setting the by_product_chance to 0 in the recipe file should prevent it from being checked.
-                        if (recipe.getByProductChance() != 0 && RandomGeneratorUtils.getRandomInt() <= recipe.getByProductChance()) {
-                            ItemStack byProductItemStack = recipe.getByProduct();
-                            ItemStack existingByProductInSlot = this.itemStackHandler.getStackInSlot(2);
-                            if (existingByProductInSlot.isEmpty() || existingByProductInSlot.getItem() == byProductItemStack.getItem()) {
-                                byProductItemStack.setCount(byProductItemStack.getCount() + existingByProductInSlot.getCount());
-                                // Using insertStack does a check against isValiditem which is false by default for output only slots.
-                                this.itemStackHandler.setStackInSlot(2, byProductItemStack);
-                            }
-                        }
-
-                        this.resetTickClock();
-                    } else if (this.tickMax == -1) {
-                        this.tickMax = recipe.getProcessingTime();
-                    } else {
-                        this.resetTickClock();
-                    }
-
-                    level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
-                } else {
-                    this.resetTickClock();
+        if (level.isClientSide) { return; } // nesting got annoying.
+        // first to see if anything has changed inside the kettle
+        if (this.itemStackHandler.getStackInSlot(SLOT_INPUT).getCount() == this.lastInputSlotAmount && this.FLUID_TANK_0.getFluidAmount() == this.lastInputTankAmount) {
+            // no change in input ingredients since the last tick
+            if (this.itemStackHandler.getStackInSlot(SLOT_INPUT).isEmpty() || this.FLUID_TANK_0.isEmpty() || this.isOutputTankFull()) { return; }  // it would be more readable to keep this on top but i'd have to repeat the part from the bottom.
+            // now, real work...
+            if (this.tickClock <= this.tickMax) {
+                // mid-proc tick
+                this.tickClock++;
+                if (level.getLevelData().getGameTime() % 20 == 11) {
+                    level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
                 }
-            } else {
+            } // mid-proc tick
+            else if (this.tickMax > 0) {
+                // post-proc tick
+                BrewKettleRecipe recipe = this.getFirstMatchingRecipe(); // won't check null, shouldn't happen
+                this.itemStackHandler.getStackInSlot(SLOT_INPUT).shrink(
+                        recipe.getInputItemStack().getCount()
+                );
+                this.getFluidTank(0).drain(
+                        recipe.getInputFluidStack().getAmount(),
+                        IFluidHandler.FluidAction.EXECUTE
+                );
+                this.getFluidTank(1).fill(
+                        recipe.getOutputFluidStack().copy(),
+                        IFluidHandler.FluidAction.EXECUTE
+                );
+                if (recipe.getByProductChance() != 0 && RandomGeneratorUtils.getRandomInt() <= recipe.getByProductChance()) { // Setting the by_product_chance to 0 in the recipe file should prevent it from being checked.
+                    ItemStack byProductItemStack = recipe.getByProduct();
+                    ItemStack existingByProductInSlot = this.itemStackHandler.getStackInSlot(SLOT_BYPRODUCT);
+                    if (existingByProductInSlot.isEmpty() || existingByProductInSlot.getItem() == byProductItemStack.getItem()) {
+                        int count = Math.min(byProductItemStack.getCount() + existingByProductInSlot.getCount(), byProductItemStack.getMaxStackSize());
+                        byProductItemStack.setCount(count); // voiding excess
+                        // Using insertStack does a check against isValiditem which is false by default for output only slots.
+                        this.itemStackHandler.setStackInSlot(SLOT_BYPRODUCT, byProductItemStack);
+                    }
+                }
                 this.resetTickClock();
-            }
-        } else {
-            // Do nothing on the client side.
-        }
-
-        level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
-
+                level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
+            } // post-proc tick
+            else if (this.tickMax == -1) {
+                // awaiting recipe
+                if (level.getLevelData().getGameTime() % 10 == 5) {
+                    this.verifyHeated();
+                    BrewKettleRecipe recipe = this.getFirstMatchingRecipe();
+                    if (recipe != null && this.getFluidTank(1).canFluidStackFit(recipe.getOutputFluidStack())) {
+                        this.tickMax = recipe.getProcessingTime();
+                    }
+                }
+            } // awaiting recipe
+        } // no change in input ingredients since the last tick
+        else {
+            // input changed
+            this.resetTickClock();
+            this.lastInputSlotAmount = this.itemStackHandler.getStackInSlot(SLOT_INPUT).getCount();
+            this.lastInputTankAmount = this.FLUID_TANK_0.getFluidAmount();
+            level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_CLIENTS);
+        } // input changed
     }
 
-    private List<BrewKettleRecipe> getMatchingRecipes() {
-        List<BrewKettleRecipe> matchingRecipes = new ArrayList<>();
-
-        List<BrewKettleRecipe> recipes = level.getRecipeManager()
-                .getAllRecipesFor(BrewKettleRecipe.Type.INSTANCE);
+    private BrewKettleRecipe getFirstMatchingRecipe() {
+        List<BrewKettleRecipe> recipes = level.getRecipeManager().getAllRecipesFor(BrewKettleRecipe.Type.INSTANCE);
 
         for (BrewKettleRecipe recipe : recipes) {
             if (recipe.matches(
-                    this.itemStackHandler.getStackInSlot(1),
+                    this.itemStackHandler.getStackInSlot(SLOT_INPUT),
                     this.FLUID_TANK_0.getFluid(),
                     this.hasLid(),
-                    BlockStateUtils.isHeatedFromBelow(this.getLevel(), this.getBlockPos())
+                    this.isHeated()
             )) {
-                if(!this.FLUID_TANK_1.getFluid().isEmpty()) {
-                    if(this.FLUID_TANK_1.getFluid().getRawFluid() == recipe.getOutputFluidStack().getFluid()) {
-                        matchingRecipes.add(recipe);
+                if (!this.FLUID_TANK_1.getFluid().isEmpty()) {
+                    if (this.FLUID_TANK_1.getFluid().getRawFluid() == recipe.getOutputFluidStack().getFluid()) {
+                        return recipe;
                     }
                 } else {
-                    matchingRecipes.add(recipe);
+                    return recipe;
                 }
             }
         }
-        return matchingRecipes;
+        return null;
     }
 
     public boolean hasLid() {
-        return this.itemStackHandler.getStackInSlot(0).getItem() == GrowthcraftCellarItems.BREW_KETTLE_LID.get();
+        return this.getBlockState().getValue(BrewKettleBlock.HAS_LID);
     }
 
     public boolean isHeated() {
+        return this.getBlockState().getValue(LIT);
+    }
+
+    public void verifyHeated() {
         boolean heated = BlockStateUtils.isHeatedFromBelow(this.level, this.getBlockPos());
         // Only change the blockstate if it is different.
-        if (this.getBlockState().getValue(LIT).booleanValue() != heated) {
+        if (this.getBlockState().getValue(LIT) != heated) {
             this.level.setBlock(this.getBlockPos(), this.getBlockState().setValue(LIT, heated), Block.UPDATE_ALL);
         }
-        return heated;
     }
 
     private void resetTickClock() {
@@ -288,10 +289,6 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
             case 1 -> this.FLUID_TANK_1;
             default -> null;
         };
-    }
-
-    public boolean isFluidEmpty() {
-        return getFluidStackInTank(0).isEmpty();
     }
 
     public int getTickClock(String type) {
@@ -376,13 +373,12 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
 
-        if(cap == ForgeCapabilities.FLUID_HANDLER) {
-            if(DirectionUtils.isSide(side)) {
+        if (cap == ForgeCapabilities.FLUID_HANDLER) {
+            if (DirectionUtils.isSide(side)) {
                 return this.fluidHandler1.cast();
 
-            } else if(DirectionUtils.isTop(side)) {
+            } else if (DirectionUtils.isTop(side)) {
                 return this.fluidHandler0.cast();
-
             }
         } else if (cap == ForgeCapabilities.ITEM_HANDLER) {
             return this.inventoryItemHandler.cast();
@@ -404,11 +400,29 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
     }
 
-    public static <E extends BlockEntity> void particleTick(Level level, BlockPos blockPos, BlockState blockState, BrewKettleBlockEntity blockEntity) {
+    public static void serverTick(Level level, BlockPos pos, BlockState blockState, BrewKettleBlockEntity blockEntity)    {
+        blockEntity.tick(level, pos, blockState, blockEntity);
+    }
+
+    public static void clientTick(Level level, BlockPos blockPos, BlockState blockState, BrewKettleBlockEntity blockEntity) {
         RandomSource randomsource = level.random;
         if (randomsource.nextFloat() < 0.11F) {
-            for (int i = 0; i < randomsource.nextInt(2) + 2; ++i) {
-                BrewKettleBlock.makeParticles(level, blockPos, blockState);
+            if (blockEntity.isProcessing() && !blockEntity.hasLid()) {
+                SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
+                int count = randomsource.nextInt(2) + 2;
+                for (int i = 0; i < count; ++i) {
+                    level.addAlwaysVisibleParticle(
+                            simpleparticletype,
+                            true,
+                            (double) blockPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
+                            (double) blockPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(),
+                            (double) blockPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
+                            0.0D,
+                            0.07D,
+                            0.0D
+                    );
+                }
+                level.playSound(null, blockPos, SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
         }
     }
@@ -427,10 +441,12 @@ public class BrewKettleBlockEntity extends BlockEntity implements BlockEntityTic
         return Math.round(percentage);
     }
 
-    public void playSound(String sound) {
-        if(Objects.equals(sound, "open") && this.level != null) {
-            this.level.playSound(null, this.getBlockPos(), SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS);
+    @Override
+    public void setBlockState(BlockState newState) {
+        if (newState.getValue(BrewKettleBlock.HAS_LID) != this.getBlockState().getValue(BrewKettleBlock.HAS_LID)
+                || newState.getValue(BrewKettleBlock.LIT) != this.getBlockState().getValue(BrewKettleBlock.LIT)) {
+            this.resetTickClock();
         }
+        super.setBlockState(newState);
     }
-
 }

@@ -66,11 +66,6 @@ public class GrowthcraftApiaryRecipes extends RecipeProvider{
 						   .group(growthcraft.bamboo.shared.Reference.MODID)
 						   .unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
 						   .save(consumer);
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO_OLD.get())
-						   .requires(GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO.get())
-						   .group(growthcraft.bamboo.shared.Reference.MODID)
-						   .unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.BAMBOO_PLANKS))
-						   .save(consumer);
 
 		// Bees Wax
 		GrowthcraftApiaryItems.ITEMS.getEntries().forEach(item -> {

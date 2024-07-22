@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_rice",
+  "key": {
+    "K": {
+      "item": "minecraft:dried_kelp"
+    },
+    "R": {
+      "item": "growthcraft_rice:rice_cooked"
+    },
+    "S": {
+      "tag": "growthcraft:salt"
+    }
+  },
+  "pattern": [
+    " R ",
+    "RSR",
+    "RKR"
+  ],
+  "result": {
+    "count": 2,
+    "item": "growthcraft_rice:onigiri"
+  },
+  "show_notification": true
+}

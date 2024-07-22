@@ -36,15 +36,6 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAULDRON))
 		.save(consumer);
 		
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.BREW_KETTLE_LID.get())
-		.pattern(" i ")
-		.pattern("III")
-		.define('I', Tags.Items.INGOTS_IRON)
-		.define('i', Tags.Items.NUGGETS_IRON)
-		.group(Reference.MODID)
-		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
-		.save(consumer);
-		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.CULTURE_JAR.get())
 		.pattern("BAB")
 		.pattern("B B")

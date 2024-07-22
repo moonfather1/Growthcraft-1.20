@@ -49,11 +49,12 @@ import static net.minecraft.world.phys.shapes.BooleanOp.OR;
 public class FruitPressBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    private final VoxelShape[] VOXEL_SHAPES = new VoxelShape[]{
+    private final VoxelShape[] SHAPES_LIST = new VoxelShape[]{
             Block.box(1, 0, 1, 15, 3, 15),
             Block.box(0, 3, 0, 16, 7, 16),
             Block.box(1, 7, 1, 15, 16, 15)
     };
+    private final VoxelShape CALCULATED_SHAPE = Shapes.or(Shapes.empty(), SHAPES_LIST);
 
     public FruitPressBlock() {
         super(getInitProperties());
@@ -79,7 +80,7 @@ public class FruitPressBlock extends BaseEntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
-        return Arrays.stream(VOXEL_SHAPES).reduce((v1, v2) -> Shapes.join(v1, v2, OR)).get();
+        return CALCULATED_SHAPE;
     }
 
     @Override

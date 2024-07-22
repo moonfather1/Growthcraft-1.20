@@ -89,6 +89,8 @@ dependencies {
     // Compile time mods for integration
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
+    compileOnly fg.deobf("curse.maven:mekanism-${curseforge_mekanism}")
+    compileOnly fg.deobf("curse.maven:immersive-engineering-${curseforge_immersive_engineering}")
 
     // Runtime mods for testing
     runtimeOnly fg.deobf("curse.maven:theoneprobe-${curseforge_theoneprobe}")

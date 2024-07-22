@@ -27,16 +27,16 @@ public class BrewKettleBlockEntityRenderer implements BlockEntityRenderer<BrewKe
 
     @Override
     public boolean shouldRenderOffScreen(BrewKettleBlockEntity blockEntity) {
-        return true;
+        return false;
     }
 
     @Override
     public void render(BrewKettleBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, int overlay) {
 
-        float baseOffset = 4.0F / 16F;
-        float maxFluidHeight = 15.0F / 16F;
+        float baseOffset = 2.5F / 16F;
+        float maxFluidHeight = 13.5F / 16F;
 
-        if(!blockEntity.getFluidStackInTank(0).isEmpty()) {
+        if (!blockEntity.getFluidStackInTank(0).isEmpty()) {
 
             FluidStack inputFluidStack = blockEntity.getFluidStackInTank(0);
 
@@ -47,7 +47,7 @@ public class BrewKettleBlockEntityRenderer implements BlockEntityRenderer<BrewKe
             renderFluidSingle(poseStack, multiBufferSource, inputFluidStack, 0.0F, inputFluidHeight, 0.0F, Axis.XP.rotationDegrees(90.0F), light, overlay);
         }
 
-        if(!blockEntity.getFluidStackInTank(1).isEmpty()) {
+        if (!blockEntity.getFluidStackInTank(1).isEmpty()) {
             FluidStack outputFluidStack = blockEntity.getFluidStackInTank(1);
 
             float outputCapacity = blockEntity.getFluidTank(1).getCapacity();
