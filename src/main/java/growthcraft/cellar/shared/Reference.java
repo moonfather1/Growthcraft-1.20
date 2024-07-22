@@ -169,6 +169,21 @@ public class Reference {
             /* Disable Automatic Creation of Public Constructor */
         }
     }
+    
+    public static class LootTable{
+    	public static final String PILLAGER_OUTPOST_CHEST_LOOT = "pillager_outpost";
+		public static final String UNDERWATER_RUIN_LOOT = "underwater_ruin";
+		public static final String SHIPWRECK_CHEST_LOOT = "shipwreck";
+		public static final String VILLAGE_CHEST_LOOT = "village";
+		public static final String BURIED_TREASURE_CHEST_LOOT = "buried_treasure";
+		public static final String WOODLAND_MANSION_CHEST_LOOT = "woodland_mansion";
+		public static final String STRONGHOLD_CHEST_LOOT = "stronghold";
+    	
+    	
+    	private LootTable() {
+            /* Disable Automatic Creation of Public Constructor */
+    	}
+    }
 
     private Reference() {
         /* Disable Automatic Creation of Public Constructor */

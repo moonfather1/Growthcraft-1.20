@@ -1,5 +1,6 @@
 package growthcraft.apiary.datagen;
 
+import growthcraft.apiary.datagen.providers.GrowthcraftApiaryGlobalLootModifiersProvider;
 import growthcraft.apiary.datagen.providers.GrowthcraftApiaryLootTableProvider;
 import growthcraft.apiary.datagen.providers.GrowthcraftApiaryRecipes;
 import growthcraft.apiary.shared.Reference;
@@ -12,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GrowthcraftApiaryDataGenerators {
 
+
     private GrowthcraftApiaryDataGenerators() {
         /* Prevent generation of public constructor */
     }
@@ -21,7 +23,9 @@ public class GrowthcraftApiaryDataGenerators {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
 
-        generator.addProvider(event.includeServer(), new GrowthcraftApiaryRecipes(packOutput));
-        generator.addProvider(event.includeServer(), new GrowthcraftApiaryLootTableProvider(packOutput));
-    }
+		generator.addProvider(event.includeServer(), new GrowthcraftApiaryRecipes(packOutput));
+		generator.addProvider(event.includeServer(), new GrowthcraftApiaryLootTableProvider(packOutput));
+//		generator.addProvider(event.includeServer(), new GrowthcraftApiaryGlobalLootModifiersProvider(packOutput));
+	}
+
 }

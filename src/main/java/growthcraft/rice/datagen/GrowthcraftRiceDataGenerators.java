@@ -1,5 +1,6 @@
 package growthcraft.rice.datagen;
 
+import growthcraft.rice.datagen.providers.GrowthcraftRiceGlobalLootModifiersProvider;
 import growthcraft.rice.datagen.providers.GrowthcraftRiceRecipes;
 import growthcraft.rice.shared.Reference;
 import net.minecraft.data.DataGenerator;
@@ -21,5 +22,6 @@ public class GrowthcraftRiceDataGenerators {
 		PackOutput packOutput = generator.getPackOutput();
 		
 		generator.addProvider(event.includeServer(), new GrowthcraftRiceRecipes(packOutput));
+//		generator.addProvider(event.includeServer(), new GrowthcraftRiceGlobalLootModifiersProvider(packOutput));
 	}
 }

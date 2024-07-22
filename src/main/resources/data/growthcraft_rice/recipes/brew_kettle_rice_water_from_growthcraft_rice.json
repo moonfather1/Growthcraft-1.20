@@ -9,7 +9,7 @@
     "amount": 125
   },
   "input_item": {
-    "tag": "forge:grain/rice",
+    "tag": "forge:crops/rice",
     "count": 1
   },
   "output_fluid": {
