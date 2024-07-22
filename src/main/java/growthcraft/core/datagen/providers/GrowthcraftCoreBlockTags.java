@@ -11,6 +11,8 @@ import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.apples.init.GrowthcraftApplesTags;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.init.GrowthcraftCellarTags;
 import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftTags;
 import growthcraft.core.shared.Reference;
@@ -154,7 +156,28 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 		tag(Tags.Blocks.ORES_IN_GROUND_STONE)
 		.add(GrowthcraftBlocks.SALT_ORE.get());
 		
-	
+		//SereneSeasons Tags
+		tag(GrowthcraftTags.Blocks.SPRING_CROPS)
+		.add(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE.get())
+		.add(GrowthcraftCellarBlocks.RED_GRAPE_VINE.get())
+		.add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE.get())
+		.add(GrowthcraftCellarBlocks.HOPS_VINE.get())
+		.add(GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get());
+		
+		tag(GrowthcraftTags.Blocks.SUMMER_CROPS)
+		.add(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE.get())
+		.add(GrowthcraftCellarBlocks.RED_GRAPE_VINE.get())
+		.add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE.get())
+		.add(GrowthcraftCellarBlocks.HOPS_VINE.get())
+		.add(GrowthcraftMilkBlocks.THISTLE_CROP.get())
+		.add(GrowthcraftRiceBlocks.RICE_CROP.get())
+		.add(GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get());
+		
+		tag(GrowthcraftTags.Blocks.AUTUMN_CROPS)
+		.add(GrowthcraftMilkBlocks.THISTLE_CROP.get())
+		.add(GrowthcraftRiceBlocks.RICE_CROP.get());
+		
+		tag(GrowthcraftTags.Blocks.WINTER_CROPS);
 	}
 
     @Override
