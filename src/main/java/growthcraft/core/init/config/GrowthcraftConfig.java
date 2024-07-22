@@ -61,6 +61,7 @@ public class GrowthcraftConfig {
                 .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenSpreadAmount"), 10, 1, 20);
     }
 
+    // TODO: Implement usage to allow server admins to prevent the salt generation.
     public static boolean isSaltOreGenEnabled() {
         return saltOreGenEnabled.get();
     }

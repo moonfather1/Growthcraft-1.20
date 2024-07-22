@@ -18,6 +18,8 @@ public class GrowthcraftMilkConfig {
     private static final String CATEGORY_MIXING_VAT = "mixing_vat";
     private static final String CATEGORY_PANCHEON = "pancheon";
     private static final String CATEGORY_LOOT_CHANCES = "loot_modifiers";
+    private static final String CATEGORY_WORLDGEN = "worldgen";
+    private static final String CATEGORY_CHEESE = "cheese";
 
     private static ForgeConfigSpec.BooleanValue churnGuiEnabled;
     private static ForgeConfigSpec.BooleanValue mixingVatGuiEnabled;
@@ -27,6 +29,11 @@ public class GrowthcraftMilkConfig {
     private static ForgeConfigSpec.BooleanValue pancheonGuiEnabled;
     private static ForgeConfigSpec.BooleanValue stomachLootEnabled;
     private static ForgeConfigSpec.IntValue stomachLootChance;
+
+    private static ForgeConfigSpec.BooleanValue villageStructuresEnabled;
+    private static ForgeConfigSpec.IntValue villageStructuresWeight;
+
+    private static ForgeConfigSpec.BooleanValue cheeseDebugEnabled;
 
     static {
         initServerConfig(SERVER_BUILDER);
@@ -73,29 +80,105 @@ public class GrowthcraftMilkConfig {
         stomachLootChance = specBuilder
                 .comment("Chance to loot a stomach from a cow. stomachLootEnabled must be set to true.")
                 .defineInRange(String.format("%s.%s", CATEGORY_LOOT_CHANCES, "stomachLootChance"), 5, 0, 100);
+
+        villageStructuresEnabled = specBuilder
+                .comment("Enable generation of Growthcraft Milk village structures.")
+                .define(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresEnabled"), false);
+        villageStructuresWeight = specBuilder
+                .comment("The weight of the villager structures.")
+                .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresWeight"), 1, 0, 16000);
+
+        cheeseDebugEnabled = specBuilder
+                .comment("Set to true to add additional logging to debug the cheese wheel and curds blocks.")
+                .define(String.format("%s.%s", CATEGORY_CHEESE, "debugEnabled"), false);
+
     }
 
+    /**
+     * Checks if the Churn GUI is enabled.
+     * TODO: This is intended to be able to implement a hard mode. Will require non-GUI
+     *       block interaction to be implemented.
+     *
+     * @return true if the Churn GUI is enabled, false otherwise.
+     */
     public static boolean isChurnGuiEnabled() {
         return churnGuiEnabled.get();
     }
 
+    /**
+     * Checks if the Pancheon GUI is enabled.
+     * TODO: This is intended to be able to implement a hard mode. Will require non-GUI
+     *       block interaction to be implemented.
+     *
+     * @return true if the Pancheon GUI is enabled, false otherwise.
+     */
     public static boolean isPancheonGuiEnabled() {
         return pancheonGuiEnabled.get();
     }
 
+    /**
+     * Checks if the Mixing Vat GUI is enabled.
+     * TODO: This is intended to be able to implement a hard mode. Will require non-GUI
+     *       block interaction to be implemented.
+     *
+     * @return true if the Mixing Vat GUI is enabled, false otherwise.
+     */
     public static boolean isMixingVatGuiEnabled() {
         return mixingVatGuiEnabled.get();
     }
+
+    /**
+     * Checks if the debugging mode for the Mixing Vat is enabled.
+     *
+     * @return true if the debugging mode is enabled, false otherwise.
+     */
     public static boolean isMixingDebugEnabled() {
         return mixingVatDebugEnabled.get();
     }
 
-
+    /**
+     * Checks if the consume mixing vat activator feature is enabled.
+     *
+     * @return true if the consume mixing vat activator is enabled, false otherwise.
+     */
     public static boolean isConsumeMixingVatActivator() {
         return mixingVatConsumeActivationItem.get();
     }
 
-    public static boolean isStomachLootingEnabled() { return stomachLootEnabled.get(); }
+    /**
+     * Checks if looting of stomach from cows is enabled. If disabled, then rennet is only
+     * made from thistle.
+     *
+     * @return true if stomach looting is enabled, false otherwise.
+     */
+    public static boolean isStomachLootingEnabled() {
+        return stomachLootEnabled.get();
+    }
 
-    public static int getStomachLootChance() { return stomachLootChance.get();}
+    /**
+     * Retrieves the chance to loot a stomach from a cow. If stomachLootEnabled is false
+     * then automatically sets it to 0 chance.
+     *
+     * @return The chance to loot a stomach as an integer value, ranging from 0 to 100.
+     */
+    public static int getStomachLootChance() {
+        return Boolean.TRUE.equals(stomachLootEnabled.get()) ? stomachLootChance.get() : 0;
+    }
+
+    public static boolean getVillageStructuresEnabled() {
+        return villageStructuresEnabled.get();
+    }
+
+    public static int getVillageStructuresWeight() {
+        return villageStructuresWeight.get();
+    }
+
+    /**
+     * Checks if the debugging mode for the cheese wheel and curds blocks is enabled.
+     *
+     * @return true if the debugging mode is enabled, false otherwise.
+     */
+    public static boolean isCheeseDebugEnabled() {
+        return cheeseDebugEnabled.get();
+    }
 }

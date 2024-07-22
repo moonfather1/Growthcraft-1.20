@@ -34,6 +34,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GrowthcraftCellar {
     public static final Logger LOGGER = LogManager.getLogger(Reference.MODID);
+//    private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Reference.MODID);
+//    private static final RegistryObject<Codec<? extends IGlobalLootModifier>> GLMSerializer1 = LOOT_MODIFIERS.register("bottles_in_loot_chests", LootModifierForBottlesInChests.CODEC);
 
     public GrowthcraftCellar() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -52,6 +54,7 @@ public class GrowthcraftCellar {
         GrowthcraftCellarFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarMenus.MENUS.register(modEventBus);
+//        GrowthcraftCellarGlobalLootModifier.register(modEventBus);
 
         GrowthcraftCellarRecipes.register(modEventBus);
 

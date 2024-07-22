@@ -45,7 +45,6 @@ public class CultureJarRecipeCategory implements IRecipeCategory<CultureJarRecip
         this.background = guiHelper.createDrawable(
                 TEXTURE, 10, 10, 160, 70
         );
-        ;
         this.icon = guiHelper.createDrawableIngredient(
                 VanillaTypes.ITEM_STACK,
                 new ItemStack(GrowthcraftCellarBlocks.CULTURE_JAR.get())

@@ -23,6 +23,10 @@ public class GrowthcraftRiceTags {
 
     public static class Blocks {
 
+        private Blocks() {
+            /* Private constructor to hide the implicit public one. */
+        }
+
         private static void init(){
             // Do nothing, simply instantiate static variables
         }
@@ -33,6 +37,9 @@ public class GrowthcraftRiceTags {
     }
 
     public static class Items {
+        private Items() {
+            /* Private constructor to hide the implicit public one. */
+        }
 
         private static void init(){
             // Do nothing, simply instantiate static variables
@@ -40,6 +47,7 @@ public class GrowthcraftRiceTags {
         
         public static final TagKey<Item> TAG_CROPS_RICE = forgeTag(Reference.UnlocalizedName.TAG_CROPS_RICE);
         public static final TagKey<Item> TAG_GRAIN_RICE = forgeTag(Reference.UnlocalizedName.TAG_GRAIN_RICE);
+		public static final TagKey<Item> TAG_SEEDS_RICE = forgeTag(Reference.UnlocalizedName.TAG_SEEDS_RICE);;
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Reference.MODID, name));
@@ -51,6 +59,10 @@ public class GrowthcraftRiceTags {
     }
 
     public static class Fluids {
+        private Fluids() {
+            /* Private constructor to hide the implicit public one. */
+        }
+
         private static void init() {
             // Do nothing, simply instantiate static variables
         }

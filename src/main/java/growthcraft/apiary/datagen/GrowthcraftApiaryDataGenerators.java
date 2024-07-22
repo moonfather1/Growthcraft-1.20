@@ -21,8 +21,8 @@ public class GrowthcraftApiaryDataGenerators {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
 
-		generator.addProvider(event.includeServer(), new GrowthcraftApiaryRecipes(packOutput));
-		generator.addProvider(event.includeServer(), new GrowthcraftApiaryLootTableProvider(packOutput));
-//		generator.addProvider(event.includeServer(), new GrowthcraftApiaryGlobalLootModifiersProvider(packOutput));
-	}
+		    generator.addProvider(event.includeServer(), new GrowthcraftApiaryRecipes(packOutput));
+		    generator.addProvider(event.includeServer(), new GrowthcraftApiaryLootTableProvider(packOutput));
+        // generator.addProvider(event.includeServer(), new GrowthcraftApiaryGlobalLootModifiersProvider(packOutput));
+	  }
 }

@@ -1,11 +1,13 @@
 package growthcraft.cellar.datagen.providers;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
+import growthcraft.lib.utils.FormatUtils;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -40,10 +42,11 @@ public class GrowthcraftCellarBlockLootTables extends VanillaBlockLoot{
     @Override
     protected Iterable<Block> getKnownBlocks() {
         List<Block> allBlocks = GrowthcraftCellarBlocks.BLOCKS.getEntries().stream()
-        		.filter(e -> !e.getKey().location().getPath().contains("fluid"))
-        		.map(RegistryObject::get)
-        		.collect(Collectors.toList());
-    	
+                .filter(e -> !e.getKey().location().getPath().contains("fluid"))
+                .map(RegistryObject::get)
+                .collect(Collectors.toList());
+
+        // Exclude any blocks that do not need loot table generator.
         allBlocks.remove(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_FRUIT.get());
         allBlocks.remove(GrowthcraftCellarBlocks.RED_GRAPE_VINE_FRUIT.get());
         allBlocks.remove(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_FRUIT.get());
@@ -52,11 +55,17 @@ public class GrowthcraftCellarBlockLootTables extends VanillaBlockLoot{
         allBlocks.remove(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE.get());
         allBlocks.remove(GrowthcraftCellarBlocks.HOPS_VINE.get());
         allBlocks.removeAll(GrowthcraftCellarFluids.FLUIDS.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList()));
-        
-    	
-    	return allBlocks;
+
+        return allBlocks;
     }
-    
+
+    /**
+     * Creates a standard loot table for a block with optional additional tags.
+     *
+     * @param block The block to create a loot table for
+     * @param type The block entity type associated with the block
+     * @param tags Additional tags to be applied to the loot table
+     */
     private void createStandardTable(Block block, BlockEntityType<?> type, String... tags) {
         LootPoolSingletonContainer.Builder<?> lti = LootItem.lootTableItem(block);
         lti.apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY));

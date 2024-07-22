@@ -12,10 +12,9 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class BrewKettleFluidTankPacket {
-    private FluidStack fluidStack;
-    private int tankID;
-
+    private final FluidStack fluidStack;
     private final BlockPos blockPos;
+    private int tankID;
 
     public BrewKettleFluidTankPacket(int tankID, FluidStack fluidStack, BlockPos blockPos) {
         this.fluidStack = fluidStack;
@@ -35,20 +34,19 @@ public class BrewKettleFluidTankPacket {
 
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
-        context.enqueueWork( () -> {
-                    if(Minecraft.getInstance().level.getBlockEntity(this.blockPos) instanceof BrewKettleBlockEntity blockEntity) {
-                        blockEntity.setFluidStackInTank(this.tankID, this.fluidStack);
+        context.enqueueWork(() -> {
+                if (Minecraft.getInstance().level.getBlockEntity(this.blockPos) instanceof BrewKettleBlockEntity blockEntity) {
+                    blockEntity.setFluidStackInTank(this.tankID, this.fluidStack);
 
-                        LocalPlayer player = Minecraft.getInstance().player;
+                    LocalPlayer player = Minecraft.getInstance().player;
 
-                        if(player.containerMenu instanceof BrewKettleMenu) {
-                            BrewKettleMenu menu = (BrewKettleMenu) player.containerMenu;
-                            if(menu.getBlockEntity().getBlockPos().equals(this.blockPos)) {
-                                menu.setFluid(this.tankID, this.fluidStack);
-                           }
-                        }
+                    if (player != null && player.containerMenu instanceof BrewKettleMenu menu
+                            && menu.getBlockEntity().getBlockPos().equals(this.blockPos)) {
+                        menu.setFluid(this.tankID, this.fluidStack);
+
                     }
                 }
+            }
         );
         return true;
     }

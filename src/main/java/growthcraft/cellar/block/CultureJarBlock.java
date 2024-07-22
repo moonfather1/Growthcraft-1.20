@@ -135,11 +135,11 @@ public class CultureJarBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos blockPos, Block block, BlockPos neighbor, boolean p_60514_)
+    public void neighborChanged(BlockState state, Level level, BlockPos blockPos, Block block, BlockPos neighbor, boolean uselessBoolean)
     {
         // when a block is removed from below the jar, drop the jar too.
         if (this.canSurvive(state, level, blockPos)) {
-            super.neighborChanged(state, level, blockPos, block, neighbor, p_60514_);
+            super.neighborChanged(state, level, blockPos, block, neighbor, uselessBoolean);
         }
         else {
             level.destroyBlock(blockPos, true);

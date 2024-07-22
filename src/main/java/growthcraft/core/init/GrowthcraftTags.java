@@ -31,9 +31,18 @@ public class GrowthcraftTags {
 
         public static final TagKey<Block> ROPE = tag(Reference.UnlocalizedName.TAG_ROPE);
         public static final TagKey<Block> SALT = tag(Reference.UnlocalizedName.TAG_SALT);
-
+        
+        //Serene Seasons Tags, we have to define them here, since they dont have them setup in 1.20.1 for datagen
+        public static final TagKey<Block> SPRING_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.SPRING_CROPS);
+        public static final TagKey<Block> SUMMER_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.SUMMER_CROPS);
+        public static final TagKey<Block> AUTUMN_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.AUTUMN_CROPS);
+        public static final TagKey<Block> WINTER_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.WINTER_CROPS);
+        
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Reference.MODID, name));
+        }
+        private static TagKey<Block> sereneSeasonsTag(String name) {
+            return BlockTags.create(new ResourceLocation("sereneseasons", name));
         }
     }
 
@@ -48,12 +57,21 @@ public class GrowthcraftTags {
         public static final TagKey<Item> SALT = tag(Reference.UnlocalizedName.TAG_SALT);
         public static final TagKey<Item> DUSTS_SALT = forgeTag(Reference.UnlocalizedName.DUSTS_SALT);
         public static final TagKey<Item> TAG_KNIFE = forgeTag(Reference.UnlocalizedName.TAG_KNIVES);
+        
+        //Serene Seasons Tags, we have to define them here, since they dont have them setup in 1.20.1 for datagen
+        public static final TagKey<Item> SPRING_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.SPRING_CROPS);
+        public static final TagKey<Item> SUMMER_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.SUMMER_CROPS);
+        public static final TagKey<Item> AUTUMN_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.AUTUMN_CROPS);
+        public static final TagKey<Item> WINTER_CROPS = sereneSeasonsTag(Reference.UnlocalizedName.WINTER_CROPS);
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Reference.MODID, name));
         }
         private static TagKey<Item> forgeTag(String name) {
             return ItemTags.create(new ResourceLocation("forge", name));
+        }
+        private static TagKey<Item> sereneSeasonsTag(String name) {
+            return ItemTags.create(new ResourceLocation("sereneseasons", name));
         }
     }
 

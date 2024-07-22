@@ -12,6 +12,10 @@ import net.minecraft.world.level.material.Fluid;
 
 public class GrowthcraftApplesTags {
 
+    private GrowthcraftApplesTags() {
+        /* Prevent generation of public constructor */
+    }
+
     public static void init() {
         Blocks.init();
         Items.init();
@@ -20,6 +24,10 @@ public class GrowthcraftApplesTags {
     }
 
     public static class Blocks {
+
+        private Blocks() {
+            /* Prevent generation of public constructor */
+        }
 
         public static void init() {
             // Do nothing, simply instantiate static variables
@@ -34,6 +42,10 @@ public class GrowthcraftApplesTags {
 
     public static class Items {
 
+        private Items() {
+            /* Prevent generation of public constructor */
+        }
+
         public static void init() {
             // Do nothing, simply instantiate static variables
         }
@@ -47,6 +59,10 @@ public class GrowthcraftApplesTags {
 
     public static class Fluids {
 
+        private Fluids() {
+            /* Prevent generation of public constructor */
+        }
+
         private static void init() {
             // Do nothing, simply instantiate static variables
         }
@@ -57,6 +73,10 @@ public class GrowthcraftApplesTags {
     }
 
     public static class EntityTypes {
+
+        private EntityTypes() {
+            /* Prevent generation of public constructor */
+        }
 
         private static void init() {
             // Do nothing, simply instantiate static variables

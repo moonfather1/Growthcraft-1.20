@@ -1,7 +1,7 @@
 package growthcraft.lib.utils;
 
 public class RecipeUtils {
-    public static enum Category {
+    public enum Category {
         FLUID("fluid"), ITEM("item"), NULL("null");
 
         private final String value;

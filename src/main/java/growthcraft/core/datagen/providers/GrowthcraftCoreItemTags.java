@@ -8,7 +8,9 @@ import org.jetbrains.annotations.Nullable;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.apiary.init.GrowthcraftApiaryTags;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
+import growthcraft.apples.init.GrowthcraftApplesItems;
 import growthcraft.apples.init.GrowthcraftApplesTags;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarTags;
 import growthcraft.core.init.GrowthcraftItems;
@@ -118,11 +120,37 @@ public class GrowthcraftCoreItemTags extends ItemTagsProvider{
 		tag(GrowthcraftTags.Items.DUSTS_SALT)
 		.add(GrowthcraftItems.SALT.get());
 		tag(GrowthcraftRiceTags.Items.TAG_CROPS_RICE)
-		.add(GrowthcraftRiceItems.RICE_STALK.get());
+		.add(GrowthcraftRiceItems.RICE.get());
 		tag(GrowthcraftRiceTags.Items.TAG_GRAIN_RICE)
 		.add(GrowthcraftRiceItems.RICE.get());
+		tag(GrowthcraftRiceTags.Items.TAG_SEEDS_RICE)
+		.add(GrowthcraftRiceItems.RICE_GRAINS.get());
 		tag(GrowthcraftTags.Items.TAG_KNIFE)
 		.add(GrowthcraftRiceItems.KNIFE.get());
+		
+		//SereneSeasons Tags
+		tag(GrowthcraftTags.Items.SPRING_CROPS)
+		.add(GrowthcraftCellarItems.GRAPE_PURPLE_SEED.get())
+		.add(GrowthcraftCellarItems.GRAPE_RED_SEEDS.get())
+		.add(GrowthcraftCellarItems.GRAPE_WHITE_SEEDS.get())
+		.add(GrowthcraftCellarItems.HOPS_SEED.get())
+		.add(GrowthcraftApplesItems.APPLE_SEEDS.get());
+		
+		tag(GrowthcraftTags.Items.SUMMER_CROPS)
+		.add(GrowthcraftCellarItems.GRAPE_PURPLE_SEED.get())
+		.add(GrowthcraftCellarItems.GRAPE_RED_SEEDS.get())
+		.add(GrowthcraftCellarItems.GRAPE_WHITE_SEEDS.get())
+		.add(GrowthcraftCellarItems.HOPS_SEED.get())
+		.add(GrowthcraftMilkItems.THISTLE_SEED.get())
+		.add(GrowthcraftRiceItems.RICE_STALK.get())
+		.add(GrowthcraftApplesItems.APPLE_SEEDS.get());
+		
+		tag(GrowthcraftTags.Items.AUTUMN_CROPS)
+		.add(GrowthcraftMilkItems.THISTLE_SEED.get())
+		.add(GrowthcraftRiceItems.RICE_STALK.get());
+
+		
+		tag(GrowthcraftTags.Items.WINTER_CROPS);
 	}
 
     @Override

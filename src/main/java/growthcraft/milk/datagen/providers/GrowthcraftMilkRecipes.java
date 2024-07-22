@@ -24,6 +24,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 
+import static growthcraft.lib.utils.FormatUtils.HAS_ITEM;
+
 public class GrowthcraftMilkRecipes extends RecipeProvider{
 
 	public GrowthcraftMilkRecipes(PackOutput packOutput) {
@@ -38,7 +40,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.pattern("sss")
 		.define('s', Items.STRING)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.CHEESE_PRESS.get())
@@ -49,7 +51,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.define('C', Tags.Items.CHESTS_WOODEN)
 		.define('S', ItemTags.WOODEN_SLABS)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.CHURN.get())
@@ -59,7 +61,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.define('P', ItemTags.PLANKS)
 		.define('S', Tags.Items.RODS_WOODEN)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ItemTags.PLANKS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ItemTags.PLANKS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_APPLE.get())
@@ -68,7 +70,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_CHOCOLATE.get())
@@ -77,7 +79,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_PURPLE.get())
@@ -86,7 +88,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_RED.get())
@@ -95,7 +97,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_WHITE.get())
@@ -104,7 +106,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_HONEY.get())
@@ -113,7 +115,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_PUMPKIN.get())
@@ -122,7 +124,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_WATERMELON.get())
@@ -131,7 +133,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(Items.SUGAR)
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.MILKING_BUCKET_IRON.get())
@@ -141,7 +143,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.define('N', Tags.Items.NUGGETS_IRON)
 		.define('I', Tags.Items.INGOTS_IRON)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.MIXING_VAT.get())
@@ -151,7 +153,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.define('B', GrowthcraftCellarBlocks.BREW_KETTLE.get())
 		.define('I', Tags.Items.INGOTS_IRON)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftCellarBlocks.BREW_KETTLE.get()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftCellarBlocks.BREW_KETTLE.get()))
 		.save(consumer);
 		
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.PANCHEON.get())
@@ -159,19 +161,19 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.pattern("CCC")
 		.define('C', Items.CLAY_BALL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.BUTTER_SALTED.get())
 		.requires(GrowthcraftMilkItems.BUTTER.get())
 		.requires(GrowthcraftItems.SALT.get())
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftMilkItems.BUTTER.get()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftMilkItems.BUTTER.get()))
 		.save(consumer);
 		
 		SingleItemRecipeBuilder.stonecutting(Ingredient.of(GrowthcraftMilkItems.THISTLE.get()), RecipeCategory.FOOD, GrowthcraftMilkItems.THISTLE_SEED.get(), 3)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftMilkItems.THISTLE.get()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftMilkItems.THISTLE.get()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_APPLE.get())
@@ -180,7 +182,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_CHOCOLATE.get())
@@ -189,7 +191,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_PURPLE.get())
@@ -198,7 +200,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_RED.get())
@@ -207,7 +209,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_WHITE.get())
@@ -216,7 +218,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_HONEY.get())
@@ -225,7 +227,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_PLAIN.get())
@@ -233,7 +235,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_PUMPKIN.get())
@@ -242,7 +244,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_WATERMELON.get())
@@ -251,7 +253,7 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
-		.unlockedBy("has_item", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);	
 	}
 	

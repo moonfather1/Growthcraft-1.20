@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import growthcraft.lib.utils.FormatUtils;
 import growthcraft.milk.block.BaseCheeseWheel;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
@@ -29,10 +30,27 @@ public class GrowthcraftMilkLootTables extends VanillaBlockLoot{
 	
 	@Override
 	protected void generate() {
-		createStandardTable(GrowthcraftMilkBlocks.CHEESE_PRESS.get(), GrowthcraftMilkBlockEntities.CHEESE_PRESS_BLOCK_ENTITY.get(), "inventory");
-		createStandardTable(GrowthcraftMilkBlocks.CHURN.get(), GrowthcraftMilkBlockEntities.CHURN_BLOCK_ENTITY.get(), "inventory", "fluid_tank_input_0");
-		createStandardTable(GrowthcraftMilkBlocks.MIXING_VAT.get(), GrowthcraftMilkBlockEntities.MIXING_VAT_BLOCK_ENTITY.get(), "inventory", "fluid_tank_input_0");
-		createStandardTable(GrowthcraftMilkBlocks.PANCHEON.get(), GrowthcraftMilkBlockEntities.PANCHEON_BLOCK_ENTITY.get(), "inventory", "fluid_tank_input_0", "fluid_tank_output_0", "fluid_tank_output_1");
+		createStandardTable(
+			GrowthcraftMilkBlocks.CHEESE_PRESS.get(),
+			GrowthcraftMilkBlockEntities.CHEESE_PRESS_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY);
+		createStandardTable(
+			GrowthcraftMilkBlocks.CHURN.get(),
+			GrowthcraftMilkBlockEntities.CHURN_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY,
+			FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+		createStandardTable(
+			GrowthcraftMilkBlocks.MIXING_VAT.get(),
+			GrowthcraftMilkBlockEntities.MIXING_VAT_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY,
+			FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0));
+		createStandardTable(
+			GrowthcraftMilkBlocks.PANCHEON.get(),
+			GrowthcraftMilkBlockEntities.PANCHEON_BLOCK_ENTITY.get(),
+			FormatUtils.INVENTORY,
+			FormatUtils.fluidTankSlot(FormatUtils.INPUT, 0),
+			FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 0),
+			FormatUtils.fluidTankSlot(FormatUtils.OUTPUT, 1));
 	}
 	
     @Override
@@ -47,7 +65,11 @@ public class GrowthcraftMilkLootTables extends VanillaBlockLoot{
     	return knownBlocks;
 
     }
-    
+
+	/**
+	 * @deprecated ("9.2.0", Used to be used for excluding from the item registration so that JEI and creative tab would not have these blocks include.)
+	 */
+	@Deprecated(since = "9.2.0", forRemoval = false)
     private List<Block> excludedBlocks() {
     	List<Block> excludedList = new LinkedList<Block>();
     	excludedList.add(GrowthcraftMilkBlocks.THISTLE_CROP.get());

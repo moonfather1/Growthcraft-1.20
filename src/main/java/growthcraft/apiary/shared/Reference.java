@@ -40,7 +40,6 @@ public class Reference {
         public static final String BEE_BOX_SPRUCE = "bee_box_spruce";
         public static final String BEE_BOX_WARPED = "bee_box_warped";
         public static final String BEE_BOX_BAMBOO = "bee_box_bamboo";
-        public static final String BEE_BOX_BAMBOO_OLD = "bee_box_bamboo_old";
 
         public static final String BEE_TAG = "bee";
         public static final String HONEY = "honey";
