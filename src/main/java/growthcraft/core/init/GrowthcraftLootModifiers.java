@@ -1,7 +1,7 @@
 package growthcraft.core.init;
 
 import com.mojang.serialization.Codec;
-import growthcraft.core.loot.GlobalLootModifier;
+
 import growthcraft.core.shared.Reference;
 import growthcraft.lib.loot.AddItemModifier;
 import growthcraft.lib.loot.AddLootTableModifier;
