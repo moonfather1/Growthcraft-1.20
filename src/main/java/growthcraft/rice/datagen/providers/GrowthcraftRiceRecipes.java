@@ -67,6 +67,12 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftRiceItems.RICE.get()).build()))
 		.save(consumer);
 		
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftRiceItems.RICE.get())
+		.requires(GrowthcraftRiceItems.RICE.get(), 4)
+		.group(Reference.MODID)
+		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftRiceItems.RICE.get()).build()))
+		.save(consumer);
+		
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.SUSHI_ROLL.get(), 12)
 		.pattern(" F ")
 		.pattern("RRR")
