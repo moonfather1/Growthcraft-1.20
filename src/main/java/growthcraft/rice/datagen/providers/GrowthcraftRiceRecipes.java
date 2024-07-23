@@ -68,7 +68,7 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.save(consumer);
 		
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftRiceItems.RICE.get())
-		.requires(GrowthcraftRiceItems.RICE.get(), 4)
+		.requires(GrowthcraftRiceItems.RICE_GRAINS.get(), 4)
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftRiceItems.RICE.get()).build()))
 		.save(consumer);
@@ -95,7 +95,7 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.ONIGIRI.get(), 2)
 		.pattern(" R ")
 		.pattern("RSR")
-		.pattern("RKR")
+		.pattern(" K ")
 		.define('S', GrowthcraftTags.Items.SALT)
 		.define('R', GrowthcraftRiceItems.RICE_COOKED.get())
 		.define('K', Items.DRIED_KELP)
