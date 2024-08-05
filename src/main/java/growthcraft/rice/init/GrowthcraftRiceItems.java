@@ -1,5 +1,6 @@
 package growthcraft.rice.init;
 
+import growthcraft.lib.item.GrowthcraftBowlFoodItem;
 import growthcraft.lib.item.GrowthcraftFoodItem;
 import growthcraft.lib.item.GrowthcraftItem;
 import growthcraft.rice.item.CultivatorItem;
@@ -41,7 +42,7 @@ public class GrowthcraftRiceItems {
 
     public static final RegistryObject<GrowthcraftFoodItem> RICE_COOKED = ITEMS.register(
             Reference.UnlocalizedName.RICE_COOKED,
-            GrowthcraftFoodItem::new
+            () -> new GrowthcraftFoodItem(2, 0.5F, 64)
     );
 
     public static final RegistryObject<GrowthcraftItem> RICE_STALK = ITEMS.register(
@@ -56,12 +57,12 @@ public class GrowthcraftRiceItems {
     
     public static final RegistryObject<GrowthcraftFoodItem> ONIGIRI = ITEMS.register(
             Reference.UnlocalizedName.ONIGIRI,
-            GrowthcraftFoodItem::new
+            () -> new GrowthcraftFoodItem(3, 0.5F, 64)
     );
     
-    public static final RegistryObject<GrowthcraftFoodItem> CHICKEN_RICE = ITEMS.register(
+    public static final RegistryObject<GrowthcraftBowlFoodItem> CHICKEN_RICE = ITEMS.register(
             Reference.UnlocalizedName.CHICKEN_RICE,
-            GrowthcraftFoodItem::new
+            () -> new GrowthcraftBowlFoodItem(9, 1F, 8)
     );
 
     public static final RegistryObject<GrowthcraftItem> YEAST_SEISHU = ITEMS.register(
