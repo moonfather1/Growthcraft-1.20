@@ -26,3 +26,4 @@ forge*changelog.txt
 /.local/
 /src/generated/resources/.cache/
 /run-data/
+/.java-version
