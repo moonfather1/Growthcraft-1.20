@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_rice",
+  "ingredients": [
+    {
+      "item": "growthcraft_rice:rice_grains"
+    },
+    {
+      "item": "growthcraft_rice:rice_grains"
+    },
+    {
+      "item": "growthcraft_rice:rice_grains"
+    },
+    {
+      "item": "growthcraft_rice:rice_grains"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_rice:rice"
+  }
+}

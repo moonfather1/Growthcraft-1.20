@@ -41,54 +41,54 @@ public class GrowthcraftCoreGlobalLootModifiersProvider extends GlobalLootModifi
 		add("add_loot_"+ growthcraft.cellar.shared.Reference.LootTable.STRONGHOLD_CHEST_LOOT , loot(name(growthcraft.cellar.shared.Reference.LootTable.STRONGHOLD_CHEST_LOOT), LootTableIdCondition.builder(BuiltInLootTables.STRONGHOLD_CORRIDOR).or(LootTableIdCondition.builder(BuiltInLootTables.STRONGHOLD_CROSSING)).build()));
 		
 		add("grape_seeds_purple_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.2f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftCellarItems.GRAPE_PURPLE_SEED.get().asItem()));
 		
 		add("grape_seeds_red_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.2f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftCellarItems.GRAPE_RED_SEEDS.get().asItem()));
 		
 		add("grape_seeds_white_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.2f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftCellarItems.GRAPE_WHITE_SEEDS.get().asItem()));
 		
 		add("hops_seeds_white_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.2f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftCellarItems.HOPS_SEED.get().asItem()));
 		
 		add("yeast_bayanus_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.1f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftCellarItems.YEAST_BAYANUS.get().asItem()));
 		
 		add("yeast_brewers_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.1f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftCellarItems.YEAST_BREWERS.get().asItem()));
 		
 		add("yeast_ethereal_from_chorus_flower", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.05f).build(),
+				LootItemRandomChanceCondition.randomChance(0.4f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.CHORUS_FLOWER).build()}, 
 				GrowthcraftCellarItems.YEAST_ETHEREAL.get().asItem()));
 		
 		add("yeast_lager_from_snow", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.02f).build(),
+				LootItemRandomChanceCondition.randomChance(0.2f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.SNOW).build()}, 
 				GrowthcraftCellarItems.YEAST_LAGER.get().asItem()));
 		
 //		GC Milk
 		add("thistle_seeds_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.2f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftMilkItems.THISTLE_SEED.get().asItem()));
 		
 //		GC Rice
 		add("rice_from_grass", new AddItemModifier(new LootItemCondition[]{
-				LootItemRandomChanceCondition.randomChance(0.01f).build(),
+				LootItemRandomChanceCondition.randomChance(0.2f).build(),
 				LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.GRASS).build()}, 
 				GrowthcraftRiceItems.RICE_GRAINS.get().asItem()));
 		
