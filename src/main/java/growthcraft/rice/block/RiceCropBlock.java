@@ -47,7 +47,7 @@ public class RiceCropBlock extends CropBlock {
         }
         return InteractionResult.PASS;
     }
-
+    
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return level.getBlockState(pos.below()).is(GrowthcraftRiceBlocks.CULTIVATED_FARMLAND.get());
