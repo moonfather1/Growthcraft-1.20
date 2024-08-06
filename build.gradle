@@ -94,13 +94,15 @@ dependencies {
 
     // Runtime mods for testing
     runtimeOnly fg.deobf("curse.maven:theoneprobe-${curseforge_theoneprobe}")
-    runtimeOnly fg.deobf("curse.maven:jei-${curseforge_jei}")
+    //runtimeOnly fg.deobf("curse.maven:jei-${curseforge_jei}")
     runtimeOnly fg.deobf("curse.maven:patchouli-${curseforge_patchouli}")
     runtimeOnly fg.deobf("curse.maven:appleskin-${curseforge_appleskin}")
     runtimeOnly fg.deobf("curse.maven:mekanism-${curseforge_mekanism}")
     runtimeOnly fg.deobf("curse.maven:farmers-delight-${curseforge_farmers_delight}")
     runtimeOnly fg.deobf("curse.maven:immersive-engineering-${curseforge_immersive_engineering}")
     runtimeOnly fg.deobf("curse.maven:serene-seasons-${curseforge_serene_seasons}")
+
+    implementation fg.deobf("curse.maven:emi-580555:5497473")
 
     // Nice thing that shows the nbt in scrollable manner
     runtimeOnly fg.deobf("curse.maven:item-nbt-viewer-514135:4578522")
