@@ -52,23 +52,25 @@ public class BrewKettleBlock extends BaseEntityBlock {
 
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final BooleanProperty HAS_LID = BooleanProperty.create("has_lid");
-    private final VoxelShape[] SHAPES_LIST = new VoxelShape[]{
+    private final VoxelShape[] SHAPES_LEGS = new VoxelShape[] {
             Block.box(0, 0, 2, 2, 3, 4),
-            Block.box(1, 3, 1, 15, 4, 15),
-            Block.box(1, 3, 0, 15, 15, 1),
-            Block.box(15, 3, 0, 16, 15, 16),
-            Block.box(1, 3, 15, 15, 15, 16),
-            Block.box(0, 3, 0, 1, 15, 16),
             Block.box(0, 0, 0, 4, 3, 2),
             Block.box(12, 0, 0, 16, 3, 2),
             Block.box(12, 0, 14, 16, 3, 16),
             Block.box(0, 0, 14, 4, 3, 16),
             Block.box(14, 0, 2, 16, 3, 4),
             Block.box(14, 0, 12, 16, 3, 14),
-            Block.box(1, 15, 1, 15, 15, 15),
             Block.box(0, 0, 12, 2, 3, 14)
     };
-    private final VoxelShape BLOCK_SHAPE = Shapes.or(Shapes.empty(), SHAPES_LIST);
+    private final VoxelShape[] SHAPES_SIDES = new VoxelShape[] {
+            Block.box(1, 3, 1, 15, 4, 15),
+            Block.box(1, 3, 0, 15, 15, 1),
+            Block.box(15, 3, 0, 16, 15, 16),
+            Block.box(1, 3, 15, 15, 15, 16),
+            Block.box(0, 3, 0, 1, 15, 16)
+    };
+    private final VoxelShape BLOCK_SHAPE_WITHOUT_LID = Shapes.or(Shapes.or(Shapes.empty(), SHAPES_SIDES), SHAPES_LEGS);
+    private final VoxelShape BLOCK_SHAPE_WITH_LID = Shapes.or(Block.box(0, 3, 0, 16, 15, 16), SHAPES_LEGS);
 
     private static final Component MESSAGE_NO_LID = Component.translatable("message.growthcraft_cellar.kettle.outside_lid_off").withStyle(Style.EMPTY.withColor(0xffccccd5));
     private static final Component MESSAGE_HAS_LID = Component.translatable("message.growthcraft_cellar.kettle.outside_lid_on").withStyle(Style.EMPTY.withColor(0xffccccd5));
@@ -102,7 +104,7 @@ public class BrewKettleBlock extends BaseEntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
-        return BLOCK_SHAPE;
+        return blockState.getValue(HAS_LID) ? BLOCK_SHAPE_WITH_LID : BLOCK_SHAPE_WITHOUT_LID;
     }
 
     @Override
