@@ -15,11 +15,10 @@
   },
   "pattern": [
     " R ",
-    "RSR",
+    " S ",
     " K "
   ],
   "result": {
-    "count": 2,
     "item": "growthcraft_rice:onigiri"
   },
   "show_notification": true
