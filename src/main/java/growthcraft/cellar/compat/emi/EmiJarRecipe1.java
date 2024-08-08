@@ -5,19 +5,17 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import growthcraft.cellar.recipe.FruitPressRecipe;
+import growthcraft.cellar.recipe.CultureJarRecipe;
+import growthcraft.cellar.recipe.CultureJarStarterRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public class EmiPressRecipe extends BasicEmiRecipe
+public class EmiJarRecipe1 extends BasicEmiRecipe
 {
-    public EmiPressRecipe(FruitPressRecipe recipe)
+    public EmiJarRecipe1(CultureJarStarterRecipe recipe)
     {
-        super(EmiPlugin.PRESS_RECIPE_CATEGORY, recipe.getId(), 125, 20);
-        this.inputs.add(EmiIngredient.of(Ingredient.of(recipe.getIngredientItemStack())));
-        this.outputs.add(EmiStack.of(recipe.getResultingFluid().getFluid(), recipe.getResultingFluid().getAmount()));
-        this.outputs.add(EmiStack.of(recipe.getResultingFluid().getFluid().getBucket()));
-        // i would prefer to multiply both input and output to have output at 1000mb.
-        // it would be more readable but  that's not the recipe so i won't.
+        super(EmiPlugin.JAR_RECIPE_CATEGORY1, recipe.getId(), 125, 18);
+        this.inputs.add(EmiStack.of(recipe.getInputFluidStack().getFluid(), recipe.getInputFluidStack().getAmount()));
+        this.outputs.add(EmiStack.of(recipe.getInputItemStack()));
     }
 
     @Override
