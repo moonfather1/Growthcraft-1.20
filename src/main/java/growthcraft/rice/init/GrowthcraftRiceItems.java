@@ -42,7 +42,7 @@ public class GrowthcraftRiceItems {
 
     public static final RegistryObject<GrowthcraftFoodItem> RICE_COOKED = ITEMS.register(
             Reference.UnlocalizedName.RICE_COOKED,
-            () -> new GrowthcraftFoodItem(2, 0.5F, 64)
+            () -> new GrowthcraftFoodItem(6, 0.4F, 64)
     );
 
     public static final RegistryObject<GrowthcraftItem> RICE_STALK = ITEMS.register(
@@ -52,17 +52,17 @@ public class GrowthcraftRiceItems {
 
     public static final RegistryObject<GrowthcraftFoodItem> SUSHI_ROLL = ITEMS.register(
             Reference.UnlocalizedName.SUSHI_ROLL,
-            GrowthcraftFoodItem::new
+            () -> new GrowthcraftFoodItem(3, 0.4F, 64)
     );
     
     public static final RegistryObject<GrowthcraftFoodItem> ONIGIRI = ITEMS.register(
             Reference.UnlocalizedName.ONIGIRI,
-            () -> new GrowthcraftFoodItem(3, 0.5F, 64)
+            () -> new GrowthcraftFoodItem(8, 0.5F, 64)
     );
     
     public static final RegistryObject<GrowthcraftBowlFoodItem> CHICKEN_RICE = ITEMS.register(
             Reference.UnlocalizedName.CHICKEN_RICE,
-            () -> new GrowthcraftBowlFoodItem(9, 1F, 8)
+            () -> new GrowthcraftBowlFoodItem(12, 0.8F, 8)
     );
 
     public static final RegistryObject<GrowthcraftItem> YEAST_SEISHU = ITEMS.register(

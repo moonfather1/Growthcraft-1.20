@@ -92,9 +92,9 @@ public class GrowthcraftRiceRecipes extends RecipeProvider{
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftRiceItems.RICE_COOKED.get()).build()))
 		.save(consumer);
 		
-		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.ONIGIRI.get(), 2)
+		ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, GrowthcraftRiceItems.ONIGIRI.get(), 1)
 		.pattern(" R ")
-		.pattern("RSR")
+		.pattern(" S ")
 		.pattern(" K ")
 		.define('S', GrowthcraftTags.Items.SALT)
 		.define('R', GrowthcraftRiceItems.RICE_COOKED.get())
