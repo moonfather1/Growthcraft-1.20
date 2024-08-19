@@ -1,0 +1,6 @@
+{
+  "type": "emi:world_interaction",
+  "left": "item:minecraft:farmland",
+  "right": "item:growthcraft_rice:cultivator",
+  "output": "item:growthcraft_rice:cultivated_farmland"
+}
