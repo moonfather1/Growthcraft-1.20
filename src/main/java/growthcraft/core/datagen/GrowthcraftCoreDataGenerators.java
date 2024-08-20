@@ -7,6 +7,7 @@ import growthcraft.core.datagen.providers.GrowthcraftCoreGlobalLootModifiersProv
 import growthcraft.core.datagen.providers.GrowthcraftCoreItemTags;
 import growthcraft.core.datagen.providers.GrowthcraftCoreLootTableProvider;
 import growthcraft.core.datagen.providers.GrowthcraftCoreRecipes;
+import growthcraft.core.datagen.providers.GrowthcraftCoreWorldGenProvider;
 import growthcraft.core.shared.Reference;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -35,9 +36,8 @@ public class GrowthcraftCoreDataGenerators {
 		generator.addProvider(event.includeServer(), new GrowthcraftCoreRecipes(packOutput));
 		generator.addProvider(event.includeServer(), new GrowthcraftCoreLootTableProvider(packOutput));
 		generator.addProvider(event.includeServer(), new GrowthcraftCoreGlobalLootModifiersProvider(packOutput));
+		generator.addProvider(event.includeServer(), new GrowthcraftCoreWorldGenProvider(packOutput, lookupProvider));
 //		generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
 //                List.of(new LootTableProvider.SubProviderEntry(GrowthcraftCoreLootTables::new, LootContextParamSets.BLOCK))));
 	}
-
-	
 }
