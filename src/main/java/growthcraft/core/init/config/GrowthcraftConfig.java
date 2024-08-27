@@ -16,6 +16,10 @@ public class GrowthcraftConfig {
     private static final String CATEGORY_WORLDGEN = "worldgen";
 
     private static ForgeConfigSpec.BooleanValue saltOreGenEnabled;
+    private static ForgeConfigSpec.BooleanValue saltOreGenTheEndEnabled;
+    private static ForgeConfigSpec.BooleanValue saltOreGenNetherEnabled;
+    private static ForgeConfigSpec.BooleanValue saltOreGenDeepslateEnabled;
+
     private static ForgeConfigSpec.IntValue saltOreGenVeinSize;
     private static ForgeConfigSpec.IntValue saltOreGenHeightMin;
     private static ForgeConfigSpec.IntValue saltOreGenHeightMax;
@@ -45,8 +49,17 @@ public class GrowthcraftConfig {
     public static void initServerConfig(ForgeConfigSpec.Builder specBuilder) {
         // Init Server Side Configuration
         saltOreGenEnabled = specBuilder
-                .comment("Set to false to disable Growthcraft Salt Ore Generation.")
+                .comment("Set to false to disable all Growthcraft Salt Ore Generation.")
                 .define(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenEnabled"), true);
+        saltOreGenDeepslateEnabled = specBuilder
+                .comment("Set to false to disable Growthcraft Salt Ore Generation in Deepslate layer of the overworld.")
+                .define(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenDeepslateEnabled"), true);
+        saltOreGenNetherEnabled = specBuilder
+                .comment("Set to false to disable Growthcraft Salt Ore Generation in the Nether.")
+                .define(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenNetherEnabled"), true);
+        saltOreGenTheEndEnabled = specBuilder
+                .comment("Set to false to disable Growthcraft Salt Ore Generation in The End.")
+                .define(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenTheEndEnabled"), true);
         saltOreGenVeinSize = specBuilder
                 .comment("Set to the max number of ores to generate in the vein.")
                 .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenVeinSize"), 5, 1, 10);
@@ -61,8 +74,22 @@ public class GrowthcraftConfig {
                 .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenSpreadAmount"), 10, 1, 20);
     }
 
+    // TODO: Implement usage to allow server admins to prevent the salt generation.
     public static boolean isSaltOreGenEnabled() {
         return saltOreGenEnabled.get();
+    }
+
+    public static boolean isSaltOreGenEnabledForDimension(String dimension) {
+        switch(dimension) {
+            case "deepslate":
+                return saltOreGenDeepslateEnabled.get();
+            case "nether":
+                return saltOreGenNetherEnabled.get();
+            case "theend":
+                return saltOreGenTheEndEnabled.get();
+            default:
+                return false;
+        }
     }
 
     public static int getSaltOreGenVeinSize() {

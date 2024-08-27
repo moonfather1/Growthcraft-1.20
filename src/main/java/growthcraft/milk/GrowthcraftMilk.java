@@ -63,6 +63,7 @@ public class GrowthcraftMilk {
 
     private void setup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new LivingDropLootModifier());
+        GrowthcraftMilkItems.registerCompostables();
         GrowthcraftMilkMessages.register();
     }
 

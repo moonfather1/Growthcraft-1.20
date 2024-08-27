@@ -1,0 +1,19 @@
+{
+  "type": "growthcraft:add_loot_table",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:chests/underwater_ruin_small"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:chests/underwater_ruin_big"
+        }
+      ]
+    }
+  ],
+  "lootTable": "growthcraft_cellar:chests/underwater_ruin"
+}

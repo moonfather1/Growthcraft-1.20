@@ -8,51 +8,13 @@
       "type": "patchouli:spotlight",
       "item": "growthcraft_cellar:fermentation_barrel_oak",
       "title": "Fermentation Barrel",
-      "text": "The ferment barrel can hold up to eight buckets of fluid. It can be used to ferment fluids or as a storage tank.$(br2)Place the non-fermented fluid into the barrel with the respective yeast to produce a fermented fluid with effects. Use a glass bottle to extract the drink."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "$(br2)If you happen to put to much yeast into the barrel, all of it will be consumed in the ferment process."
+      "text": "The fermentation barrel is used to ferment ales, lagers, wines, ciders, and mead. Each of these beverages will apply a different effect upon drinking.$(br2)Place the base fluid into the barrel with the appropriate yeast to produce a fermented product.$(br)The finished product can be extracted with a glass bottle."
     },
     {
       "type": "patchouli:crafting",
-      "title": "Crafting",
       "recipe": "growthcraft_cellar:fermentation_barrel_oak",
-      "text": "The ferment barrel is easily crafted using oak planks and iron.$(br2)Currently, there is only one type of ferment barrel."
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:potion_ale",
-      "title": "Ales",
-      "text": "$(bold)Amber Ale$()$(li)Brewer's Yeast$(li)Haste III (3:00)$(br2)$(bold)Brown Ale$()$(li)Brewer's Yeast$(li)Haste IV (7200)$(br2)$(bold)Copper Ale$()$(li)Brewer's Yeast$(li)Regeneration III (3:00)"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Ales (cont.)",
-      "text": "$(bold)IPA$()$(li)Brewer's Yeast$(li)Regeneration II (3:00)$(br2)$(bold)Old Port Ale$()$(li)Brewer's Yeast$(li)Luck (5:00)$(br2)$(bold)Pale Ale$()$(li)Brewer's Yeast$(li)Haste II (0:30)$(bold)$(br2)Stout$()$(li)Brewer's Yeast$(li)Hero of the Village (10:00)"
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:potion_lager",
-      "title": "Lagers",
-      "text": "$(bold)Amber Lager$()$(li)Lager Yeast$(li)Speed III (3:00)$(br2)$(bold)Black Lager$()$(li)Lager Yeast$(li)Resistance II (5:00)$(br2)$(bold)Brown Lager$()$(li)Lager Yeast$(li)Speed IV (5:00)"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Lagers (cont.)",
-      "text": "$(bold)Copper Lager$()$(li)Lager Yeast$(li)Resistance III (3:00)$(br2)$(bold)Pale Lager$()$(li)Lager Yeast$(li)Speed II (0:30)$(br2)$(bold)Pilsner Lager$()$(li)Lager Yeast$(li)Resistance II (0:30)$(br2)$(bold)Viena Lager$()$(li)Lager Yeast$(li)Luck II (1:00)"
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:potion_wine",
-      "title": "Wine",
-      "text": "$(bold)Port Wine$()$(li)Bayanus Yeast$(li)Absoption II (1:00)$(br2)$(bold)Red Wine$()$(li)Bayanus Yeast$(li)Health II (1:00)$(br2)$(bold)White Wine$()$(li)Bayanus Yeast$(li)Saturation II (1:00)"
-    },
-    {
-      "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:potion_wine",
-      "title": "Mead",
-      "text": "$(bold)Honey Mead$()$(li)Bayanus Yeast$(li)Health Boost II (3:00)"
+      "title": " ",
+      "text": "The fermentation barrel can fit up to four buckets of fluid, but takes longer to process the more fluid is present."
     }
   ]
 }

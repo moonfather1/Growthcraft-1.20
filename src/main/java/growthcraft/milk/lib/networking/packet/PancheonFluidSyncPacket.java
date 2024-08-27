@@ -12,7 +12,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class PancheonFluidSyncPacket {
-    private FluidStack fluidStack;
+    private final FluidStack fluidStack;
     private int tankID;
 
     private final BlockPos blockPos;

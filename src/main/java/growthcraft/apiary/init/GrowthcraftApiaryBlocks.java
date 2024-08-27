@@ -56,6 +56,9 @@ public class GrowthcraftApiaryBlocks {
     public static final RegistryObject<Block> BEE_BOX_WARPED = registerBlock(
             Reference.UnlocalizedName.BEE_BOX_WARPED, BeeBoxBlock::new
     );
+    public static final RegistryObject<Block> BEE_BOX_BAMBOO = registerBlock(
+            Reference.UnlocalizedName.BEE_BOX_BAMBOO, BeeBoxBlock::new
+    );
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> block) {
         RegistryObject<Block> registryObject = BLOCKS.register(name, block);

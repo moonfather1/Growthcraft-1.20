@@ -114,5 +114,21 @@
   "item.growthcraft_cellar.yeast_brewers_ethereal": "Эфирные пивные дрожжи",
   "item.growthcraft_cellar.yeast_ethereal": "Эфирные дрожжи",
   "item.growthcraft_cellar.yeast_lager": "Лагерные дрожжи",
-  "item.growthcraft_cellar.yeast_lager_ethereal": "Эфирные лагерные дрожжи"
+  "item.growthcraft_cellar.yeast_lager_ethereal": "Эфирные лагерные дрожжи",
+  "growthcraft_cellar.tooltip.roaster.progress": "Roast Level %s (%d%%)",
+  "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
+  "growthcraft_cellar.tooltip.fermentation.yeast_warning": "Insufficient yeast.",
+  "growthcraft_cellar.tooltip.fermentation.yeast_error": "Not a valid yeast for this fluid.",
+  "message.growthcraft_cellar.kettle.outside_lid_on": "Lid put on.",
+  "message.growthcraft_cellar.kettle.outside_lid_off": "Lid taken off.",
+  "message.growthcraft_cellar.kettle.gui_lid_on": "Put the lid on.",
+  "message.growthcraft_cellar.kettle.gui_lid_off": "Take the lid off.",
+  "emi.category.growthcraft_cellar.press": "Pressing",
+  "emi.category.growthcraft_cellar.barrel": "Fermenting",
+  "emi.category.growthcraft_cellar.kettle": "Brewing and steaming",
+  "emi.category.growthcraft_cellar.roaster": "Roasting",
+  "emi.category.growthcraft_cellar.jar1": "Culturing (starters)",
+  "emi.category.growthcraft_cellar.jar2": "Culturing",
+  "emi.category.growthcraft_cellar.book": "Other",
+  "label.growthcraft_cellar.roaster_level": "Roaster level: %s"
 }

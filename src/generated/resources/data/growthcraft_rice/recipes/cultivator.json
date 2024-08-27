@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "growthcraft_rice",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "i": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "pattern": [
+    "iIi",
+    "iSi",
+    " S "
+  ],
+  "result": {
+    "item": "growthcraft_rice:cultivator"
+  },
+  "show_notification": true
+}

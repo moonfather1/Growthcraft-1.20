@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 3,
+  "group": "growthcraft_milk",
+  "ingredient": {
+    "item": "growthcraft_milk:thistle"
+  },
+  "result": "growthcraft_milk:thistle_seed"
+}

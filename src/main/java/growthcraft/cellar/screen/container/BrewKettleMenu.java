@@ -3,13 +3,17 @@ package growthcraft.cellar.screen.container;
 import growthcraft.cellar.block.BrewKettleBlock;
 import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
 import growthcraft.cellar.init.GrowthcraftCellarMenus;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -17,10 +21,10 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class BrewKettleMenu extends AbstractContainerMenu {
-    private BrewKettleBlockEntity blockEntity;
-    private BrewKettleBlock block;
+    private final BrewKettleBlockEntity blockEntity;
+    private final BrewKettleBlock block;
     private final Level level;
-    private ContainerData data;
+    private final ContainerData data;
 
     public BrewKettleMenu(int containerId, Inventory inventory, FriendlyByteBuf extraData) {
         this(containerId, inventory, inventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
@@ -39,7 +43,7 @@ public class BrewKettleMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
                     // 0 Lid Slot
-                    this.addSlot(new SlotItemHandler(handler, 0, 19, 17));
+                    this.addSlot(new TemporarilyDisabledSlot(0));
                     // 1 Input Slot
                     this.addSlot(new SlotItemHandler(handler, 1, 80, 35));
                     // 2 By Product Slot (output only)
@@ -65,6 +69,10 @@ public class BrewKettleMenu extends AbstractContainerMenu {
 
     public boolean isHeated() {
         return this.blockEntity.isHeated();
+    }
+
+    public boolean hasLid() {
+        return this.blockEntity.hasLid();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -150,4 +158,26 @@ public class BrewKettleMenu extends AbstractContainerMenu {
         }
     }
 
+    @Override
+    public boolean clickMenuButton(Player player, int buttonId) {
+        BlockState state = this.level.getBlockState(this.blockEntity.getBlockPos());  // we're on server, don't actually care for ContainerLevelAccess
+        this.level.setBlockAndUpdate(this.blockEntity.getBlockPos(), state.setValue(BrewKettleBlock.HAS_LID, !state.getValue(BrewKettleBlock.HAS_LID)));
+        this.sendAllDataToRemote();
+        return true;
+    }
+
+    // we'll temporarily disable slot 0; we'll either kill it later (to keep this commit clean), or repurpose it (have plans).
+    private static class TemporarilyDisabledSlot extends Slot {
+        public TemporarilyDisabledSlot(int index) {
+            super(new SimpleContainer(ItemStack.EMPTY), index, 4, 4);
+        }
+        @Override
+        public boolean mayPlace(ItemStack p_40231_) {
+            return false;
+        }
+        @Override
+        public boolean isActive() {
+            return false;
+        }
+    }
 }

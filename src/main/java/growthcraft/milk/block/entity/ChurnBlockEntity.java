@@ -172,7 +172,7 @@ public class ChurnBlockEntity extends BlockEntity implements BlockEntityTicker<C
                 } else if (this.tickMax > 0 && this.tickClock > this.tickMax) {
                     this.setFluidStackInTank(0, recipe.getOutputFluidStack().copy());
                     if(new SecureRandom().nextInt(100) <= recipe.getByProductChance()) {
-                        this.getInventoryHandler().setStackInSlot(0, recipe.getResultItemStack());
+                        this.getInventoryHandler().setStackInSlot(0, recipe.getResultItemStack().copy());
                     }
                     this.tickMax = -1;
                     this.tickClock = 0;

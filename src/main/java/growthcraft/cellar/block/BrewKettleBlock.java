@@ -3,17 +3,17 @@ package growthcraft.cellar.block;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.utils.BlockPropertiesUtils;
 import growthcraft.lib.utils.BlockStateUtils;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -36,39 +36,45 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
-
-import static net.minecraft.world.phys.shapes.BooleanOp.OR;
 
 public class BrewKettleBlock extends BaseEntityBlock {
 
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final BooleanProperty HAS_LID = BooleanProperty.create("has_lid");
-
-    private final VoxelShape[] VOXEL_SHAPES_LID = new VoxelShape[]{
+    private final VoxelShape[] SHAPES_LEGS = new VoxelShape[] {
             Block.box(0, 0, 2, 2, 3, 4),
-            Block.box(1, 3, 1, 15, 4, 15),
-            Block.box(1, 3, 0, 15, 16, 1),
-            Block.box(15, 3, 0, 16, 16, 16),
-            Block.box(1, 3, 15, 15, 16, 16),
-            Block.box(0, 3, 0, 1, 16, 16),
             Block.box(0, 0, 0, 4, 3, 2),
             Block.box(12, 0, 0, 16, 3, 2),
             Block.box(12, 0, 14, 16, 3, 16),
             Block.box(0, 0, 14, 4, 3, 16),
             Block.box(14, 0, 2, 16, 3, 4),
             Block.box(14, 0, 12, 16, 3, 14),
-            Block.box(1, 15, 1, 15, 16, 15),
             Block.box(0, 0, 12, 2, 3, 14)
     };
+    private final VoxelShape[] SHAPES_SIDES = new VoxelShape[] {
+            Block.box(1, 3, 1, 15, 4, 15),
+            Block.box(1, 3, 0, 15, 15, 1),
+            Block.box(15, 3, 0, 16, 15, 16),
+            Block.box(1, 3, 15, 15, 15, 16),
+            Block.box(0, 3, 0, 1, 15, 16)
+    };
+    private final VoxelShape BLOCK_SHAPE_WITHOUT_LID = Shapes.or(Shapes.or(Shapes.empty(), SHAPES_SIDES), SHAPES_LEGS);
+    private final VoxelShape BLOCK_SHAPE_WITH_LID = Shapes.or(Block.box(0, 3, 0, 16, 15, 16), SHAPES_LEGS);
+
+    private static final Component MESSAGE_NO_LID = Component.translatable("message.growthcraft_cellar.kettle.outside_lid_off").withStyle(Style.EMPTY.withColor(0xffccccd5));
+    private static final Component MESSAGE_HAS_LID = Component.translatable("message.growthcraft_cellar.kettle.outside_lid_on").withStyle(Style.EMPTY.withColor(0xffccccd5));
+    private static final Component MESSAGE_ON_PLACED = Component.translatable("message.growthcraft_cellar.kettle.on_place").withStyle(Style.EMPTY.withColor(0xffccccd5));
 
     public BrewKettleBlock() {
         this(getInitProperties());
@@ -98,7 +104,7 @@ public class BrewKettleBlock extends BaseEntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
-        return Arrays.stream(VOXEL_SHAPES_LID).reduce((v1, v2) -> Shapes.join(v1, v2, OR)).get();
+        return blockState.getValue(HAS_LID) ? BLOCK_SHAPE_WITH_LID : BLOCK_SHAPE_WITHOUT_LID;
     }
 
     @Override
@@ -110,7 +116,7 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
-                .setValue(LIT, BlockStateUtils.isHeated(context.getLevel(), context.getClickedPos()))
+                .setValue(LIT, BlockStateUtils.isHeatedFromBelow(context.getLevel(), context.getClickedPos()))
                 .setValue(HAS_LID, false);
     }
 
@@ -129,16 +135,10 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
         if (level.isClientSide) {
-            return blockState.getValue(LIT)
-                    ? createTickerHelper(blockEntityType,
-                        GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::particleTick)
-                    : null;
-        } else {
-            return createTickerHelper(
-                    blockEntityType,
-                    GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(),
-                    (worldLevel, pos, state, blockEntity) -> (blockEntity).tick()
-            );
+            return createTickerHelper(blockEntityType, GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::clientTick);
+        }
+        else  {
+            return createTickerHelper(blockEntityType, GrowthcraftCellarBlockEntities.BREW_KETTLE_BLOCK_ENTITY.get(), BrewKettleBlockEntity::serverTick);
         }
     }
 
@@ -147,11 +147,17 @@ public class BrewKettleBlock extends BaseEntityBlock {
     @ParametersAreNonnullByDefault
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
         if (!level.isClientSide) {
+            if (player.isCrouching()) {
+                boolean newState = !blockState.getValue(HAS_LID);
+                level.setBlockAndUpdate(blockPos, blockState.setValue(HAS_LID, newState));
+                player.displayClientMessage(newState ? MESSAGE_HAS_LID : MESSAGE_NO_LID, true);
+                return InteractionResult.SUCCESS;
+            }
             BrewKettleBlockEntity blockEntity = (BrewKettleBlockEntity) level.getBlockEntity(blockPos);
-            if(blockEntity == null) return InteractionResult.FAIL;
+            if (blockEntity == null) return InteractionResult.FAIL;
 
             // Try to do fluid handling first.
-            if(player.getItemInHand(interactionHand)
+            if (player.getItemInHand(interactionHand)
                     .getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
                     .isPresent()
             ) {
@@ -184,11 +190,12 @@ public class BrewKettleBlock extends BaseEntityBlock {
                     fluidInteractionResult = FluidUtil.interactWithFluidHandler(player, interactionHand, level, blockPos, Direction.UP);
                 }
 
+                level.sendBlockUpdated(blockPos, blockState, blockState, Block.UPDATE_CLIENTS);
                 // Return based on whether interaction with the fluid handler item was successful or not.
                 return fluidInteractionResult ? InteractionResult.SUCCESS : InteractionResult.FAIL;
             } else {
                 try {
-                    blockEntity.playSound("open");
+                    level.playSound(null, blockPos, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS);
                     NetworkHooks.openScreen(((ServerPlayer) player), blockEntity, blockPos);
                     return InteractionResult.SUCCESS;
                 } catch (Exception ex) {
@@ -214,32 +221,23 @@ public class BrewKettleBlock extends BaseEntityBlock {
         return true;
     }
 
-    public static void makeParticles(Level level, BlockPos blockPos, BlockState blockState) {
-        try {
-            BrewKettleBlockEntity blockEntity = (BrewKettleBlockEntity) level.getBlockEntity(blockPos);
-
-            if (blockState.getValue(LIT) && blockEntity.getTickClock("current") > 0) {
-                RandomSource randomsource = level.getRandom();
-                SimpleParticleType simpleparticletype = ParticleTypes.CAMPFIRE_COSY_SMOKE;
-
-                level.addAlwaysVisibleParticle(
-                        simpleparticletype,
-                        true,
-                        (double) blockPos.getX() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        (double) blockPos.getY() + randomsource.nextDouble() + randomsource.nextDouble(),
-                        (double) blockPos.getZ() + 0.5D + randomsource.nextDouble() / 3.0D * (double) (randomsource.nextBoolean() ? 1 : -1),
-                        0.0D,
-                        0.07D,
-                        0.0D
-                );
-
-                level.playSound(null, blockPos, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F);
-            }
-        } catch (Exception e) {
-            GrowthcraftCellar.LOGGER.error("BrewKettleBlockEntity at %d threw an Exception: %s", blockPos.toString(), e.getMessage());
+    @Override
+    public void neighborChanged(BlockState p_60509_, Level level, BlockPos blockPos, Block p_60512_, BlockPos p_60513_, boolean p_60514_)  {
+        super.neighborChanged(p_60509_, level, blockPos, p_60512_, p_60513_, p_60514_);
+        if (level.getBlockEntity(blockPos) instanceof BrewKettleBlockEntity kettle) {
+            kettle.verifyHeated();
         }
-
     }
 
+    /////////////// message when block is placed //////////////
 
+    @Mod.EventBusSubscriber
+    private static class BlockEventHandler {
+        @SubscribeEvent
+        public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
+            if (event.getEntity() instanceof Player player && event.getPlacedBlock().is(GrowthcraftCellarBlocks.BREW_KETTLE.get())) {
+                player.displayClientMessage(MESSAGE_ON_PLACED, true);
+            }
+        }
+    }
 }

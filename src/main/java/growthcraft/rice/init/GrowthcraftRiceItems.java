@@ -1,5 +1,6 @@
 package growthcraft.rice.init;
 
+import growthcraft.lib.item.GrowthcraftBowlFoodItem;
 import growthcraft.lib.item.GrowthcraftFoodItem;
 import growthcraft.lib.item.GrowthcraftItem;
 import growthcraft.rice.item.CultivatorItem;
@@ -28,25 +29,40 @@ public class GrowthcraftRiceItems {
             Reference.UnlocalizedName.KNIFE,
             GrowthcraftItem::new
     );
-
-    public static final RegistryObject<RiceSeedItem> RICE = ITEMS.register(
-            Reference.UnlocalizedName.RICE,
+    
+    public static final RegistryObject<RiceSeedItem> RICE_GRAINS = ITEMS.register(
+            Reference.UnlocalizedName.RICE_GRAINS,
             RiceSeedItem::new
+    );
+
+    public static final RegistryObject<GrowthcraftItem> RICE = ITEMS.register(
+            Reference.UnlocalizedName.RICE,
+            GrowthcraftItem::new
     );
 
     public static final RegistryObject<GrowthcraftFoodItem> RICE_COOKED = ITEMS.register(
             Reference.UnlocalizedName.RICE_COOKED,
-            GrowthcraftFoodItem::new
+            () -> new GrowthcraftFoodItem(6, 0.4F, 64)
     );
 
     public static final RegistryObject<GrowthcraftItem> RICE_STALK = ITEMS.register(
             Reference.UnlocalizedName.RICE_STALK,
-            GrowthcraftItem::new
+            RiceSeedItem::new
     );
 
     public static final RegistryObject<GrowthcraftFoodItem> SUSHI_ROLL = ITEMS.register(
             Reference.UnlocalizedName.SUSHI_ROLL,
-            GrowthcraftFoodItem::new
+            () -> new GrowthcraftFoodItem(3, 0.4F, 64)
+    );
+    
+    public static final RegistryObject<GrowthcraftFoodItem> ONIGIRI = ITEMS.register(
+            Reference.UnlocalizedName.ONIGIRI,
+            () -> new GrowthcraftFoodItem(8, 0.5F, 64)
+    );
+    
+    public static final RegistryObject<GrowthcraftBowlFoodItem> CHICKEN_RICE = ITEMS.register(
+            Reference.UnlocalizedName.CHICKEN_RICE,
+            () -> new GrowthcraftBowlFoodItem(12, 0.8F, 8)
     );
 
     public static final RegistryObject<GrowthcraftItem> YEAST_SEISHU = ITEMS.register(

@@ -17,7 +17,7 @@ import static growthcraft.lib.block.GrowthcraftCropsRopeBlock.*;
 
 public class GrapeSeedsItem extends GrowthcraftItem {
 
-    private GrapeVineCropBlock grapeVineCropBlock;
+    private final GrapeVineCropBlock grapeVineCropBlock;
 
     public GrapeSeedsItem(Block grapeVineCropBlock, Block grapeVineLeavesCropBlock, Block grapeVineFruitBlock) {
         super();

@@ -1,0 +1,6 @@
+{
+  "type": "emi:world_interaction",
+  "left": "item:growthcraft_rice:cultivated_farmland",
+  "right": ["item:growthcraft_rice:rice_stalk", "item:growthcraft_rice:rice_grains"],
+  "output": "item:growthcraft_rice:rice_stalk"
+}

@@ -1,11 +1,13 @@
 package growthcraft.apples.init;
 
-import growthcraft.apples.block.AppleBeeBoxBlock;
-import growthcraft.apples.block.AppleRopeBlock;
+import growthcraft.apiary.block.BeeBoxBlock;
+import growthcraft.apiary.init.GrowthcraftApiaryBlockEntities;
 import growthcraft.apples.block.AppleTreeFruit;
 import growthcraft.apples.block.AppleTreeLeaves;
 import growthcraft.apples.shared.Reference;
 import growthcraft.apples.world.feature.tree.AppleTreeGrower;
+import growthcraft.core.block.RopeBlock;
+import growthcraft.core.init.GrowthcraftBlockEntities;
 import growthcraft.lib.block.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -107,14 +109,13 @@ public class GrowthcraftApplesBlocks {
             GrowthcraftLogBlock::new
     );
 
-    public static final RegistryObject<Block> APPLE_PLANK_FENCE_ROPE_LINEN = registerBlock(
+    public static final RegistryObject<Block> APPLE_PLANK_FENCE_ROPE_LINEN = registerRopedFence(
             Reference.UnlocalizedName.APPLE_PLANK_FENCE_ROPE_LINEN,
-            AppleRopeBlock::new,
-            true
+            RopeBlock::new
     );
 
-    public static final RegistryObject<Block> BEE_BOX_APPLE = registerBlock(
-            Reference.UnlocalizedName.BEE_BOX_APPLE, AppleBeeBoxBlock::new
+    public static final RegistryObject<Block> BEE_BOX_APPLE = registerBeeBox(
+            Reference.UnlocalizedName.BEE_BOX_APPLE, BeeBoxBlock::new
     );
 
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> block) {
@@ -127,6 +128,18 @@ public class GrowthcraftApplesBlocks {
             registerBlockItem(name, registryObject);
         }
         return registryObject;
+    }
+
+    private static RegistryObject<Block> registerBeeBox(String name, Supplier<Block> block) {
+        RegistryObject<Block> blockRegistryObject = registerBlock(name, block, false);
+        GrowthcraftApiaryBlockEntities.registerBeeBox(blockRegistryObject);
+        return blockRegistryObject;
+    }
+
+    private static RegistryObject<Block> registerRopedFence(String name, Supplier<Block> block) {
+        RegistryObject<Block> blockRegistryObject = registerBlock(name, block, true);
+        GrowthcraftBlockEntities.registerRopedFence(blockRegistryObject);
+        return blockRegistryObject;
     }
 
     private static void registerBlockItem(String name, RegistryObject<Block> blockRegistryObject) {

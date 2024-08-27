@@ -46,16 +46,18 @@ public class FruitPressPistonBlock  extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
 
-    private VoxelShape[] VOXEL_SHAPES_UP = new VoxelShape[] {
+    private final VoxelShape[] SHAPES_LIST_UP = new VoxelShape[] {
             Block.box(0, 15, 0, 16, 16, 16),
             Block.box(3, 0, 3, 13, 16, 13)
     };
+    private final VoxelShape CALCULATED_SHAPE_UP = Shapes.or(Shapes.empty(), SHAPES_LIST_UP);
 
-    private VoxelShape[] VOXEL_SHAPES_DOWN = new VoxelShape[] {
+    private final VoxelShape[] SHAPES_LIST_DOWN = new VoxelShape[] {
             Block.box(0, 15, 0, 16, 16, 16),
             Block.box(6.5, 0, 6.5, 9.5, 9, 9.5),
             Block.box(3, 9, 3, 13, 16, 13)
     };
+    private final VoxelShape CALCULATED_SHAPE_DOWN = Shapes.or(Shapes.empty(), SHAPES_LIST_DOWN);
 
     public FruitPressPistonBlock() {
         super(getInitProperties());
@@ -82,9 +84,7 @@ public class FruitPressPistonBlock  extends Block {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
-        return blockState.getValue(PRESSED)
-                ? Arrays.stream(VOXEL_SHAPES_DOWN).reduce((v1, v2) -> Shapes.join(v1, v2, OR)).get()
-                : Arrays.stream(VOXEL_SHAPES_UP).reduce((v1, v2) -> Shapes.join(v1, v2, OR)).get();
+        return blockState.getValue(PRESSED) ? CALCULATED_SHAPE_DOWN : CALCULATED_SHAPE_UP;
     }
 
     @Override
@@ -142,7 +142,7 @@ public class FruitPressPistonBlock  extends Block {
         if(!level.isClientSide && player.getItemInHand(interactionHand).getItem() == Items.LEVER) {
             level.setBlock(blockPos.above(), Blocks.LEVER.getStateDefinition().any().setValue(FACING, blockState.getValue(FACING)), Block.UPDATE_ALL_IMMEDIATE);
             player.getItemInHand(interactionHand).shrink(1);
-        } else if (!level.isClientSide && player.isCrouching() && !blockState.getValue(PRESSED)) {
+        } else if (!level.isClientSide && !blockState.getValue(PRESSED)) {
             try {
                 // Play sound
                 level.playSound(player, blockPos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 1.0F, 1.0F);

@@ -1,6 +1,14 @@
 package growthcraft.cellar;
 
-import growthcraft.cellar.init.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarFluids;
+import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.init.GrowthcraftCellarMenus;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockEntityRenderers;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenderers;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
@@ -20,14 +28,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 
 @Mod(Reference.MODID)
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GrowthcraftCellar {
     public static final Logger LOGGER = LogManager.getLogger(Reference.MODID);
+//    private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Reference.MODID);
+//    private static final RegistryObject<Codec<? extends IGlobalLootModifier>> GLMSerializer1 = LOOT_MODIFIERS.register("bottles_in_loot_chests", LootModifierForBottlesInChests.CODEC);
 
     public GrowthcraftCellar() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -46,6 +54,7 @@ public class GrowthcraftCellar {
         GrowthcraftCellarFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarMenus.MENUS.register(modEventBus);
+//        GrowthcraftCellarGlobalLootModifier.register(modEventBus);
 
         GrowthcraftCellarRecipes.register(modEventBus);
 

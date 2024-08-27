@@ -107,7 +107,7 @@ public class BeeBoxBlock extends BaseEntityBlock {
                 BeeBoxBlockEntity blockEntity = (BeeBoxBlockEntity) level.getBlockEntity(pos);
                 blockEntity.dropItems();
             } catch (Exception ex) {
-                GrowthcraftApiary.LOGGER.error(String.format("Invalid blockEntity type at %s, expected BeeBoxBlockEntity", pos.toString()));
+                GrowthcraftApiary.LOGGER.error(String.format("Invalid blockEntity type at %s, expected BeeBoxBlockEntity", pos));
             }
         }
         super.onRemove(state, level, pos, newState, isMoving);

@@ -49,11 +49,12 @@ import static net.minecraft.world.phys.shapes.BooleanOp.OR;
 public class FruitPressBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    private final VoxelShape[] VOXEL_SHAPES = new VoxelShape[]{
+    private final VoxelShape[] SHAPES_LIST = new VoxelShape[]{
             Block.box(1, 0, 1, 15, 3, 15),
             Block.box(0, 3, 0, 16, 7, 16),
             Block.box(1, 7, 1, 15, 16, 15)
     };
+    private final VoxelShape CALCULATED_SHAPE = Shapes.or(Shapes.empty(), SHAPES_LIST);
 
     public FruitPressBlock() {
         super(getInitProperties());
@@ -79,7 +80,7 @@ public class FruitPressBlock extends BaseEntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
-        return Arrays.stream(VOXEL_SHAPES).reduce((v1, v2) -> Shapes.join(v1, v2, OR)).get();
+        return CALCULATED_SHAPE;
     }
 
     @Override
@@ -138,7 +139,7 @@ public class FruitPressBlock extends BaseEntityBlock {
 
             if (FluidUtil.interactWithFluidHandler(player, interactionHand, level, blockPos, hitResult.getDirection()) || player.getItemInHand(interactionHand).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent()) {
                 return InteractionResult.SUCCESS;
-            } else if (player.isCrouching() && !level.getBlockState(blockPos.above()).getValue(PRESSED)) {
+            } else if (!level.getBlockState(blockPos.above()).getValue(PRESSED)) {
                 try {
                     // Play sound
                     level.playSound(player, blockPos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 1.0F, 1.0F);

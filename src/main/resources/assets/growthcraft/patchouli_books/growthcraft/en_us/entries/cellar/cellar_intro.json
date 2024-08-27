@@ -1,12 +1,21 @@
 {
-  "name": "Introduction to brewing",
-  "icon": "growthcraft_cellar:brew_kettle",
+  "name": "Intro to Fermenting",
+  "icon": "growthcraft_cellar:fermentation_barrel_oak",
   "category": "growthcraft:cellar",
   "sortnum": 0,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "There are three categories of brewing, ales and lagers, wines, and meades. All three have a similar process.$(br2)Ales and Lagers - "
+      "text": "There are three categories of fermented beverages:$(li)$(bold)Ales and Lagers$() start from roasted grains brewed into worts$(li)$(bold)Wines and Ciders$() start from fruit pressed into juices$(li)$(bold)Meads$() start from Honeycombs brewed into must."
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "growthcraft:cellar/ales_and_lagers",
+        "growthcraft:cellar/wines_and_ciders"
+      ],
+      "title": "Getting Started",
+      "text": "$(br2)A separate $(l:apiary/honey_mead)Guide to Mead$() is maintained in the $(l:apiary)$(bold)Apiary$() section."
     }
   ]
 }

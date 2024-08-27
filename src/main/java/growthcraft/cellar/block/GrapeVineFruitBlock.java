@@ -2,6 +2,7 @@ package growthcraft.cellar.block;
 
 import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -11,8 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -93,5 +97,20 @@ public class GrapeVineFruitBlock extends GrowthcraftCropsRopeBlock {
         return super.use(state, level, pos, player, hand, hitResult);
     }
 
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos blockPos) {
+        BlockState above = world.getBlockState(blockPos.above());
+        return (above.getBlock() instanceof GrapeVineLeavesCropBlock);
+    }
 
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos blockPos, Block block, BlockPos neighbor, boolean uselessBoolean) {
+        // when a block is removed from above, don't leave this one.
+        if (this.canSurvive(state, level, blockPos)) {
+            super.neighborChanged(state, level, blockPos, block, neighbor, uselessBoolean);
+        }
+        else {
+            level.destroyBlock(blockPos, true);
+        }
+    }
 }

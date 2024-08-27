@@ -64,9 +64,9 @@ public class TickUtils {
         // 1200 ticks per minute.
         // 72000 ticks per hour.
 
-        int hours = Math.round(ticks / 72000);
-        int minutes = Math.round(ticks / 1200);
-        int seconds = Math.round(ticks / 20 - minutes * 60);
+        int hours = ticks / (60 * 60 * 20);
+        int minutes = (ticks / (60 * 20)) % 60;
+        int seconds = (ticks / 20) % 60;
 
         return hours > 0 ? String.format("%02d:%02d:%02d", hours, minutes, seconds) : String.format("%02d:%02d", minutes, seconds);
     }

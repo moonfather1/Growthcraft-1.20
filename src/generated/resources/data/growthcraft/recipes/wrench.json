@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "growthcraft",
+  "key": {
+    "A": {
+      "tag": "forge:ingots/iron"
+    },
+    "B": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "pattern": [
+    " BB",
+    " AB",
+    "A  "
+  ],
+  "result": {
+    "item": "growthcraft:wrench"
+  },
+  "show_notification": true
+}

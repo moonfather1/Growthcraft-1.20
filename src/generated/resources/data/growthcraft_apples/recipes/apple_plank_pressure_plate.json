@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "growthcraft_apples",
+  "key": {
+    "#": {
+      "item": "growthcraft_apples:apple_plank"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "item": "growthcraft_apples:apple_plank_pressure_plate"
+  },
+  "show_notification": true
+}

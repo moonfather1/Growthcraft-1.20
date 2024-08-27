@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_cellar",
+  "key": {
+    "A": {
+      "tag": "minecraft:planks"
+    },
+    "B": {
+      "tag": "forge:glass_panes"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "B B",
+    "BBB"
+  ],
+  "result": {
+    "item": "growthcraft_cellar:culture_jar"
+  },
+  "show_notification": true
+}

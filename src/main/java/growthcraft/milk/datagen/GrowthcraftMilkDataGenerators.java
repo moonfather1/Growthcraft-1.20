@@ -1,7 +1,9 @@
 package growthcraft.milk.datagen;
 
 import growthcraft.milk.datagen.providers.GrowthcraftMilkBlockStateProvider;
+import growthcraft.milk.datagen.providers.GrowthcraftMilkGlobalLootModifiersProvider;
 import growthcraft.milk.datagen.providers.GrowthcraftMilkLootTableProvider;
+import growthcraft.milk.datagen.providers.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.data.DataGenerator;
@@ -27,6 +29,8 @@ public class GrowthcraftMilkDataGenerators {
         );
 
         generator.addProvider(event.includeClient(), new GrowthcraftMilkBlockStateProvider(output, helper));
+        generator.addProvider(event.includeClient(), new GrowthcraftMilkRecipes(output));
+//		generator.addProvider(event.includeServer(), new GrowthcraftMilkGlobalLootModifiersProvider(output));
 
     }
 

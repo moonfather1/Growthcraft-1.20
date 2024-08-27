@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -20,7 +21,7 @@ import net.minecraftforge.common.ToolActions;
 public class CultivatorItem extends HoeItem {
 
     public CultivatorItem() {
-        super(Tiers.IRON, 6, -1.0F, getInitProperties());
+        super(Tiers.IRON, -1, -2.0F, getInitProperties());
     }
 
     private static Item.Properties getInitProperties() {

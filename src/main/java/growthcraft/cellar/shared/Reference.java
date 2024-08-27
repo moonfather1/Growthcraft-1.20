@@ -19,7 +19,6 @@ public class Reference {
         public static final String AMBER_LAGER = "amber_lager";
         public static final String AMBER_WORT = "amber_wort";
         public static final String BREW_KETTLE = "brew_kettle";
-        public static final String BREW_KETTLE_LID = "brew_kettle_lid";
         public static final String BREW_KETTLE_RECIPE = "brew_kettle_recipe";
         public static final String BROWN_ALE = "brown_ale";
         public static final String BROWN_LAGER = "brown_lager";
@@ -109,6 +108,9 @@ public class Reference {
         public static final String YEAST_LAGER_ETHEREAL = "yeast_lager_ethereal";
         public static final String TAG_HEATSOURCES = "heat_sources";
         public static final String KINDLING = "kindling";
+		public static final String TAG_BARLEY = "grain/barley";
+		public static final String TAG_GRAPE_SEEDS = "seeds/grapes";
+		public static final String TAG_GRAPE_FRUITS = "fruits/grapes";
 
         private UnlocalizedName() {
             /* Disable Automatic Creation of Public Constructor */
@@ -166,6 +168,21 @@ public class Reference {
         private GrainColor() {
             /* Disable Automatic Creation of Public Constructor */
         }
+    }
+    
+    public static class LootTable{
+    	public static final String PILLAGER_OUTPOST_CHEST_LOOT = "pillager_outpost";
+		public static final String UNDERWATER_RUIN_LOOT = "underwater_ruin";
+		public static final String SHIPWRECK_CHEST_LOOT = "shipwreck";
+		public static final String VILLAGE_CHEST_LOOT = "village";
+		public static final String BURIED_TREASURE_CHEST_LOOT = "buried_treasure";
+		public static final String WOODLAND_MANSION_CHEST_LOOT = "woodland_mansion";
+		public static final String STRONGHOLD_CHEST_LOOT = "stronghold";
+    	
+    	
+    	private LootTable() {
+            /* Disable Automatic Creation of Public Constructor */
+    	}
     }
 
     private Reference() {

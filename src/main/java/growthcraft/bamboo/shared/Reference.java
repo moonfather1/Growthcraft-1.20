@@ -1,17 +1,11 @@
 package growthcraft.bamboo.shared;
 
-import org.codehaus.plexus.util.StringUtils;
-
 public class Reference {
     public static final String NAME_SHORT = "bamboo";
 
     public static final String MODID = growthcraft.core.shared.Reference.MODID + "_" + NAME_SHORT;
 
-    public static final String NAME = String.format("%s %s",
-            growthcraft.core.shared.Reference.NAME,
-            StringUtils.capitalise(NAME_SHORT));
-
-    public static final String VERSION = growthcraft.core.shared.Reference.VERSION;
+    public static final String VERSION = "2.1-clean-slate";
 
     public static class UnlocalizedName {
         public static final String BAMBOO_PLANK = "bamboo_plank";
@@ -35,14 +29,11 @@ public class Reference {
         public static final String BAMBOO_WOOD_LOG_STRIPPED = "bamboo_wood_log_stripped";
         public static final String BAMBOO_PLANK_BEE_BOX = "bee_box_bamboo";
 
+        // now the new (2024 and onwards) blocks
+        public static final String BAMBOO_POST_VERTICAL = "bamboo_post_vertical";
+        public static final String BAMBOO_POST_HORIZONTAL = "bamboo_post_horizontal";
+
         private UnlocalizedName() {
-            /* Disable Automatic Creation of Public Constructor */
-        }
-    }
-
-    public static class FluidColor {
-
-        private FluidColor() {
             /* Disable Automatic Creation of Public Constructor */
         }
     }

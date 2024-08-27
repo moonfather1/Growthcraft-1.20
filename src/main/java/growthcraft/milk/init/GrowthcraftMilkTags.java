@@ -41,6 +41,8 @@ public class GrowthcraftMilkTags {
         }
 
         public static final TagKey<Item> TAG_MIXING_VAT_TOOLS = tag(Reference.UnlocalizedName.TAG_MIXING_VAT_TOOLS);
+        public static final TagKey<Item> TAG_MILK_BUCKETS = tag(Reference.UnlocalizedName.TAG_MILK_BUCKETS);
+        public static final TagKey<Item> TAG_MILKABLE = tag(Reference.UnlocalizedName.TAG_MILKABLE);
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(Reference.MODID, name));

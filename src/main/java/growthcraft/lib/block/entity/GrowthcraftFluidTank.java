@@ -71,14 +71,10 @@ public class GrowthcraftFluidTank extends FluidTank {
 
         // If the fluid type matches and there is enough room in the tank,
         // then the fluid stack can fit.
-        if(this.getFluid().getFluid() == fluidStack.getFluid()
-                && this.capacity - this.getFluidAmount() >= fluidStack.getAmount()
-        ) {
-            return true;
-        }
+        return this.getFluid().getFluid() == fluidStack.getFluid()
+                && this.capacity - this.getFluidAmount() >= fluidStack.getAmount();
 
         // Otherwise return false.
-        return false;
     }
 
 }

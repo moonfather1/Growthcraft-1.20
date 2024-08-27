@@ -27,11 +27,11 @@ public class Reference {
         public static final String BEES_WAX_RED = "bees_wax_red";
         public static final String BEES_WAX_WHITE = "bees_wax_white";
         public static final String BEES_WAX_YELLOW = "bees_wax_yellow";
+
         public static final String BEE_BOX = "bee_box";
         public static final String BEE_BOX_ACACIA = "bee_box_acacia";
         public static final String BEE_BOX_BIRCH = "bee_box_birch";
         public static final String BEE_BOX_CHERRY = "bee_box_cherry";
-
         public static final String BEE_BOX_CRIMSON = "bee_box_crimson";
         public static final String BEE_BOX_DARK_OAK = "bee_box_dark_oak";
         public static final String BEE_BOX_JUNGLE = "bee_box_jungle";
@@ -39,6 +39,7 @@ public class Reference {
         public static final String BEE_BOX_OAK = "bee_box_oak";
         public static final String BEE_BOX_SPRUCE = "bee_box_spruce";
         public static final String BEE_BOX_WARPED = "bee_box_warped";
+        public static final String BEE_BOX_BAMBOO = "bee_box_bamboo";
 
         public static final String BEE_TAG = "bee";
         public static final String HONEY = "honey";

@@ -19,11 +19,38 @@ import java.util.List;
 public class GrowthcraftPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> SALT_ORE_PLACED_KEY = createKey(Reference.UnlocalizedName.SALT_ORE_PLACED);
+    public static final ResourceKey<PlacedFeature> DEEPSLATE_SALT_ORE_PLACED_KEY = createKey("deepslate_" + Reference.UnlocalizedName.SALT_ORE_PLACED);
+    public static final ResourceKey<PlacedFeature> NETHER_SALT_ORE_PLACED_KEY = createKey("nether_" + Reference.UnlocalizedName.SALT_ORE_PLACED);
+    public static final ResourceKey<PlacedFeature> END_SALT_ORE_PLACED_KEY = createKey("end_" + Reference.UnlocalizedName.SALT_ORE_PLACED);
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(context, SALT_ORE_PLACED_KEY, configuredFeatures.getOrThrow(GrowthcraftConfiguredFeatures.OVERWORLD_SALT_ORE_KEY),
+        register(context, SALT_ORE_PLACED_KEY, configuredFeatures.getOrThrow(GrowthcraftConfiguredFeatures.SALT_ORE_KEY),
+                GrowthcraftOrePlacement.commonOrePlacement(
+                        GrowthcraftConfig.getSaltOreGenSpreadAmount(),
+                        HeightRangePlacement.uniform(
+                                VerticalAnchor.absolute(GrowthcraftConfig.getSaltOreGenHeightMin()),
+                                VerticalAnchor.absolute(GrowthcraftConfig.getSaltOreGenHeightMax()))
+                ));
+        
+        register(context, DEEPSLATE_SALT_ORE_PLACED_KEY, configuredFeatures.getOrThrow(GrowthcraftConfiguredFeatures.DEEPSLATE_SALT_ORE_KEY),
+                GrowthcraftOrePlacement.commonOrePlacement(
+                        GrowthcraftConfig.getSaltOreGenSpreadAmount(),
+                        HeightRangePlacement.uniform(
+                                VerticalAnchor.absolute(GrowthcraftConfig.getSaltOreGenHeightMin()),
+                                VerticalAnchor.absolute(GrowthcraftConfig.getSaltOreGenHeightMax()))
+                ));
+        
+        register(context, NETHER_SALT_ORE_PLACED_KEY, configuredFeatures.getOrThrow(GrowthcraftConfiguredFeatures.NETHER_SALT_ORE_KEY),
+                GrowthcraftOrePlacement.commonOrePlacement(
+                        GrowthcraftConfig.getSaltOreGenSpreadAmount(),
+                        HeightRangePlacement.uniform(
+                                VerticalAnchor.absolute(GrowthcraftConfig.getSaltOreGenHeightMin()),
+                                VerticalAnchor.absolute(GrowthcraftConfig.getSaltOreGenHeightMax()))
+                ));
+        
+        register(context, END_SALT_ORE_PLACED_KEY, configuredFeatures.getOrThrow(GrowthcraftConfiguredFeatures.END_SALT_ORE_KEY),
                 GrowthcraftOrePlacement.commonOrePlacement(
                         GrowthcraftConfig.getSaltOreGenSpreadAmount(),
                         HeightRangePlacement.uniform(
@@ -43,15 +70,6 @@ public class GrowthcraftPlacedFeatures {
             List<PlacementModifier> modifiers
     ) {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
-    }
-
-    private static void register(
-            BootstapContext<PlacedFeature> context,
-            ResourceKey<PlacedFeature> key,
-            Holder<ConfiguredFeature<?, ?>> configuration,
-            PlacementModifier... modifiers
-    ) {
-        register(context, key, configuration, List.of(modifiers));
     }
 
     private GrowthcraftPlacedFeatures() {

@@ -15,7 +15,7 @@
   },
   "effects": [
     {
-      "effect": "minecraft:regeneration",
+      "effect": "minecraft:jump_boost",
       "duration": 3600,
       "amplifier": 1
     }
