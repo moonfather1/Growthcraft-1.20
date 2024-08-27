@@ -1,14 +1,14 @@
 modLoader = "javafml"
 loaderVersion = "[45,)"
 license = "GNU General Public License v3.0"
-issueTrackerURL = "https://github.com/GrowthcraftCE/Growthcraft-1.19/issues"
+issueTrackerURL = "https://github.com/GrowthcraftCE/Growthcraft-1.20/issues"
 
 [[mods]]
 modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
-updateJSONURL = "https://raw.githubusercontent.com/GrowthcraftCE/Growthcraft-Updates/master/growthcraft-trapper-versions.json"
-displayURL = "https://github.com/GrowthcraftCE/Growthcraft/wiki"
+updateJSONURL = "https://raw.githubusercontent.com/GrowthcraftCE/Growthcraft-Updates/master/growthcraft-versions.json"
+displayURL = "https://github.com/GrowthcraftCE/Growthcraft-1.20/wiki"
 logoFile = "growthcraft_core_logo.png"
 credits = "Thanks to Gwafu for starting a great mod. And the Growthcraft CE Development for continuing the work."
 authors = "${mod_authors}"
