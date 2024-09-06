@@ -5,7 +5,6 @@ import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.block.RopeBlock;
 import growthcraft.core.init.GrowthcraftTags;
 import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
-import growthcraft.lib.utils.BlockStateUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -29,10 +28,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HopsCropBlock extends GrowthcraftCropsRopeBlock {
 
@@ -55,16 +52,7 @@ public class HopsCropBlock extends GrowthcraftCropsRopeBlock {
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         VoxelShape ropeVoxel = super.getShape(state, worldIn, pos, context);
 
-        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
-        Map<String, BlockState> blockMap = BlockStateUtils.getSurroundingBlockState(worldIn, pos);
-
-        if (blockMap.get("north").is(GrowthcraftTags.Blocks.ROPE)) voxelShapeArrayList.add(NORTH_BOUNDING_BOX);
-        if (blockMap.get("east").is(GrowthcraftTags.Blocks.ROPE)) voxelShapeArrayList.add(EAST_BOUNDING_BOX);
-        if (blockMap.get("south").is(GrowthcraftTags.Blocks.ROPE)) voxelShapeArrayList.add(SOUTH_BOUNDING_BOX);
-        if (blockMap.get("west").is(GrowthcraftTags.Blocks.ROPE)) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
-        if (blockMap.get("above").is(GrowthcraftTags.Blocks.ROPE)) voxelShapeArrayList.add(UP_BOUNDING_BOX);
-        if (blockMap.get("below").is(GrowthcraftTags.Blocks.ROPE)) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
-
+        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<>();
         voxelShapeArrayList.add(CUSTOM_SHAPE_BY_AGE[state.getValue(AGE)]);
         voxelShapeArrayList.add(ropeVoxel);
 
