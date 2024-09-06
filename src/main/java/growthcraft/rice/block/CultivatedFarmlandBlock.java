@@ -32,10 +32,10 @@ public class CultivatedFarmlandBlock extends Block implements SimpleWaterloggedB
     public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    protected static final VoxelShape SHAPE = Block.box(
-            0.0D, 0.0D, 0.0D,
-            16.0D, 15.0D, 16.0D
-    );
+    protected static final VoxelShape[] SHAPES = new VoxelShape[] {
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
+            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.5D, 16.0D)
+    };
 
     public static final int MAX_MOISTURE = 7;
 
@@ -76,8 +76,8 @@ public class CultivatedFarmlandBlock extends Block implements SimpleWaterloggedB
     }
 
     @Override
-    public VoxelShape getShape(BlockState p_53290_, BlockGetter p_53291_, BlockPos p_53292_, CollisionContext p_53293_) {
-        return SHAPE;
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
+        return blockState.getValue(WATERLOGGED) ? SHAPES[1] : SHAPES[0];
     }
 
     @Override
