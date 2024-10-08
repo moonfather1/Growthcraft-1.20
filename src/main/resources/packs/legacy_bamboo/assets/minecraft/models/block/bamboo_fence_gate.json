@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"bam": "minecraft:block/stripped_bamboo_block"
+		"bam": "minecraft:block/stripped_bamboo_block",
+		"particle": "#bam"
 	},
 	"elements": [
 		{
@@ -11,12 +12,12 @@
 			"to": [16, 16, 10.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -1.5]},
 			"faces": {
-				"north": {"uv": [12, 2, 14, 16], "texture": "#bam", "cullface": "east"},
-				"east": {"uv": [1, 0, 6, 14], "texture": "#bam", "cullface": "east"},
-				"south": {"uv": [13, 2, 15, 16], "texture": "#bam", "cullface": "east"},
-				"west": {"uv": [9, 2, 14, 16], "texture": "#bam", "cullface": "east"},
-				"up": {"uv": [13, 0, 15, 4], "texture": "#bam", "cullface": "east"},
-				"down": {"uv": [8, 5, 12, 7], "rotation": 90, "texture": "#bam", "cullface": "east"}
+				"north": {"uv": [12, 2, 14, 16], "texture": "#bam"},
+				"east": {"uv": [1, 0, 6, 14], "texture": "#bam"},
+				"south": {"uv": [13, 2, 15, 16], "texture": "#bam"},
+				"west": {"uv": [9, 2, 14, 16], "texture": "#bam"},
+				"up": {"uv": [13, 0, 15, 4], "texture": "#bam"},
+				"down": {"uv": [8, 5, 12, 7], "rotation": 90, "texture": "#bam"}
 			}
 		},
 		{
@@ -25,12 +26,12 @@
 			"to": [2, 16, 10.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, -1.5]},
 			"faces": {
-				"north": {"uv": [14, 2, 12, 16], "texture": "#bam", "cullface": "east"},
-				"east": {"uv": [14, 2, 9, 16], "texture": "#bam", "cullface": "east"},
-				"south": {"uv": [15, 2, 13, 16], "texture": "#bam", "cullface": "east"},
-				"west": {"uv": [6, 0, 1, 14], "texture": "#bam", "cullface": "east"},
-				"up": {"uv": [15, 0, 13, 4], "texture": "#bam", "cullface": "east"},
-				"down": {"uv": [8, 7, 12, 5], "rotation": 90, "texture": "#bam", "cullface": "east"}
+				"north": {"uv": [14, 2, 12, 16], "texture": "#bam"},
+				"east": {"uv": [14, 2, 9, 16], "texture": "#bam"},
+				"south": {"uv": [15, 2, 13, 16], "texture": "#bam"},
+				"west": {"uv": [6, 0, 1, 14], "texture": "#bam"},
+				"up": {"uv": [15, 0, 13, 4], "texture": "#bam"},
+				"down": {"uv": [8, 7, 12, 5], "rotation": 90, "texture": "#bam"}
 			}
 		},
 		{
@@ -39,12 +40,12 @@
 			"to": [16, 22, 10.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 11, -1.5]},
 			"faces": {
-				"north": {"uv": [12, 5, 14, 11], "texture": "#bam", "cullface": "east"},
-				"east": {"uv": [9, 5, 14, 11], "texture": "#bam", "cullface": "east"},
-				"south": {"uv": [13, 5, 15, 11], "texture": "#bam", "cullface": "east"},
-				"west": {"uv": [9, 5, 14, 11], "texture": "#bam", "cullface": "east"},
-				"up": {"uv": [13, 0, 15, 4], "texture": "#bam", "cullface": "east"},
-				"down": {"uv": [8, 5, 12, 7], "rotation": 90, "texture": "#bam", "cullface": "east"}
+				"north": {"uv": [12, 5, 14, 11], "texture": "#bam"},
+				"east": {"uv": [9, 5, 14, 11], "texture": "#bam"},
+				"south": {"uv": [13, 5, 15, 11], "texture": "#bam"},
+				"west": {"uv": [9, 5, 14, 11], "texture": "#bam"},
+				"up": {"uv": [13, 0, 15, 4], "texture": "#bam"},
+				"down": {"uv": [8, 5, 12, 7], "rotation": 90, "texture": "#bam"}
 			}
 		},
 		{
@@ -53,12 +54,12 @@
 			"to": [2, 22, 10.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 11, -1.5]},
 			"faces": {
-				"north": {"uv": [14, 5, 12, 11], "texture": "#bam", "cullface": "east"},
-				"east": {"uv": [14, 5, 9, 11], "texture": "#bam", "cullface": "east"},
-				"south": {"uv": [15, 5, 13, 11], "texture": "#bam", "cullface": "east"},
-				"west": {"uv": [14, 5, 9, 11], "texture": "#bam", "cullface": "east"},
-				"up": {"uv": [15, 0, 13, 4], "texture": "#bam", "cullface": "east"},
-				"down": {"uv": [8, 7, 12, 5], "rotation": 90, "texture": "#bam", "cullface": "east"}
+				"north": {"uv": [14, 5, 12, 11], "texture": "#bam"},
+				"east": {"uv": [14, 5, 9, 11], "texture": "#bam"},
+				"south": {"uv": [15, 5, 13, 11], "texture": "#bam"},
+				"west": {"uv": [14, 5, 9, 11], "texture": "#bam"},
+				"up": {"uv": [15, 0, 13, 4], "texture": "#bam"},
+				"down": {"uv": [8, 7, 12, 5], "rotation": 90, "texture": "#bam"}
 			}
 		},
 		{
