@@ -3,14 +3,23 @@ package growthcraft.milk.init;
 import growthcraft.lib.utils.CheeseUtils;
 import growthcraft.milk.block.*;
 import growthcraft.milk.block.CheeseWheelWaxableBlock;
+import growthcraft.milk.block.signs.HangingSignBlock1;
+import growthcraft.milk.block.signs.HangingSignBlock2;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SignBlock;
+import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class GrowthcraftMilkBlocks {
@@ -228,6 +237,15 @@ public class GrowthcraftMilkBlocks {
             () -> new CheeseCurdBlock(Reference.ItemColor.PROVOLONE_CHEESE.getColor())
     );
 
+    /////////// shop signs ////////////
+
+    private static final RegistryObject<Block> SHOP_SIGN_1_OAK = registerBlock("hanging_sign_1_oak", () -> makeSign(Blocks.OAK_HANGING_SIGN));
+    private static final RegistryObject<Block> SHOP_SIGN_2_OAK = registerBlock("hanging_sign_2_oak", () -> makeSign(Blocks.OAK_WALL_HANGING_SIGN));
+    private static final RegistryObject<Block> SHOP_SIGN_1_SPRUCE = registerBlock("hanging_sign_1_spruce", () -> makeSign(Blocks.SPRUCE_HANGING_SIGN));
+    private static final RegistryObject<Block> SHOP_SIGN_2_SPRUCE = registerBlock("hanging_sign_2_spruce", () -> makeSign(Blocks.SPRUCE_WALL_HANGING_SIGN));
+
+    ///////////////////////////////////
+
     private static RegistryObject<Block> registerBlock(String name, Supplier<Block> block) {
         return registerBlock(name, block, false);
     }
@@ -252,9 +270,32 @@ public class GrowthcraftMilkBlocks {
         return properties;
     }
 
+    //////// sign transforming support //////////////
+    private static Block makeSign(Block original) {
+        SignBlock originalCast = (SignBlock) original;
+        Block ourBlock;
+        if (! (original instanceof WallHangingSignBlock)) {
+            ourBlock = new HangingSignBlock1(originalCast);
+        }
+        else {
+            ourBlock = new HangingSignBlock2(originalCast);
+        }
+        signBlocksByOriginal.put(original, ourBlock);
+        return ourBlock;
+    }
+    private static final Map<Block, Block> signBlocksByOriginal = new HashMap<>(); // for transformation
+
+    public static Block getSignFromOriginal(Block original) {
+        return signBlocksByOriginal.getOrDefault(original, null);
+    }
+
+    public static Block[] getSignsAsArray() { // for block entity
+        return signBlocksByOriginal.values().toArray(new Block[0]);
+    }
+
+    /////////////////////////////////////////////////
+
     private GrowthcraftMilkBlocks() {
         /* Disable default public constructor */
     }
-
-
 }

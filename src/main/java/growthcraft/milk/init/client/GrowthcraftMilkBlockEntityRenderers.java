@@ -2,6 +2,7 @@ package growthcraft.milk.init.client;
 
 import growthcraft.milk.block.entity.renderer.MixingVatBlockEntityRenderer;
 import growthcraft.milk.block.entity.renderer.PancheonBlockEntityRenderer;
+import growthcraft.milk.block.entity.renderer.ShopSignRenderer;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -14,6 +15,7 @@ public class GrowthcraftMilkBlockEntityRenderers {
     public static void register(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.PANCHEON_BLOCK_ENTITY.get(), context -> new PancheonBlockEntityRenderer());
         event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.MIXING_VAT_BLOCK_ENTITY.get(), context -> new MixingVatBlockEntityRenderer());
+        event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.SHOP_SIGN_BLOCK_ENTITY.get(), ShopSignRenderer::new);
     }
 
     private GrowthcraftMilkBlockEntityRenderers() {

@@ -73,6 +73,14 @@ public class GrowthcraftMilkBlockEntities {
             ).build(null)
     );
 
+    public static final RegistryObject<BlockEntityType<ShopSignBlockEntity>> SHOP_SIGN_BLOCK_ENTITY = BLOCK_ENTITIES.register(
+            Reference.UnlocalizedName.SHOP_SIGN,
+            () -> BlockEntityType.Builder.of(
+                    ShopSignBlockEntity::new,
+                    GrowthcraftMilkBlocks.getSignsAsArray()
+            ).build(null)
+    );
+
     public GrowthcraftMilkBlockEntities() {
         /* Disable automatic default public constructor */
     }

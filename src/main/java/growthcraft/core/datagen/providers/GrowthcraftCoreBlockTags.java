@@ -122,7 +122,8 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 		.add(GrowthcraftBlocks.ROPE_LINEN_MANGROVE_FENCE.get())
 		.add(GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get())
 		.add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get())
-		.add(GrowthcraftMilkBlocks.CHURN.get());
+		.add(GrowthcraftMilkBlocks.CHURN.get())
+		.add(GrowthcraftMilkBlocks.getSignsAsArray());
 		tag(BlockTags.MINEABLE_WITH_PICKAXE)
 		.add(GrowthcraftCellarBlocks.BREW_KETTLE.get())
 		.add(GrowthcraftCellarBlocks.FRUIT_PRESS.get())
