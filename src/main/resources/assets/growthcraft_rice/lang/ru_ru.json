@@ -1,18 +1,20 @@
 {
-  "block.growthcraft_rice.cultivated_farmland": "Возделанная почва",
-  "block.growthcraft_rice.rice_crop": "Побеги риса",
-  "fluid_type.growthcraft_rice.rice_water_fluid": "Рисовая вода",
+  "block.growthcraft_rice.cultivated_farmland": "Обработанная пашня",
+  "block.growthcraft_rice.rice_crop": "Урожай риса",
+  "fluid_type.growthcraft_rice.rice_water_fluid": "Рисовый вода",
   "fluid_type.growthcraft_rice.rice_wine_fluid": "Рисовое вино",
-  "fluid_type.growthcraft_rice.sake_fluid": "Саке",
-  "item.growthcraft_rice.cultivator": "Культиватор",
+  "fluid_type.growthcraft_rice.sake_fluid": "Сакэ",
+  "item.growthcraft_rice.cultivator": "Пропашник",
   "item.growthcraft_rice.knife": "Нож",
   "item.growthcraft_rice.rice": "Рис",
-  "item.growthcraft_rice.rice_cooked": "Приготовленный рис",
-  "item.growthcraft_rice.rice_stalk": "Стебель риса",
-  "item.growthcraft_rice.rice_water_fluid_bucket": "Ведро рисовой воды",
-  "item.growthcraft_rice.rice_wine_fluid_bucket": "Ведро рисового вина",
-  "item.growthcraft_rice.sake_fluid_bucket": "Ведро саке",
-  "item.growthcraft_rice.sushi_roll": "Суши ролл",
-  "item.growthcraft_rice.yeast_seishu": "Kumamoto Yeast"
-
+  "item.growthcraft_rice.rice_grains": "Рисовые зёрна",
+  "item.growthcraft_rice.onigiri": "Онигири",
+  "item.growthcraft_rice.chicken_rice": "Куриный рис",
+  "item.growthcraft_rice.rice_cooked": "Варёный рис",
+  "item.growthcraft_rice.rice_stalk": "Рисовый стебель",
+  "item.growthcraft_rice.rice_water_fluid_bucket": "Ведро с рисовым отваром",
+  "item.growthcraft_rice.rice_wine_fluid_bucket": "Ведро с рисовым вином",
+  "item.growthcraft_rice.sake_fluid_bucket": "Ведро с Сакэ",
+  "item.growthcraft_rice.sushi_roll": "Суши-ролл",
+  "item.growthcraft_rice.yeast_seishu": "Сейсю дрожжи"
 }
