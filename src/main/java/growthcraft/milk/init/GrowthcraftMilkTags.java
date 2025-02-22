@@ -11,6 +11,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class GrowthcraftMilkTags {
 
@@ -39,6 +40,9 @@ public class GrowthcraftMilkTags {
         private static void init() {
             // Do nothing, simply instantiate static variables
         }
+
+        public static final TagKey<Item> GC_WAX = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("growthcraft_apiary:bees_wax"));
+        public static final TagKey<Item> CHEESE_SLICES = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("growthcraft_milk:cheese_slices"));
 
         public static final TagKey<Item> TAG_MIXING_VAT_TOOLS = tag(Reference.UnlocalizedName.TAG_MIXING_VAT_TOOLS);
         public static final TagKey<Item> TAG_MILK_BUCKETS = tag(Reference.UnlocalizedName.TAG_MILK_BUCKETS);

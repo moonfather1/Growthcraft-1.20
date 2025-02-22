@@ -44,6 +44,7 @@ public class GrowthcraftCellarBlockLootTables extends VanillaBlockLoot{
 		dropSelf(GrowthcraftCellarBlocks.CORK_WOOD_LOG.get());
 		dropSelf(GrowthcraftCellarBlocks.CORK_WOOD_LOG_STRIPPED.get());
 		dropSelf(GrowthcraftCellarBlocks.CORK_WOOD_STRIPPED.get());
+		dropSelf(GrowthcraftCellarBlocks.CORK_COASTER.get());
 	}
 	
     @Override

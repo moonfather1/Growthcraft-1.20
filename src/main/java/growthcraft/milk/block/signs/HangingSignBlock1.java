@@ -1,6 +1,7 @@
 package growthcraft.milk.block.signs;
 
 import growthcraft.milk.block.entity.ShopSignBlockEntity;
+import growthcraft.milk.init.GrowthcraftMilkTags;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -89,7 +90,7 @@ public class HangingSignBlock1 extends CeilingHangingSignBlock {
                         level.setBlockAndUpdate(blockPos, newState);
                         newState.getBlock().use(newState, level, blockPos, player, hand, blockHitResult);
                     }
-                    else if (signBlockEntity.getItem().isEmpty() || ! (player.getItemInHand(hand).is(Items.HONEYCOMB) || player.getItemInHand(hand).is(Reference.ItemTag.GC_WAX))) {
+                    else if (signBlockEntity.getItem().isEmpty() || ! (player.getItemInHand(hand).is(Items.HONEYCOMB) || player.getItemInHand(hand).is(GrowthcraftMilkTags.Items.GC_WAX))) {
                         // change item
                         signBlockEntity.setItem(player.getItemInHand(hand));
                     }

@@ -45,7 +45,8 @@
       "state": {
         "Name": "growthcraft_cellar:cork_wood_log",
         "Properties": {
-          "axis": "y"
+          "axis": "y",
+          "regrow": "true"
         }
       }
     }

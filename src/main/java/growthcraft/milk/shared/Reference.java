@@ -141,9 +141,4 @@ public class Reference {
             /* Disable Automatic Creation of Public Constructor */
         }
     }
-
-    public static class ItemTag // these class names should be plurals but i'll play along and change to singular
-    {
-        public static final TagKey<Item> GC_WAX = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("growthcraft_apiary:bees_wax"));
-    }
 }
