@@ -1,6 +1,7 @@
 package growthcraft.milk.block.signs;
 
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.init.GrowthcraftMilkTags;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -27,7 +28,7 @@ public class TransformSignEvent {
             return;
         }
         BlockState state = event.getLevel().getBlockState(event.getHitVec().getBlockPos());
-        if (event.getItemStack() != ItemStack.EMPTY && state.getBlock() instanceof SignBlock original && event.getFace() != null && ! event.getFace().equals(Direction.DOWN) && ! event.getItemStack().is(Items.HONEYCOMB) && ! event.getItemStack().is(Reference.ItemTag.GC_WAX)) {
+        if (event.getItemStack() != ItemStack.EMPTY && state.getBlock() instanceof SignBlock original && event.getFace() != null && ! event.getFace().equals(Direction.DOWN) && ! event.getItemStack().is(Items.HONEYCOMB) && ! event.getItemStack().is(GrowthcraftMilkTags.Items.GC_WAX)) {
             BlockEntity blockEntity = event.getLevel().getBlockEntity(event.getHitVec().getBlockPos());
             if (blockEntity instanceof SignBlockEntity sbe && sbe.isWaxed()) {
                 return;
