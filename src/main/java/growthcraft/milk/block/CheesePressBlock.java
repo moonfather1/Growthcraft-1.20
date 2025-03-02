@@ -1,6 +1,7 @@
 package growthcraft.milk.block;
 
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.core.init.GrowthcraftTags;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.block.entity.CheesePressBlockEntity;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
@@ -116,7 +117,7 @@ public class CheesePressBlock extends BaseEntityBlock {
             CheesePressBlockEntity blockEntity = (CheesePressBlockEntity) level.getBlockEntity(blockPos);
             if (blockEntity == null) return InteractionResult.FAIL;
 
-            if (player.getItemInHand(interactionHand).getItem() == GrowthcraftItems.WRENCH.get()) {
+            if (player.getItemInHand(interactionHand).is(GrowthcraftTags.Items.ROASTER_WRENCH)) {
                 if (!player.isCrouching()) {
                     // Then tighten the cheese press.
                     level.playSound(null, blockPos, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS);
