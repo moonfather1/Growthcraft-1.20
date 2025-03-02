@@ -27,7 +27,7 @@ public class DataReloadListener
     //-----------------------------------
 
     @SubscribeEvent
-    public static void OnServerStarting(ServerStartingEvent event)
+    public static void onServerStarting(ServerStartingEvent event)
     {
         insertOurRecipes(event.getServer());
     }
