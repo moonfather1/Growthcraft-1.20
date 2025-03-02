@@ -20,6 +20,7 @@ public class GrowthcraftCellarConfig {
     private static ForgeConfigSpec.IntValue lootChanceBeachTreasure;
     private static ForgeConfigSpec.IntValue lootChanceDarkForestMansion;
     private static ForgeConfigSpec.IntValue lootChanceStronghold;
+    private static ForgeConfigSpec.BooleanValue secondaryAdjunctGrainsAllowed;
 
     static {
         initLootConfig(SERVER_BUILDER);
@@ -66,6 +67,11 @@ public class GrowthcraftCellarConfig {
                 .comment("Percentage chance you'll find a few bottles of wine in stronghold chest.")
                 .defineInRange("loot_chance_stronghold", 0, 0, 100);   // default is 0 - disabled for now. some absorption won't be too bad.
         builder.pop();
+        builder.push("brewing");
+        secondaryAdjunctGrainsAllowed = builder
+                .comment("Do we allow rice and corn as adjunct grains")
+                .define("allow_additional_adjunct_grains", false);
+        builder.pop();
     }
 
     public static int getLootChancePillagerTower() {
@@ -96,4 +102,5 @@ public class GrowthcraftCellarConfig {
         return lootChanceStronghold.get();
     }
 
+    public static boolean isSecondaryAdjunctGrainsAllowed() { return secondaryAdjunctGrainsAllowed.get(); }
 }

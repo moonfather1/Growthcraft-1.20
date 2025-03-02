@@ -48,6 +48,8 @@ public class GrowthcraftCoreBlockTags extends BlockTagsProvider {
 				.add(TagEntry.optionalElement(new ResourceLocation("farmersdelight", "stove")))
 				.add(TagEntry.optionalElement(new ResourceLocation("decorative_blocks", "bonfire")))
 				.add(TagEntry.optionalElement(new ResourceLocation("decorative_blocks", "brazier")))  // would have liked to support additional_lights but their firepits aren't tagged and there's a ton of them.
+				.add(TagEntry.optionalTag(new ResourceLocation("farm_and_charm:allows_cooking")))
+				.add(TagEntry.optionalTag(new ResourceLocation("create:fan_heaters")))
 				.add(TagEntry.tag(BlockTags.CAMPFIRES.location()))
 				.add(TagEntry.tag(BlockTags.FIRE.location()));
 

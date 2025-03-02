@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "conditions": [
+    {
+      "type": "forge:tag_empty",
+      "tag": "forge:grain/barley"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "growthcraft:config_value",
+        "module": "cellar",
+        "name": "brewing.allow_additional_adjunct_grains"
+      }
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "growthcraft_cellar:adjunct_grains_basic"
+      }
+    }
+  ],
+  "group": "growthcraft_cellar",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "tag": "growthcraft_cellar:adjunct_grains_basic"
+    },
+    {
+      "tag": "growthcraft_cellar:adjunct_grains_basic"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "growthcraft_cellar:grain"
+  }
+}

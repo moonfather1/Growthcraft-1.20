@@ -1,5 +1,9 @@
 {
   "values": [
-    "growthcraft:wrench"
+    "growthcraft:wrench",
+    {
+      "id": "#forge:tools/wrench",
+      "required": false
+    }
   ]
 }

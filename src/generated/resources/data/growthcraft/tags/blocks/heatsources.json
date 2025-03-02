@@ -14,6 +14,14 @@
       "id": "decorative_blocks:brazier",
       "required": false
     },
+    {
+      "id": "#farm_and_charm:allows_cooking",
+      "required": false
+    },
+    {
+      "id": "#create:fan_heaters",
+      "required": false
+    },
     "#minecraft:campfires",
     "#minecraft:fire"
   ]

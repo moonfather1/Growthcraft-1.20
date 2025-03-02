@@ -38,9 +38,12 @@ public class GrowthcraftCellarTags {
 
     public static class Items {
 
-        public static final TagKey<Item> TAG_GRAIN = tag(Reference.UnlocalizedName.GRAIN);
+        public static final TagKey<Item> TAG_ROASTED_GRAIN = tag(Reference.UnlocalizedName.TAG_ROASTED_GRAIN);
         
-        public static final TagKey<Item> TAG_BARLEY = forgeTag(Reference.UnlocalizedName.TAG_BARLEY);
+        public static final TagKey<Item> TAG_BARLEY = forgeTag("grain/barley");
+        public static final TagKey<Item> TAG_ADJUNCT_GRAINS1 = tag("adjunct_grains_basic");
+        public static final TagKey<Item> TAG_ADJUNCT_GRAINS2 = tag("adjunct_grains_extended");
+        public static final TagKey<Item> TAG_ADJUNCT_GRAINS2S = tag("adjunct_grains_extended_minus_wheat");
         public static final TagKey<Item> TAG_GRAPE_SEEDS = forgeTag(Reference.UnlocalizedName.TAG_GRAPE_SEEDS);
         public static final TagKey<Item> TAG_GRAPE_FRUITS = forgeTag(Reference.UnlocalizedName.TAG_GRAPE_FRUITS);
 

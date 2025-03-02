@@ -2,6 +2,8 @@ package growthcraft.core.datagen.providers;
 
 import java.util.concurrent.CompletableFuture;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -61,7 +63,8 @@ public class GrowthcraftCoreItemTags extends ItemTagsProvider{
 		.add(GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get().asItem());
 		
 		tag(GrowthcraftTags.Items.ROASTER_WRENCH)
-		.add(GrowthcraftItems.WRENCH.get());
+		.add(GrowthcraftItems.WRENCH.get())
+		.add(TagEntry.optionalTag(new ResourceLocation("forge:tools/wrench")));
 		tag(GrowthcraftTags.Items.SALT)
 		.add(GrowthcraftItems.SALT.get());
 		tag(GrowthcraftCellarTags.Items.TAG_GRAPE_FRUITS)
@@ -108,15 +111,13 @@ public class GrowthcraftCoreItemTags extends ItemTagsProvider{
 		tag(ItemTags.LEAVES)
 		.add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get().asItem());
 		
-		//Forge Tags
 		GrowthcraftCellarItems.ITEMS.getEntries().forEach(grain -> {
-			if (grain.getId().getPath().contains("grain")) {
-				tag(GrowthcraftCellarTags.Items.TAG_BARLEY)
-				.add(grain.get());
-				tag(GrowthcraftCellarTags.Items.TAG_GRAIN)
+			if (grain.getId().getPath().contains("grain") && ! grain.equals(GrowthcraftCellarItems.GRAIN)) {
+				tag(GrowthcraftCellarTags.Items.TAG_ROASTED_GRAIN)
 				.add(grain.get());
 			}
 		});
+		//Forge Tags
 		tag(GrowthcraftTags.Items.DUSTS_SALT)
 		.add(GrowthcraftItems.SALT.get());
 		tag(GrowthcraftRiceTags.Items.TAG_CROPS_RICE)

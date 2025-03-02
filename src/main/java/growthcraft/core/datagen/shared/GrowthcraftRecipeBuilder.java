@@ -1,6 +1,7 @@
 package growthcraft.core.datagen.shared;
 
 import com.google.gson.JsonObject;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -11,7 +12,9 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class GrowthcraftRecipeBuilder {
@@ -44,11 +47,27 @@ public class GrowthcraftRecipeBuilder {
         }
         private final List<ICondition> conditions = new ArrayList<>();
 
+
+
+        @Override
+        public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+            ResourceLocation location = BuiltInRegistries.ITEM.getKey(this.getResult().asItem());
+            int countExisting = dupeCounter.getOrDefault(location, 0);
+            dupeCounter.put(location, countExisting + 1);
+            if (countExisting > 0) {
+                location = new ResourceLocation(location.getNamespace(), location.getPath() + '_' + (countExisting + 1));
+            }
+            this.save(pFinishedRecipeConsumer, location);
+        }
+        private static final Map<ResourceLocation, Integer> dupeCounter = new HashMap<>();
+
         @Override
         public void save(Consumer<FinishedRecipe> recipeConsumer, ResourceLocation location)
         {
             super.save(recipe -> recipeConsumer.accept(this.appendConditions(recipe)), location);
         }
+
+
 
         private FinishedRecipe appendConditions(FinishedRecipe recipeWithoutConditions)
         {
