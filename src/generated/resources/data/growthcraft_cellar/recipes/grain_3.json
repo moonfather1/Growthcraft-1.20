@@ -3,20 +3,23 @@
   "category": "misc",
   "conditions": [
     {
-      "type": "forge:tag_empty",
-      "tag": "forge:grain/barley"
+      "type": "forge:not",
+      "value": {
+        "type": "forge:tag_empty",
+        "tag": "forge:grain/barley"
+      }
     }
   ],
   "group": "growthcraft_cellar",
   "ingredients": [
     {
-      "item": "minecraft:wheat"
+      "tag": "forge:grain/barley"
     },
     {
-      "item": "minecraft:wheat"
+      "tag": "forge:grain/barley"
     },
     {
-      "item": "minecraft:wheat"
+      "tag": "forge:grain/barley"
     }
   ],
   "result": {

@@ -108,7 +108,7 @@ public class Reference {
         public static final String YEAST_LAGER_ETHEREAL = "yeast_lager_ethereal";
         public static final String TAG_HEATSOURCES = "heat_sources";
         public static final String KINDLING = "kindling";
-		public static final String TAG_BARLEY = "grain/barley";
+		public static final String TAG_ROASTED_GRAIN = "roasted_grain";
 		public static final String TAG_GRAPE_SEEDS = "seeds/grapes";
 		public static final String TAG_GRAPE_FRUITS = "fruits/grapes";
 		public static final String CORK_TREE = "cork_tree";

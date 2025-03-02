@@ -4,7 +4,11 @@ import java.util.function.Consumer;
 
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.init.GrowthcraftCellarTags;
 import growthcraft.cellar.shared.Reference;
+import growthcraft.core.datagen.shared.GrowthcraftRecipeBuilder;
+import growthcraft.core.init.config.BooleanFromConfigFileCondition;
+import growthcraft.core.init.config.OptionalFeatureCondition;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.PackOutput;
@@ -19,6 +23,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.conditions.NotCondition;
+import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 
 import static growthcraft.lib.utils.FormatUtils.HAS_ITEM;
 
@@ -68,10 +74,65 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.PISTON))
 		.save(consumer);
 		
-		SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.WHEAT), RecipeCategory.FOOD, GrowthcraftCellarItems.GRAIN.get())
-		.group(Reference.MODID)
-		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
-		.save(consumer);
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+			.addCondition(new TagEmptyCondition("forge:grain/barley"))
+			.requires(Items.WHEAT, 3)
+			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+			.save(consumer);
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+			.addCondition(new NotCondition(new TagEmptyCondition("forge:grain/barley")))
+			.requires(Items.WHEAT, 5)
+			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+			.save(consumer);
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+			.addCondition(new NotCondition(new TagEmptyCondition("forge:grain/barley")))
+			.requires(GrowthcraftCellarTags.Items.TAG_BARLEY)
+			.requires(GrowthcraftCellarTags.Items.TAG_BARLEY)
+			.requires(GrowthcraftCellarTags.Items.TAG_BARLEY)
+			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+			.save(consumer);
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+			.addCondition(new NotCondition(new TagEmptyCondition("forge:grain/barley")))
+			.addCondition(new NotCondition(new BooleanFromConfigFileCondition("cellar", "brewing.allow_additional_adjunct_grains")))
+			.addCondition(new NotCondition(new TagEmptyCondition("growthcraft_cellar:adjunct_grains_basic")))
+			.requires(GrowthcraftCellarTags.Items.TAG_BARLEY)
+			.requires(GrowthcraftCellarTags.Items.TAG_BARLEY)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS1)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS1)
+			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+			.save(consumer);
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+			.addCondition(new NotCondition(new TagEmptyCondition("forge:grain/barley")))
+			.addCondition(new BooleanFromConfigFileCondition("cellar", "brewing.allow_additional_adjunct_grains"))
+			.addCondition(new NotCondition(new TagEmptyCondition("growthcraft_cellar:adjunct_grains_extended")))
+			.requires(GrowthcraftCellarTags.Items.TAG_BARLEY)
+			.requires(GrowthcraftCellarTags.Items.TAG_BARLEY)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS2)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS2)
+			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+			.save(consumer);
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+			.addCondition(new TagEmptyCondition("forge:grain/barley"))
+			.addCondition(new NotCondition(new BooleanFromConfigFileCondition("cellar", "brewing.allow_additional_adjunct_grains")))
+			.addCondition(new NotCondition(new TagEmptyCondition("growthcraft_cellar:adjunct_grains_basic")))
+			.requires(Items.WHEAT)
+			.requires(Items.WHEAT)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS1)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS1)
+			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+			.save(consumer);
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+			.addCondition(new TagEmptyCondition("forge:grain/barley"))
+			.addCondition(new BooleanFromConfigFileCondition("cellar", "brewing.allow_additional_adjunct_grains"))
+			.addCondition(new NotCondition(new TagEmptyCondition("growthcraft_cellar:adjunct_grains_extended_minus_wheat")))
+			.requires(Items.WHEAT)
+			.requires(Items.WHEAT)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS2S)
+			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS2S)
+			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+			.save(consumer);
+		// don't think too hard about the above thing.
+		// for example the last one above is: grain recipe if we don't have barley, but we do have something like oats and user said in the config file that they're okay with corn rice too and the tag containing last two isn't empty.
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarBlocks.ROASTER.get())
 		.pattern(" I ")
