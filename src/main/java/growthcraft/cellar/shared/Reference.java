@@ -42,7 +42,7 @@ public class Reference {
         public static final String FERMENT_BARREL_OAK = "fermentation_barrel_oak";
         public static final String FERMENT_BARREL_RECIPE = "fermentation_barrel_recipe";
         public static final String FERMENT_BARREL_SPRUCE = "fermentation_barrel_spruce";
-        public static final String FERMENT_BARREL_WARPED = "fermentation_barrel_WARPED";
+        public static final String FERMENT_BARREL_WARPED = "fermentation_barrel_warped";
         public static final String FRUIT_PRESS = "fruit_press";
         public static final String FRUIT_PRESS_PISTON = "fruit_press_piston";
         public static final String FRUIT_PRESS_RECIPE = "fruit_press_recipe";
