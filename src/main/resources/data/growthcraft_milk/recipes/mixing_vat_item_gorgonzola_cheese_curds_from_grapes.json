@@ -13,16 +13,12 @@
       "count": 1
     },
     {
-      "item": "growthcraft_cellar:grape_white",
-      "count": 1
-    },
-    {
-      "item": "growthcraft_cellar:yeast_bayanus",
+      "tag": "forge:fruits/grapes",
       "count": 1
     }
   ],
   "result_item": {
-    "item": "growthcraft_milk:appenzeller_cheese_curds"
+    "item": "growthcraft_milk:gorgonzola_cheese_curds"
   },
   "activation_tool": {
     "item": "minecraft:wooden_sword"
