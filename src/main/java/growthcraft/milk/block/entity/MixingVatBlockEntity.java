@@ -259,7 +259,7 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
         this.activated = false;
     }
 
-    private List<MixingVatFluidRecipe> getMatchingFluidRecipes() {
+    public List<MixingVatFluidRecipe> getMatchingFluidRecipes() {
         if (level == null) return Collections.emptyList();
 
         List<MixingVatFluidRecipe> matchingRecipes = new ArrayList<>();
@@ -288,7 +288,7 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
         return matchingRecipes;
     }
 
-    private List<MixingVatItemRecipe> getMatchingItemRecipes() {
+    public List<MixingVatItemRecipe> getMatchingItemRecipes() {
         if (level == null) return Collections.emptyList();
 
         List<MixingVatItemRecipe> matchingRecipes = new ArrayList<>();
@@ -475,8 +475,8 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
      * @return boolean If the current block was activated with this check.
      */
     public boolean activateRecipe(ItemStack stack) {
-        // Fail fast if vat is already activated.
-        if(this.activated) return false;
+        // Fail fast if vat is already activated or if there is a result itemstack that still needs to be removed.
+        if(this.activated || !this.itemStackHandler.getStackInSlot(3).isEmpty()) return false;
 
         this.activated = this.getActivationTool() != null
                 && this.getActivationTool().getItem() == stack.getItem()

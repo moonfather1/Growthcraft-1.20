@@ -48,9 +48,9 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
         this.inputFluidStack = inputFluidStack;
         this.ingredients = ingredients;
         this.processingTime = processingTime;
-        this.resultItemStack = resultItemStack;
-        this.activationTool = activationTool;
-        this.resultActivationTool = resultActivationTool;
+        this.resultItemStack = resultItemStack.copy();
+        this.activationTool = activationTool.copy();
+        this.resultActivationTool = resultActivationTool.copy();
         this.requiresHeat = requiresHeat;
     }
 
