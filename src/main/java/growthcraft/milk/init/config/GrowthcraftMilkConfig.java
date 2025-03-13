@@ -30,9 +30,6 @@ public class GrowthcraftMilkConfig {
     private static ForgeConfigSpec.BooleanValue stomachLootEnabled;
     private static ForgeConfigSpec.IntValue stomachLootChance;
 
-    private static ForgeConfigSpec.BooleanValue villageStructuresEnabled;
-    private static ForgeConfigSpec.IntValue villageStructuresWeight;
-
     private static ForgeConfigSpec.BooleanValue cheeseDebugEnabled;
 
     static {
@@ -80,13 +77,6 @@ public class GrowthcraftMilkConfig {
         stomachLootChance = specBuilder
                 .comment("Chance to loot a stomach from a cow. stomachLootEnabled must be set to true.")
                 .defineInRange(String.format("%s.%s", CATEGORY_LOOT_CHANCES, "stomachLootChance"), 5, 0, 100);
-
-        villageStructuresEnabled = specBuilder
-                .comment("Enable generation of Growthcraft Milk village structures.")
-                .define(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresEnabled"), false);
-        villageStructuresWeight = specBuilder
-                .comment("The weight of the villager structures.")
-                .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "villageStructuresWeight"), 1, 0, 16000);
 
         cheeseDebugEnabled = specBuilder
                 .comment("Set to true to add additional logging to debug the cheese wheel and curds blocks.")
@@ -163,14 +153,6 @@ public class GrowthcraftMilkConfig {
      */
     public static int getStomachLootChance() {
         return Boolean.TRUE.equals(stomachLootEnabled.get()) ? stomachLootChance.get() : 0;
-    }
-
-    public static boolean getVillageStructuresEnabled() {
-        return villageStructuresEnabled.get();
-    }
-
-    public static int getVillageStructuresWeight() {
-        return villageStructuresWeight.get();
     }
 
     /**
