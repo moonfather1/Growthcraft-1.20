@@ -75,9 +75,9 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
         boolean ingredientMatches = false;
 
         if (this.getIngredients().size() == testIngredients.size()) {
-            int itemCount = this.getIngredientList().size();
+            int itemCount = this.getIngredientList_DO_NOT_USE___REMOVE_OR_FIX().size();
             int matchCount = 0;
-            for (int i = 0; i < this.getIngredientList().size(); i++) {
+            for (int i = 0; i < this.getIngredientList_DO_NOT_USE___REMOVE_OR_FIX().size(); i++) {
                 int index = i;
                 boolean ingredientMatch = Arrays.stream(
                         this.getIngredients().get(index).getItems()).anyMatch(
@@ -116,7 +116,7 @@ public class MixingVatItemRecipe implements Recipe<SimpleContainer> {
         return this.ingredients;
     }
 
-    public List<ItemStack> getIngredientList() {
+    public List<ItemStack> getIngredientList_DO_NOT_USE___REMOVE_OR_FIX() {
         return Arrays.stream(ingredients.get(0).getItems()).toList();
     }
 

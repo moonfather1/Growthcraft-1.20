@@ -6,9 +6,14 @@
     {
       "tag": "growthcraft_milk:milk_buckets"
     },
-    {
-      "item": "growthcraft_apiary:honey_comb_full"
-    },
+    [
+      {
+        "item": "growthcraft_apiary:honey_comb_full"
+      },
+      {
+        "item": "minecraft:honeycomb"
+      }
+    ],
     {
       "item": "growthcraft_milk:starter_culture"
     },
