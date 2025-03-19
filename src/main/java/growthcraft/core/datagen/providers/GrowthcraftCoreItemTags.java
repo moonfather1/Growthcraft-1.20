@@ -83,9 +83,7 @@ public class GrowthcraftCoreItemTags extends ItemTagsProvider{
 		tag(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.add(GrowthcraftMilkFluids.MILK.bucket.get())
 		.add(GrowthcraftMilkFluids.BUTTER_MILK.bucket.get());
-		tag(GrowthcraftMilkTags.Items.TAG_MIXING_VAT_TOOLS)
-		.add(GrowthcraftMilkItems.CHEESE_CLOTH.get());
-		
+
 		//Vanilla Tags
 		tag(ItemTags.WOODEN_BUTTONS)
 		.add(GrowthcraftApplesBlocks.APPLE_PLANK_BUTTON.get().asItem());
