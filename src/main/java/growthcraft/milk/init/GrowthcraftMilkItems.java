@@ -90,9 +90,9 @@ public class GrowthcraftMilkItems {
             () -> new GrowthcraftFoodItem(8, 0.5F, 64)
     );
 
-    public static final RegistryObject<GrowthcraftFoodItem> CHEESE_RICOTTA_SLICE = ITEMS.register(
+    public static final RegistryObject<GrowthcraftBowlFoodItem> CHEESE_RICOTTA_SLICE = ITEMS.register(
             CheeseUtils.getCheeseNames(Reference.UnlocalizedName.RICOTTA).get(CheeseUtils.SLICE),
-            () -> new GrowthcraftFoodItem(4, 0.4F, 16)
+            () -> new GrowthcraftBowlFoodItem(4, 0.4F, 16)
     );
 
     public static final RegistryObject<GrowthcraftBowlFoodItem> ICE_CREAM_APPLE = ITEMS.register(
