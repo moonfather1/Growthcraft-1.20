@@ -288,34 +288,38 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
         return matchingRecipes;
     }
 
+    /**
+     * Returns a list of matching {@link MixingVatItemRecipe}s based on the current fluid input,
+     * non-empty item input slots, and heat source status.
+     *
+     * @return a list of matching item recipes, or an empty list if no matches are found
+     */
     public List<MixingVatItemRecipe> getMatchingItemRecipes() {
-        if (level == null) return Collections.emptyList();
-
-        List<MixingVatItemRecipe> matchingRecipes = new ArrayList<>();
-
-        // Place the input slots into a List.
-        List<ItemStack> currentItems = new ArrayList<>();
-        for (int i = 0; i < itemStackHandler.getSlots() - 1; i++) {
-            if (!itemStackHandler.getStackInSlot(i).isEmpty()) currentItems.add(itemStackHandler.getStackInSlot(i));
+        // Fail-fast if world context or required conditions are not met
+        if (level == null || !FLUID_TANK_OUTPUT.isEmpty() || FLUID_TANK_INPUT.isEmpty()) {
+            return Collections.emptyList();
         }
 
-        if(!FLUID_TANK_INPUT.isEmpty() && !currentItems.isEmpty()) {
-           // Then we need to try and match a MixingVatItemRecipe.
-            List<MixingVatItemRecipe> recipes = this.level.getRecipeManager().getAllRecipesFor(
-                    MixingVatItemRecipe.Type.INSTANCE
-            );
+        // Collect non-empty item stacks from input slots (excluding the last slot)
+        List<ItemStack> currentItems = new ArrayList<>();
+        int inputSlots = itemStackHandler.getSlots() - 1;
 
-            for(MixingVatItemRecipe recipe : recipes) {
-                if (recipe.matches(
-                        this.FLUID_TANK_INPUT.getFluid(),
-                        currentItems,
-                        isHeated())
-                ) {
-                    matchingRecipes.add(recipe);
-                }
+        for (int i = 0; i < inputSlots; i++) {
+            ItemStack stack = itemStackHandler.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                currentItems.add(stack);
             }
         }
-        return matchingRecipes;
+
+        // If no valid input items, return empty list
+        if (currentItems.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        // Find all recipes that match the current inputs
+        return level.getRecipeManager().getAllRecipesFor(MixingVatItemRecipe.Type.INSTANCE).stream()
+                .filter(recipe -> recipe.matches(FLUID_TANK_INPUT.getFluid(), currentItems, isHeated()))
+                .toList();
     }
 
     @Nullable
