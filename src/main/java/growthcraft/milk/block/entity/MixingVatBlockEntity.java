@@ -62,18 +62,51 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
 
     private Component customName;
 
-    private final ItemStackHandler itemStackHandler = new ItemStackHandler(4) {
+    private static class MixingVatItemStackHandler extends ItemStackHandler
+    {
+        private MixingVatItemStackHandler() {
+            super(4);
+        }
+        private BlockEntity owner;
+
+        private void setOwner(BlockEntity owner) {
+            this.owner = owner;
+        }
+
         @Override
         protected void onContentsChanged(int slot) {
-            setChanged();
+            owner.setChanged();
         }
 
         @Override
         public int getSlotLimit(int slot) {
             return 1;
         }
-    };
 
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate)
+        {
+            if (amount == 0)  return ItemStack.EMPTY;
+            validateSlotIndex(slot);
+            ItemStack existing = this.stacks.get(slot);
+            if (existing.isEmpty()) return ItemStack.EMPTY; // up to here is just copied.
+            if (slot == 3 && existing.hasCraftingRemainingItem()) return ItemStack.EMPTY; // this is why we override.
+            return super.extractItem(slot, amount, simulate);
+        }
+
+        public @NotNull ItemStack extractItemWithProperActivationItem(int slot, int amount, boolean simulate) {
+            if (slot != 3) throw new RuntimeException("Slot " + slot + " not result slot.");
+            return super.extractItem(slot, amount, simulate);
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack)
+        {
+            if (slot == 3) return false; // no insertion into result slot
+            return super.isItemValid(slot, stack);
+        }
+    };
+    private final MixingVatItemStackHandler itemStackHandler = new MixingVatItemStackHandler();
     private LazyOptional<IItemHandler> inventoryHandler = LazyOptional.empty();
 
     private final GrowthcraftFluidTank FLUID_TANK_INPUT = new GrowthcraftFluidTank(4000) {
@@ -104,6 +137,7 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
 
         this.FLUID_TANK_INPUT.allowAnyFluid(true);
         this.FLUID_TANK_OUTPUT.allowAnyFluid(true);
+        this.itemStackHandler.setOwner(this);
 
         this.data = new ContainerData() {
             @Override
@@ -509,7 +543,7 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
         if (this.getResultActivationTool() != null
                 && this.getResultActivationTool().getItem() == resultActivationTool.getItem()
         ) {
-            ItemStack itemStack = this.itemStackHandler.extractItem(
+            ItemStack itemStack = this.itemStackHandler.extractItemWithProperActivationItem(
                     3,
                     this.itemStackHandler.getStackInSlot(3).getCount(),
                     false);
