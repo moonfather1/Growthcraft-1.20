@@ -294,7 +294,8 @@ public class MixingVatBlockEntity extends BlockEntity implements BlockEntityTick
     }
 
     public List<MixingVatFluidRecipe> getMatchingFluidRecipes() {
-        if (level == null) return Collections.emptyList();
+        // Fail-fast if world context or required conditions are not met
+        if (level == null || FLUID_TANK_INPUT.isEmpty() || FLUID_TANK_OUTPUT.isEmpty()) return Collections.emptyList();
 
         List<MixingVatFluidRecipe> matchingRecipes = new ArrayList<>();
 
