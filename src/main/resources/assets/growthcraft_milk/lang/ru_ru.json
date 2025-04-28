@@ -129,5 +129,7 @@
   "emi.caption.growthcraft_milk.mixing_vat_starter": "Start mixing using ",
   "emi.caption.growthcraft_milk.mixing_vat_collector": "Collect result using ",
   "emi.caption.growthcraft_milk.mixing_vat_additions": "Additions: ",
-  "emi.category.growthcraft_milk.aging": "Aging"
+  "emi.category.growthcraft_milk.aging": "Aging",
+  "message.growthcraft_milk.get_using_item": "Collect contents using %s.",
+  "message.growthcraft_milk.get_using_item_empty_hand": "empty hand"
 }
