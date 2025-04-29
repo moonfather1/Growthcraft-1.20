@@ -21,6 +21,9 @@ public class GrowthcraftMilkConfig {
     private static final String CATEGORY_WORLDGEN = "worldgen";
     private static final String CATEGORY_CHEESE = "cheese";
 
+    private static ForgeConfigSpec.BooleanValue moduleEnabled;
+    private static ForgeConfigSpec.BooleanValue featureEnabledBeverages;
+
     private static ForgeConfigSpec.BooleanValue churnGuiEnabled;
     private static ForgeConfigSpec.BooleanValue mixingVatGuiEnabled;
     private static ForgeConfigSpec.BooleanValue mixingVatDebugEnabled;
@@ -54,6 +57,15 @@ public class GrowthcraftMilkConfig {
     }
 
     public static void initServerConfig(ForgeConfigSpec.Builder specBuilder) {
+        // best config flag here....
+        moduleEnabled = specBuilder
+                .comment("This master-switch lets you disable the entire Rice module - seeds dropping from grass, farming tool and products.")
+                .define("_master_switch_.module_enabled", true);
+        featureEnabledBeverages = specBuilder
+                .comment("In case master-switch is turned off, this exception allows you to still make beverages from this module's fluids.")
+                .define("_master_switch_.feature_exception_beverages", true);
+        // good stuff done
+
         // Init Server Side Configuration
         churnGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Churn GUI.")
@@ -163,4 +175,14 @@ public class GrowthcraftMilkConfig {
     public static boolean isCheeseDebugEnabled() {
         return cheeseDebugEnabled.get();
     }
+
+    /**
+     * exception: allow beverages even if the module is disabled
+     */
+    public static boolean getFeatureEnabledBeverages() { return featureEnabledBeverages.get(); }
+
+    /**
+     * is the whole module disabled
+     */
+    public static boolean getModuleEnabled() { return moduleEnabled.get(); }
 }

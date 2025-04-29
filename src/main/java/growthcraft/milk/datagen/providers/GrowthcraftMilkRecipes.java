@@ -5,8 +5,9 @@ import java.util.function.Consumer;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
-import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.core.datagen.shared.GrowthcraftRecipeBuilder;
 import growthcraft.core.init.GrowthcraftTags;
+import growthcraft.core.init.config.OptionalFeatureCondition;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkTags;
@@ -17,9 +18,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -35,7 +33,8 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 
 	@Override
 	protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.CHEESE_CLOTH.get())
+		GrowthcraftRecipeBuilder.crafting_shaped(RecipeCategory.MISC, GrowthcraftMilkItems.CHEESE_CLOTH.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.pattern("sss")
 		.pattern("s s")
 		.pattern("sss")
@@ -43,8 +42,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
-		
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.CHEESE_PRESS.get())
+
+		GrowthcraftRecipeBuilder.crafting_shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.CHEESE_PRESS.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.pattern("III")
 		.pattern("ICI")
 		.pattern("SSS")
@@ -54,8 +54,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
-		
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.CHURN.get())
+
+		GrowthcraftRecipeBuilder.crafting_shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.CHURN.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.pattern(" S ")
 		.pattern("P P")
 		.pattern("PPP")
@@ -64,8 +65,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(ItemTags.PLANKS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_APPLE.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_APPLE.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.APPLE)
 		.requires(Items.SUGAR)
@@ -73,8 +75,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_CHOCOLATE.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_CHOCOLATE.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.COCOA_BEANS)
 		.requires(Items.SUGAR)
@@ -82,8 +85,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_PURPLE.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_PURPLE.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(GrowthcraftCellarItems.GRAPE_PURPLE.get())
 		.requires(Items.SUGAR)
@@ -91,8 +95,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_RED.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_RED.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(GrowthcraftCellarItems.GRAPE_RED.get())
 		.requires(Items.SUGAR)
@@ -100,8 +105,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_WHITE.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_GRAPE_WHITE.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(GrowthcraftCellarItems.GRAPE_WHITE.get())
 		.requires(Items.SUGAR)
@@ -109,8 +115,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_HONEY.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_HONEY.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Ingredient.of(GrowthcraftApiaryItems.HONEY_COMB_FULL.get(), Items.HONEYCOMB))
 		.requires(Items.SUGAR)
@@ -118,8 +125,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_PUMPKIN.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_PUMPKIN.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.PUMPKIN)
 		.requires(Items.SUGAR)
@@ -127,8 +135,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_WATERMELON.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.ICE_CREAM_WATERMELON.get())
+		  .addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.MELON_SLICE)
 		.requires(Items.SUGAR)
@@ -136,8 +145,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.MILKING_BUCKET_IRON.get())
+
+		GrowthcraftRecipeBuilder.crafting_shaped(RecipeCategory.MISC, GrowthcraftMilkItems.MILKING_BUCKET_IRON.get())
+		   .addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.pattern("NNN")
 		.pattern("I I")
 		.pattern(" I ")
@@ -146,8 +156,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
 		.save(consumer);
-		
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.MIXING_VAT.get())
+
+		GrowthcraftRecipeBuilder.crafting_shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.MIXING_VAT.get())
+		   .addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.pattern("   ")
 		.pattern(" B ")
 		.pattern("I I")
@@ -156,29 +167,33 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftCellarBlocks.BREW_KETTLE.get()))
 		.save(consumer);
-		
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.PANCHEON.get())
+
+		GrowthcraftRecipeBuilder.crafting_shaped(RecipeCategory.MISC, GrowthcraftMilkBlocks.PANCHEON.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.pattern("C C")
 		.pattern("CCC")
 		.define('C', Items.CLAY_BALL)
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.CLAY_BALL))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.BUTTER_SALTED.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.BUTTER_SALTED.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkItems.BUTTER.get())
 		.requires(GrowthcraftTags.Items.SALT_FORGE)
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(GrowthcraftMilkItems.BUTTER.get()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftMilkItems.THISTLE_SEED.get(), 2)
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftMilkItems.THISTLE_SEED.get(), 2)
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkItems.THISTLE.get())
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkItems.THISTLE.get()).build()))
 		.save(consumer);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_APPLE.get())
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_APPLE.get())
+		    .addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.APPLE)
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -186,8 +201,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_CHOCOLATE.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_CHOCOLATE.get())
+		    .addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.COCOA_BEANS)
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -195,8 +211,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_PURPLE.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_PURPLE.get())
+		    .addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(GrowthcraftCellarItems.GRAPE_PURPLE.get())
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -204,8 +221,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_RED.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_RED.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(GrowthcraftCellarItems.GRAPE_RED.get())
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -213,8 +231,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_WHITE.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_GRAPE_WHITE.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(GrowthcraftCellarItems.GRAPE_WHITE.get())
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -222,8 +241,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_HONEY.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_HONEY.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Ingredient.of(GrowthcraftApiaryItems.HONEY_COMB_FULL.get(), Items.HONEYCOMB))
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -231,16 +251,18 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_PLAIN.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_PLAIN.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
 		.requires(Items.BOWL)
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_PUMPKIN.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_PUMPKIN.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.PUMPKIN)
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -248,8 +270,9 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.group(Reference.MODID)
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
-		
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_WATERMELON.get())
+
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.YOGURT_WATERMELON.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
 		.requires(Items.MELON_SLICE)
 		.requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
@@ -258,7 +281,8 @@ public class GrowthcraftMilkRecipes extends RecipeProvider{
 		.unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS).build()))
 		.save(consumer);
 
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.CHEESE_RICOTTA_SLICE.get())
+		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.CHEESE_RICOTTA_SLICE.get())
+			.addCondition(new OptionalFeatureCondition(growthcraft.milk.shared.Reference.NAME_SHORT))
 		.requires(Items.BOWL)
 		.requires(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get())
 		.requires(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get())
