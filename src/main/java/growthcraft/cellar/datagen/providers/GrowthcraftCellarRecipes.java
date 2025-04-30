@@ -76,7 +76,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 		
 		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
 			.addCondition(new TagEmptyCondition("forge:grain/barley"))
-			.requires(Items.WHEAT, 3)
+			.requires(Items.WHEAT, 4)
 			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
 			.save(consumer);
 		GrowthcraftRecipeBuilder.crafting_shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
@@ -117,6 +117,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 			.addCondition(new NotCondition(new TagEmptyCondition("growthcraft_cellar:adjunct_grains_basic")))
 			.requires(Items.WHEAT)
 			.requires(Items.WHEAT)
+			.requires(Items.WHEAT)
 			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS1)
 			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS1)
 			.group(Reference.MODID).unlockedBy(HAS_ITEM, InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
@@ -125,6 +126,7 @@ public class GrowthcraftCellarRecipes extends RecipeProvider{
 			.addCondition(new TagEmptyCondition("forge:grain/barley"))
 			.addCondition(new BooleanFromConfigFileCondition("cellar", "brewing.allow_additional_adjunct_grains"))
 			.addCondition(new NotCondition(new TagEmptyCondition("growthcraft_cellar:adjunct_grains_extended_minus_wheat")))
+			.requires(Items.WHEAT)
 			.requires(Items.WHEAT)
 			.requires(Items.WHEAT)
 			.requires(GrowthcraftCellarTags.Items.TAG_ADJUNCT_GRAINS2S)
